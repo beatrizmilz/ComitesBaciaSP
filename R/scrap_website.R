@@ -67,7 +67,7 @@ scrap_website <- function(n_comite) {
   sigrh.sp::delete_existing_variables(postado_em)
   print("Variáveis exportadas para o environment deletadas com sucesso!")
 
-
+  View(df_preenchida_final)
 
 
 }
