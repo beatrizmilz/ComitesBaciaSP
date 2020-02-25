@@ -1,0 +1,14 @@
+Package: sigrh.sp
+Title: sigrh.sp - Webscraping of the Plenums Minites in the SigRH Sao Paulo Website
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Beatriz",
+           family = "Milz",
+           role = c("aut", "cre"),
+           email = "beatriz.milz@usp.br",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Webscraping of the Plenums Minites in the SigRH Sao Paulo Website
+License: CCBY-4.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
