@@ -6,13 +6,14 @@
 
 The goal of sigrh.sp is to ...
 
-## Installation
 
-You can install the released version of sigrh.sp from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
-install.packages("sigrh.sp")
-```
+~~## Installation~~
+
+~~You can install the released version of sigrh.sp ...~~
+
+
+
 
 ## Example
 
