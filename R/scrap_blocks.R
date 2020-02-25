@@ -7,6 +7,7 @@
 #'
 #' @examples
 scrap_blocks <- function(n_block) {
+  `%>%` <- magrittr::`%>%`
 
   n_block <<- n_block
 

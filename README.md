@@ -14,7 +14,7 @@ The goal of sigrh.sp is to ...
 
 test: 
 
-purrr::map_df(.x = c(2), .f = sigrh.sp::scrap_website)
+purrr::map(.x = c(2,3), .f = sigrh.sp::scrap_website)
 
 
 

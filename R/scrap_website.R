@@ -7,7 +7,8 @@
 #'
 #' @examples
 scrap_website <- function(n_comite) {
-
+  #browser()
+  `%>%` <- magrittr::`%>%`
   n_comite <<- n_comite
 
   link_comite <-
@@ -40,12 +41,35 @@ scrap_website <- function(n_comite) {
   df_preenchida_final <-
     purrr::map_df(.x = (1:length(blocks)), .f = sigrh.sp::scrap_blocks)
 
+  if (dir.exists("dataframes/") == FALSE) {
+    dir.create("dataframes/")
+    print("Diretório 'dataframes/' criado com sucesso!")
+  } else {
+    print("Diretório 'dataframes/' já existia!")
+  }
+
   saveRDS(df_preenchida_final,
-          file = glue::glue("dados/df_preenchida_ughri_{n_comite}.RDS"))
 
-  beepr::beep()
+          file = glue::glue("dataframes/df_preenchida_ughri_{n_comite}.RDS"))
 
-  view(df_preenchida_final)
+  print(glue::glue("Arquivo salvo com sucesso:'dataframes/df_preenchida_ughri_{n_comite}.RDS'"))
+
+  print("Deletando variáveis exportadas para o environment...")
+  sigrh.sp::delete_existing_variables(blocks)
+  sigrh.sp::delete_existing_variables(df_comite)
+  sigrh.sp::delete_existing_variables(ano_reuniao)
+  sigrh.sp::delete_existing_variables(anos)
+  sigrh.sp::delete_existing_variables(data_reuniao)
+  sigrh.sp::delete_existing_variables(n_block)
+  sigrh.sp::delete_existing_variables(links)
+  sigrh.sp::delete_existing_variables(n_comite)
+  sigrh.sp::delete_existing_variables(nome_reuniao)
+  sigrh.sp::delete_existing_variables(postado_em)
+  print("Variáveis exportadas para o environment deletadas com sucesso!")
+
+
+
+
 }
 
 #------

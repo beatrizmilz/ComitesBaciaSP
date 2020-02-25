@@ -18,7 +18,7 @@ scrap_lines_by_index <- function(index) {
 
   link_tipo_arquivo <- sigrh.sp::get_file_format(link_completo)
 
-  df <- tibble(
+  df <- tibble::tibble(
     data_scrap = date_of_scrap,
     numero_comite = n_comite,
     numero_bloco = n_block,
@@ -34,7 +34,7 @@ scrap_lines_by_index <- function(index) {
 
   )
 
-  df_comite <<- rbind(df, df_comite)
-  df_comite
+   df_comite <<- rbind(df, df_comite)
+   df_comite
 
 }
