@@ -9,9 +9,9 @@
 #'
 #' @examples
 #' file <- "https://github.com/hadley/pkg-dev/blob/master/1-intro.pdf"
-#' extract_file_format(file)
+#' get_file_format(file)
 
-extract_file_format <- function(url) {
+get_file_format <- function(url) {
   ifelse(
     is.na(url),
     NA,
