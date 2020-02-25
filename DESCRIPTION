@@ -7,7 +7,18 @@ Authors@R:
            role = c("aut", "cre"),
            email = "beatriz.milz@usp.br",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Webscraping of the Plenums Minites in the SigRH Sao Paulo Website
+Description: Webscraping of the Plenums Minites in the SigRH Sao Paulo Website.
+imports: 
+    stringr,
+    httr, 
+    magrittr,
+    lubridate,
+    tibble,
+    purrr,
+    rvest,
+    glue,
+    dplyr,
+    xml2
 License: CCBY-4.0
 Encoding: UTF-8
 LazyData: true
@@ -16,3 +27,4 @@ URL: https://github.com/beatrizmilz/sigrh.sp
 BugReports: https://github.com/beatrizmilz/sigrh.sp/issues
 Suggests: 
     testthat
+

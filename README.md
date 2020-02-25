@@ -12,6 +12,9 @@ The goal of sigrh.sp is to ...
 
 ~~You can install the released version of sigrh.sp ...~~
 
+test: 
+
+purrr::map_df(.x = c(2), .f = sigrh.sp::scrap_website)
 
 
 
