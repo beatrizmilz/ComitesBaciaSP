@@ -54,22 +54,21 @@ scrap_website <- function(n_comite) {
 
   print(glue::glue("Arquivo salvo com sucesso:'dataframes/df_preenchida_ughri_{n_comite}.RDS'"))
 
-  print("Deletando variáveis exportadas para o environment...")
-  sigrh.sp::delete_existing_variables(blocks)
-  sigrh.sp::delete_existing_variables(df_comite)
-  sigrh.sp::delete_existing_variables(ano_reuniao)
-  sigrh.sp::delete_existing_variables(anos)
-  sigrh.sp::delete_existing_variables(data_reuniao)
-  sigrh.sp::delete_existing_variables(n_block)
-  sigrh.sp::delete_existing_variables(links)
-  sigrh.sp::delete_existing_variables(n_comite)
-  sigrh.sp::delete_existing_variables(nome_reuniao)
-  sigrh.sp::delete_existing_variables(postado_em)
-  print("Variáveis exportadas para o environment deletadas com sucesso!")
+  # print("Deletando variáveis exportadas para o environment...")
+  # sigrh.sp::delete_existing_variables(blocks)
+  # sigrh.sp::delete_existing_variables(df_comite)
+  # sigrh.sp::delete_existing_variables(ano_reuniao)
+  # sigrh.sp::delete_existing_variables(anos)
+  # sigrh.sp::delete_existing_variables(data_reuniao)
+  # sigrh.sp::delete_existing_variables(n_block)
+  # sigrh.sp::delete_existing_variables(links)
+  # sigrh.sp::delete_existing_variables(n_comite)
+  # sigrh.sp::delete_existing_variables(nome_reuniao)
+  # sigrh.sp::delete_existing_variables(postado_em)
+  # print("Variáveis exportadas para o environment deletadas com sucesso!")
+  #delete_existing_variables(df_preenchida_final)
 
-  View(df_preenchida_final)
 
-
+  readRDS(glue::glue("dataframes/df_preenchida_ughri_{n_comite}.RDS")) %>%
+    View()
 }
-
-#------
