@@ -9,3 +9,8 @@
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
 NULL
+
+
+globalVariables(c(
+
+))

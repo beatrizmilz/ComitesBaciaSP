@@ -5,7 +5,7 @@
 \alias{comites_sp}
 \title{Comitês de Bacia Hidrográfica no Estado de São Paulo}
 \format{
-
+Uma tibble.
 }
 \source{
 SigRH - \url{http://www.sigrh.sp.gov.br/}
@@ -14,7 +14,6 @@ SigRH - \url{http://www.sigrh.sp.gov.br/}
 comites_sp
 }
 \description{
-MUDAR ISSO Base de dados contendo informações sobre os Sistemas
-que abastecem a Região Metropolitana de São Paulo
+MUDAR ISSO
 }
 \keyword{datasets}

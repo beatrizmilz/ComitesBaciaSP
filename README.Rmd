@@ -55,3 +55,13 @@ obter_tabela_atas_comites(6) %>% # O 6 é o número referente à bacia Alto Tiet
   knitr::kable() # formata a tabela
 ```
 
+```{r}
+reunioes_disponiveis_por_comite <- tabela_atas_comites %>%
+  dplyr::filter(numero_link == "ata_1") %>%
+  dplyr::group_by(comite, comite_numero) %>%
+  dplyr::count()
+
+knitr::kable(reunioes_disponiveis_por_comite)
+
+```
+

@@ -16,7 +16,7 @@ obter_tabela_atas_comites <- function(n_comite) {
     dplyr::pull()
 
   nome_comite <- comite %>%
-    dplyr::select(nome_ugrhi) %>%
+    dplyr::select(bacia_hidrografica) %>%
     dplyr::pull()
 
 

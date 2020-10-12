@@ -75,3 +75,22 @@ obter_tabela_atas_comites(6) %>% # O 6 é o número referente à bacia Alto Tiet
 | 2020-10-12          | Alto Tietê |              6 | Plenária CBH-AT 24/07/2019                                      | 2019-07-24    | 2019-08-13     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17449/resumo-executivo-da-3-reuniao-plenaria-extraordinaria-de-2019-24-07-2019.pdf> | .pdf          |
 | 2020-10-12          | Alto Tietê |              6 | Plenária CBH-AT 29/03/2019                                      | 2019-03-29    | 2019-08-13     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17448/resumo-executivo-da-2-reuniao-plenaria-ordinaria-de-2019-29-03-2019.pdf>      | .pdf          |
 | 2020-10-12          | Alto Tietê |              6 | Plenária CBH-AT 14/03/2019                                      | 2019-03-14    | 2019-08-13     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17447/resumo-executivo-da-1-reuniao-plenaria-extraordinaria-de-2019-14-03-2019.pdf> | .pdf          |
+
+``` r
+reunioes_disponiveis_por_comite <- tabela_atas_comites %>%
+  dplyr::filter(numero_link == "ata_1") %>%
+  dplyr::group_by(comite, comite_numero) %>%
+  dplyr::count()
+
+knitr::kable(reunioes_disponiveis_por_comite)
+```
+
+| comite                        | comite\_numero |   n |
+| :---------------------------- | -------------: | --: |
+| Alto Tietê                    |              6 | 140 |
+| Baixada Santista              |              7 | 136 |
+| Litoral Norte                 |              3 |  56 |
+| Mogi-Guaçu                    |              9 |  84 |
+| Piracicaba/Capivari/Jundiaí   |              5 |  90 |
+| Ribeira de Iguape/Litoral Sul |             11 | 110 |
+| Tietê/Sorocaba                |             10 |  99 |
