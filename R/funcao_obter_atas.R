@@ -140,6 +140,7 @@ numeros_dos_comites <- comites_sp %>% dplyr::pull(n_ugrhi)
 tabela_atas_comites <-
   purrr::map_df(numeros_dos_comites, obter_tabela_atas_comites)
 
-tabela_atas_comites %>% write.csv2(file = glue::glue("inst/extdata/tabela_atas_comites_{Sys.Date()}.csv"), fileEncoding = "UTF-8")
+tabela_atas_comites %>%
+  write.csv2(file = glue::glue("inst/extdata/tabela_atas_comites_{Sys.Date()}.csv"), fileEncoding = "UTF-8")
 
 usethis::use_data(tabela_atas_comites, overwrite = TRUE)
