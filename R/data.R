@@ -18,7 +18,6 @@
 #' }
 #' @name comites_sp
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
-#' @examples knitr::kable(comites_sp)
 #'
 "comites_sp"
 
