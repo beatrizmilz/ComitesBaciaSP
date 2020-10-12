@@ -17,8 +17,4 @@ comites_sp
 MUDAR ISSO Base de dados contendo informações sobre os Sistemas
 que abastecem a Região Metropolitana de São Paulo
 }
-\examples{
-knitr::kable(comites_sp)
-
-}
 \keyword{datasets}

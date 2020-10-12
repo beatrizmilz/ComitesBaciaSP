@@ -19,21 +19,39 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/beatrizmilz/ComitesBaciaSP/workflows/R-CMD-check/badge.svg)](https://github.com/beatrizmilz/ComitesBaciaSP/actions)   [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of ComitesBaciaSP is to ...
+O objetivo deste pacote é disponibilizar funções para raspar dados sobre os Comitês de Bacias Hidrográficas do Estado de São Paulo, disponíveis de forma não estruturada no site [SigRH](http://www.sigrh.sp.gov.br/), assim como disponibilizar as bases de dados raspadas, de forma a facilitar a análise dos mesmos. 
 
-## Installation
+Este pacote foi criado no âmbito da [pesquisa de doutorado de Beatriz Milz](https://beatrizmilz.github.io/tese/). 
 
-You can install the from [GitHub](https://github.com/) with:
+## Instalação do pacote
+
+Este pacote pode ser instalado através do  [GitHub](https://github.com/) utilizando o seguinte código em `R`:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("beatrizmilz/ComitesBaciaSP")
 ```
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Utilização do pacote
 
 ```{r example}
 library(ComitesBaciaSP)
-## basic example code
 ```
+
+Para utilizar as funções do pacote, primeiramente é necessário saber o número referente ao comitê que você deseja buscar informações:
+
+```{r}
+comites_sp %>%
+  dplyr::select(nome_ugrhi, n_ugrhi) %>%
+  knitr::kable(col.names = c("Nome", "Número"))
+```
+
+### Busca de atas
+
+A função seguinte busca informações disponíveis sobre as atas dos comitês de bacia:
+
+```{r}
+obter_tabela_atas_comites(6) %>% # O 6 é o número referente à bacia Alto Tietê
+  head() %>%  # filtra apenas as primeiras linhas
+  knitr::kable() # formata a tabela
+```
+
