@@ -104,7 +104,7 @@ obter_tabela_atas_comites <- function(n_comite) {
 
     df_longer <- df %>%
       tidyr::pivot_longer(
-        starts_with("ata_"),
+        tidyselect::starts_with("ata_"),
         names_to = "numero_link",
         values_to = "url_link",
         values_drop_na = TRUE
