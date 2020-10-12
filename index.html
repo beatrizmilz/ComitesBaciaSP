@@ -49,7 +49,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/beatrizmilz/sigrh.sp/">
+  <a href="https://github.com/beatrizmilz/ComitesBaciaSP/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -71,22 +71,167 @@
 <a href="#comitesbaciasp" class="anchor"></a>ComitesBaciaSP</h1></div>
 <!-- badges: start -->
 
-<p>The goal of ComitesBaciaSP is to …</p>
-<div id="installation" class="section level2">
+<p>O objetivo deste pacote é disponibilizar funções para raspar dados sobre os Comitês de Bacias Hidrográficas do Estado de São Paulo, disponíveis de forma não estruturada no site <a href="http://www.sigrh.sp.gov.br/">SigRH</a>, assim como disponibilizar as bases de dados raspadas, de forma a facilitar a análise dos mesmos.</p>
+<p>Este pacote foi criado no âmbito da <a href="https://beatrizmilz.github.io/tese/">pesquisa de doutorado de Beatriz Milz</a>.</p>
+<div id="instalação-do-pacote" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the from <a href="https://github.com/">GitHub</a> with:</p>
+<a href="#instala%C3%A7%C3%A3o-do-pacote" class="anchor"></a>Instalação do pacote</h2>
+<p>Este pacote pode ser instalado através do <a href="https://github.com/">GitHub</a> utilizando o seguinte código em <code>R</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"beatrizmilz/ComitesBaciaSP"</span><span class="op">)</span></pre></div>
 </div>
-<div id="example" class="section level2">
+<div id="utilização-do-pacote" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<a href="#utiliza%C3%A7%C3%A3o-do-pacote" class="anchor"></a>Utilização do pacote</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/beatrizmilz/sigrh.sp">ComitesBaciaSP</a></span><span class="op">)</span>
-<span class="co">## basic example code</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/beatrizmilz/ComitesBaciaSP">ComitesBaciaSP</a></span><span class="op">)</span></pre></div>
+<p>Para utilizar as funções do pacote, primeiramente é necessário saber o número referente ao comitê que você deseja buscar informações:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="va">comites_sp</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">nome_ugrhi</span>, <span class="va">n_ugrhi</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Nome"</span>, <span class="st">"Número"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Nome</th>
+<th align="right">Número</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Paraíba do Sul</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Litoral Norte</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">Piracicaba/Capivari/Jundiaí</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Alto Tietê</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Baixada Santista</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="left">Mogi-Guaçu</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">Tietê/Sorocaba</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">Ribeira de Iguape/Litoral Sul</td>
+<td align="right">11</td>
+</tr>
+</tbody>
+</table>
+<div id="busca-de-atas" class="section level3">
+<h3 class="hasAnchor">
+<a href="#busca-de-atas" class="anchor"></a>Busca de atas</h3>
+<p>A função seguinte busca informações disponíveis sobre as atas dos comitês de bacia:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="reference/obter_tabela_atas_comites.html">obter_tabela_atas_comites</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># O 6 é o número referente à bacia Alto Tietê</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># filtra apenas as primeiras linhas</span>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># formata a tabela</span></pre></div>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="3%">
+<col width="4%">
+<col width="21%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="47%">
+<col width="4%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">data_coleta_dados</th>
+<th align="left">comite</th>
+<th align="right">comite_numero</th>
+<th align="left">nome_reuniao</th>
+<th align="left">data_reuniao</th>
+<th align="left">data_postagem</th>
+<th align="left">numero_link</th>
+<th align="left">url_link</th>
+<th align="left">formato_link</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2020-10-12</td>
+<td align="left">Alto Tietê</td>
+<td align="right">6</td>
+<td align="left">Resumo Executivo da 1ª reunião extraordinária do CBH-AT de 2020</td>
+<td align="left">2020-02-20</td>
+<td align="left">2020-07-29</td>
+<td align="left">ata_1</td>
+<td align="left"><a href="http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/18944/1-reuniao-20-02-2020.pdf" class="uri">http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/18944/1-reuniao-20-02-2020.pdf</a></td>
+<td align="left">.pdf</td>
+</tr>
+<tr class="even">
+<td align="left">2020-10-12</td>
+<td align="left">Alto Tietê</td>
+<td align="right">6</td>
+<td align="left">Resumo Executivo da 6ª Reunião Plenária Extraordinária de 2019</td>
+<td align="left">2019-12-17</td>
+<td align="left">2020-02-21</td>
+<td align="left">ata_1</td>
+<td align="left"><a href="http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/18770/6-reuniao-17-12-2019.pdf" class="uri">http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/18770/6-reuniao-17-12-2019.pdf</a></td>
+<td align="left">.pdf</td>
+</tr>
+<tr class="odd">
+<td align="left">2020-10-12</td>
+<td align="left">Alto Tietê</td>
+<td align="right">6</td>
+<td align="left">Plenária CBH-AT 25/09/2019</td>
+<td align="left">2019-09-25</td>
+<td align="left">2019-10-01</td>
+<td align="left">ata_1</td>
+<td align="left"><a href="http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17560/resumo-executivo-da-3-reuniao-plenaria-de-2019-24-07-2019.pdf" class="uri">http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17560/resumo-executivo-da-3-reuniao-plenaria-de-2019-24-07-2019.pdf</a></td>
+<td align="left">.pdf</td>
+</tr>
+<tr class="even">
+<td align="left">2020-10-12</td>
+<td align="left">Alto Tietê</td>
+<td align="right">6</td>
+<td align="left">Plenária CBH-AT 24/07/2019</td>
+<td align="left">2019-07-24</td>
+<td align="left">2019-08-13</td>
+<td align="left">ata_1</td>
+<td align="left"><a href="http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17449/resumo-executivo-da-3-reuniao-plenaria-extraordinaria-de-2019-24-07-2019.pdf" class="uri">http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17449/resumo-executivo-da-3-reuniao-plenaria-extraordinaria-de-2019-24-07-2019.pdf</a></td>
+<td align="left">.pdf</td>
+</tr>
+<tr class="odd">
+<td align="left">2020-10-12</td>
+<td align="left">Alto Tietê</td>
+<td align="right">6</td>
+<td align="left">Plenária CBH-AT 29/03/2019</td>
+<td align="left">2019-03-29</td>
+<td align="left">2019-08-13</td>
+<td align="left">ata_1</td>
+<td align="left"><a href="http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17448/resumo-executivo-da-2-reuniao-plenaria-ordinaria-de-2019-29-03-2019.pdf" class="uri">http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17448/resumo-executivo-da-2-reuniao-plenaria-ordinaria-de-2019-29-03-2019.pdf</a></td>
+<td align="left">.pdf</td>
+</tr>
+<tr class="even">
+<td align="left">2020-10-12</td>
+<td align="left">Alto Tietê</td>
+<td align="right">6</td>
+<td align="left">Plenária CBH-AT 14/03/2019</td>
+<td align="left">2019-03-14</td>
+<td align="left">2019-08-13</td>
+<td align="left">ata_1</td>
+<td align="left"><a href="http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17447/resumo-executivo-da-1-reuniao-plenaria-extraordinaria-de-2019-14-03-2019.pdf" class="uri">http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17447/resumo-executivo-da-1-reuniao-plenaria-extraordinaria-de-2019-14-03-2019.pdf</a></td>
+<td align="left">.pdf</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
   </div>
@@ -95,9 +240,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/beatrizmilz/sigrh.sp/">https://​github.com/​beatrizmilz/​sigrh.sp/​</a>
+<li>Browse source code at <br><a href="https://github.com/beatrizmilz/ComitesBaciaSP/">https://​github.com/​beatrizmilz/​ComitesBaciaSP/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/beatrizmilz/sigrh.sp/issues">https://​github.com/​beatrizmilz/​sigrh.sp/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/beatrizmilz/ComitesBaciaSP/issues">https://​github.com/​beatrizmilz/​ComitesBaciaSP/​issues</a>
 </li>
 </ul>
 </div>
