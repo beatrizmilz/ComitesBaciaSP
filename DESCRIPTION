@@ -8,17 +8,6 @@ Authors@R:
            email = "beatriz.milz@usp.br",
            comment = c(ORCID = "0000-0002-3064-4486"))
 Description: Dados sobre os Comitês de Bacias Hidrográficas no Estado de São Paulo 
-imports: 
-    stringr,
-    httr, 
-    magrittr,
-    lubridate,
-    tibble,
-    purrr,
-    rvest,
-    glue,
-    dplyr,
-    xml2
 License: CCBY-4.0
 Encoding: UTF-8
 LazyData: true
