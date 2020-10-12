@@ -30,6 +30,7 @@ Imports:
     stringr,
     knitr,
     tidyselect,
+    janitor,
     tidyr
 Depends: 
     R (>= 2.10)
