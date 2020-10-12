@@ -1,13 +1,24 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # ComitesBaciaSP
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-The goal of ComitesBaciaSP is to …
+The goal of ComitesBaciaSP is to ...
 
 ## Installation
 
@@ -17,12 +28,11 @@ You can install the from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("beatrizmilz/ComitesBaciaSP")
 ```
-
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
+```{r example}
 library(ComitesBaciaSP)
 ## basic example code
 ```

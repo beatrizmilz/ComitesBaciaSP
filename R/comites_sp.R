@@ -60,4 +60,4 @@ comites_sp <- ugrhis %>%
     )))
 
 
-usethis::use_data(comites_sp)
+usethis::use_data(comites_sp, overwrite = TRUE)
