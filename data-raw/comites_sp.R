@@ -1,46 +1,63 @@
-## code to prepare `DATASET` dataset goes here
+library(magrittr)
 
-comites <- structure(
-  list(
-    ugrhi = c(
-      "02 - Paraíba do Sul",
-      "03 - Litoral Norte",
-      "05 - Piracicaba/Capivari/Jundiaí",
-      "06 - Alto Tietê",
-      "07 - Baixada Santista",
-      "09 - Mogi-Guaçu",
-      "10 - Tietê/Sorocaba",
-      "11 - Ribeira de Iguape/Litoral Sul"
-    ),
-    n_ugrhi = c(2, 3,
-                5, 6, 7, 9, 10, 11),
-    nome_ugrhi = c(
-      " Paraíba do Sul",
-      " Litoral Norte",
-      " Piracicaba/Capivari/Jundiaí",
-      " Alto Tietê",
-      " Baixada Santista",
-      " Mogi-Guaçu",
-      " Tietê/Sorocaba",
-      " Ribeira de Iguape/Litoral Sul"
-    ),
+ugrhis <- tibble::tibble(
+  nome_ugrhi = "Paraíba do Sul",
+  n_ugrhi = 2,
+  sigla_comite = "ps",
+  pertence_mmp_daee = TRUE,
+) %>%
+  tibble::add_row(
+    nome_ugrhi = "Litoral Norte",
+    n_ugrhi = 3,
+    sigla_comite = "ln",
+    pertence_mmp_daee = TRUE,
+) %>%
+  tibble::add_row(
+    nome_ugrhi = "Piracicaba/Capivari/Jundiaí",
+    n_ugrhi = 5,
+    sigla_comite = "pcj",
+    pertence_mmp_daee = TRUE,
+  ) %>%
+  tibble::add_row(
+    nome_ugrhi = "Alto Tietê",
+    n_ugrhi = 6,
+    sigla_comite = "at",
+    pertence_mmp_daee = TRUE,
+  )%>%
+  tibble::add_row(
+    nome_ugrhi = "Baixada Santista",
+    n_ugrhi = 7,
+    sigla_comite = "bs",
+    pertence_mmp_daee = TRUE,
+  )%>%
+  tibble::add_row(
+    nome_ugrhi = "Mogi-Guaçu",
+    n_ugrhi = 9,
+    sigla_comite = "mogi",
+    pertence_mmp_daee = TRUE,
+  )%>%
+  tibble::add_row(
+    nome_ugrhi = "Tietê/Sorocaba",
+    n_ugrhi = 10,
+    sigla_comite = "smt",
+    pertence_mmp_daee = TRUE,
+  )%>%
+  tibble::add_row(
+    nome_ugrhi = "Ribeira de Iguape/Litoral Sul",
+    n_ugrhi = 11,
+    sigla_comite = "rb",
+    pertence_mmp_daee = TRUE,
+  )
 
-    siglas_comites = c("ps", "ln", "pcj", "at", "bs", "mogi", "smt", "rb")
-  ),
-  class = c("tbl_df", "tbl",
-            "data.frame"),
-  row.names = c(NA, -8L)
-)
-
-comites <-
-  tibble::add_column(comites, mmp = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE))
+# ADICIONAR TODOS OS COMITÊS AQUI
 
 
-links <-
-  paste0("http://www.sigrh.sp.gov.br/cbh",
-         comites$siglas_comites ,
-         "/atas")
+comites_sp <- ugrhis %>%
+  dplyr::mutate(
+    links = glue::glue("http://www.sigrh.sp.gov.br/cbh{ugrhis$sigla_comite}/atas"),
+    links_funcionando = purrr::map_dbl(links, purrr::possibly(
+      ~ httr::status_code(httr::GET(.x)), otherwise = NA
+    )))
 
-comites_sp <- tibble::add_column(comites, links)
 
 usethis::use_data(comites_sp)
