@@ -28,6 +28,7 @@ Imports:
     xml2,
     lubridate,
     stringr,
+    knitr,
     tidyr
 Depends: 
     R (>= 2.10)
