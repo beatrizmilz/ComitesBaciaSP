@@ -1,5 +1,5 @@
-Package: sigrh.sp
-Title: sigrh.sp - Webscraping of the Plenums Minites in the SigRH Sao Paulo Website
+Package: ComitesBaciaSP
+Title: ComitesBaciaSP - Dados sobre os Comitês de Bacias Hidrográficas no Estado de São Paulo 
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Beatriz",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "beatriz.milz@usp.br",
            comment = c(ORCID = "0000-0002-3064-4486"))
-Description: Webscraping of the Plenums Minites in the SigRH Sao Paulo Website.
+Description: Dados sobre os Comitês de Bacias Hidrográficas no Estado de São Paulo 
 imports: 
     stringr,
     httr, 
