@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo — atas_comites • ComitesBaciaSP</title>
+<title>Atas de reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo — atas_comites • ComitesBaciaSP</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo — atas_comites" />
-<meta property="og:description" content="MUDAR ISSO" />
+<meta property="og:title" content="Atas de reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo — atas_comites" />
+<meta property="og:description" content="Tabela contendo informações sobre reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo e link para as atas de reunião." />
 
 
 
@@ -108,13 +108,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo</h1>
+    <h1>Atas de reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo</h1>
     <small class="dont-index">Source: <a href='https://github.com/beatrizmilz/ComitesBaciaSP/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>atas_comites.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>MUDAR ISSO</p>
+    <p>Tabela contendo informações sobre reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo e link para as atas de reunião.</p>
     </div>
 
     <pre class="usage"><span class='va'>atas_comites</span></pre>
@@ -124,7 +124,13 @@
 
     <p>Uma tibble, contendo:</p><dl>
   <dt>data_coleta_dados</dt><dd><p>Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)</p></dd>
-  <dt>comite</dt><dd><p>Nome do comit</p></dd>
+  <dt>comite</dt><dd><p>Nome do comitê de bacia</p></dd>
+  <dt>n_ugrhi</dt><dd><p>Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado</p></dd>
+  <dt>nome_reuniao</dt><dd><p>Nome da reunião, segundo informado pelo Comitê de Bacia</p></dd>
+  <dt>data_reuniao</dt><dd><p>Data da reunião, segundo informado pelo Comitê de Bacia, no formato ano-mês-dia (yyyy-mm-dd)</p></dd>
+  <dt>data_postagem</dt><dd><p>Data da postagem da ata de reunião, segundo informado pelo Comitê de Bacia, no formato ano-mês-dia (yyyy-mm-dd)</p></dd>
+  <dt>numero_link</dt><dd><p>Em alguns casos, há mais de um link para o arquivo da ata por reunião. Essa coluna contém a ordem dos arquivos.</p></dd>
+  <dt>url_link</dt><dd><p>URL, ou endereço online, do arquivo referente à ata da reunião.</p></dd>
 
 </dl>
 
