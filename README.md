@@ -44,9 +44,17 @@ devtools::install_github("beatrizmilz/ComitesBaciaSP")
 library(ComitesBaciaSP)
 ```
 
-Para utilizar as funções do pacote, primeiramente é necessário saber a
-sigla referente ao comitê que você deseja buscar informações. A base
-comites\_sp disponibiliza esta informação:
+  - As bases disponíveis no pacote atualmente são:
+      - [`comites_sp`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html)
+      - [`atas_comites`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/atas_comites.html)
+      - [`representantes_comites`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/representantes_comites.html)
+  - As funções disponíveis no pacote atualmente são:
+      - [`obter_tabela_atas_comites()`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_atas_comites.html)
+      - [`obter_tabela_representantes_comites()`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_representantes_comites.html)
+
+Para utilizar as funções do pacote, é necessário saber a sigla referente
+ao comitê que você deseja buscar informações. A base comites\_sp
+disponibiliza esta informação:
 
 ``` r
 comites_sp %>%
@@ -82,14 +90,6 @@ comites_sp %>%
 Obs: As UGRHIs 20 - Aquapeí e 21 - Peixe integram o “Comitê das Bacias
 Hidrográficas dos Rios Aguapeí e Peixe – CBH-AP”, e por isso o CBH-AP
 aparece duas vezes na tabela.
-
-  - As bases disponíveis no pacote atualmente são:
-      - [`comites_sp`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html)
-      - [`atas_comites`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/atas_comites.html)
-      - [`representantes_comites`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/representantes_comites.html)
-  - As funções disponíveis no pacote atualmente são:
-      - [`obter_tabela_atas_comites()`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_atas_comites.html)
-      - [`obter_tabela_representantes_comites()`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_representantes_comites.html)
 
 ## Citações
 
