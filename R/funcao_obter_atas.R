@@ -3,7 +3,7 @@
 #' Função para obter tabelas sobre atas dos Comitês de Bacia no Estado de São Paulo
 #'
 #' @param n_comite Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.
-#' @return Retorna uma tibble.
+#' @return Retorna uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{atas_comites}}.
 #' @export
 #'
 #' @examples obter_tabela_atas_comites(6)
@@ -30,6 +30,7 @@ obter_tabela_atas_comites <- function(n_comite) {
     df_vazia <-
       tibble::tibble(
         data_coleta_dados = Sys.Date(),
+        site_coleta = link_comite,
         comite = nome_comite,
         n_ugrhi = n_comite,
         nome_reuniao = NA,
@@ -95,6 +96,7 @@ obter_tabela_atas_comites <- function(n_comite) {
     df <-
       tibble::tibble(
         data_coleta_dados = Sys.Date(),
+        site_coleta = link_comite,
         comite = nome_comite,
         n_ugrhi = n_comite,
         nome_reuniao,
@@ -112,6 +114,7 @@ obter_tabela_atas_comites <- function(n_comite) {
       ) %>%
       dplyr::select(
         "data_coleta_dados",
+        "site_coleta",
         "comite" ,
         "n_ugrhi" ,
         "nome_reuniao"  ,

@@ -10,7 +10,7 @@ obter_tabela_atas_comites(n_comite)
 \item{n_comite}{Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
 }
 \value{
-Retorna uma tibble.
+Retorna uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{atas_comites}}.
 }
 \description{
 Função para obter tabelas sobre atas dos Comitês de Bacia no Estado de São Paulo

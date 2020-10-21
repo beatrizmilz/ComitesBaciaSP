@@ -8,6 +8,7 @@
 Uma tibble, contendo:
 \describe{
   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
+  \item{site_coleta}{Link do site onde os dados foram coletados}
   \item{comite}{Nome do comitê de bacia}
   \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
   \item{nome_reuniao}{Nome da reunião, segundo informado pelo Comitê de Bacia}

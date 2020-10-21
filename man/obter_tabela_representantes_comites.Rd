@@ -10,7 +10,7 @@ obter_tabela_representantes_comites(n_comite)
 \item{n_comite}{Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
 }
 \value{
-Uma tibble.
+Uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{representantes_comites}}.
 }
 \description{
 Função para obter tabelas sobre representantes dos Comitês de Bacia no Estado de São Paulo

@@ -8,7 +8,13 @@
 Uma tibble, contendo:
 \describe{
   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
-  \item{comite}{Nome do comit}
+  \item{site_coleta}{Link do site onde os dados foram coletados}
+  \item{comite}{Nome do comitê de Bacia Hidrográfica}
+  \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+  \item{organizacao_representante}{Organização representante à qual a pessoa na coluna 'nome' está vinculada, segundo informado pelo Comitê de Bacia}
+  \item{nome}{Nome da pessoa representante, segundo informado pelo Comitê de Bacia}
+  \item{email}{Email da pessoa representante, segundo informado pelo Comitê de Bacia}
+  \item{cargo}{Cargo (Titular ou Suplente) da pessoa representante, segundo informado pelo Comitê de Bacia}
 }
 }
 \source{
@@ -18,7 +24,7 @@ SigRH - \url{http://www.sigrh.sp.gov.br/}
 representantes_comites
 }
 \description{
-MUDAR ISSO
+Tabela contendo informações sobre representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo
 }
 \examples{
 head(representantes_comites)

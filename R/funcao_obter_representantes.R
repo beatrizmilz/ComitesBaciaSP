@@ -4,7 +4,7 @@
 #'
 #' @param n_comite Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.
 #'
-#' @return Uma tibble.
+#' @return Uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{representantes_comites}}.
 #' @export
 #'
 #' @examples obter_tabela_representantes_comites(10)
@@ -63,9 +63,9 @@ obter_tabela_representantes_comites <- function(n_comite) {
     df_vazia <-
       tibble::tibble(
         data_coleta_dados = Sys.Date(),
-        comite = nome_comite,
-        comite_numero = n_comite,
         site_coleta = link_comite,
+        comite = nome_comite,
+        n_ugrhi = n_comite,
         organizacao_representante = NA,
         nome = NA,
         email = NA,
@@ -146,10 +146,11 @@ obter_tabela_representantes_comites <- function(n_comite) {
     df <-
       tibble::tibble(
         data_coleta_dados = Sys.Date(),
+        site_coleta = link_comite,
         posicao_blocos = tamanho_blocos,
         comite = nome_comite,
-        comite_numero = n_comite,
-        site_coleta = link_comite,
+        n_ugrhi = n_comite,
+
         organizacao_representante,
         nome_representantes,
         email_representantes,
@@ -164,7 +165,8 @@ obter_tabela_representantes_comites <- function(n_comite) {
     )    %>%
       tidyr::pivot_wider(names_from = c(set),
                          values_from = c(value)) %>%
-      dplyr::filter(!is.na(nome))
+      dplyr::filter(!is.na(nome)) %>%
+      dplyr::select(-posicao_blocos, -ordem)
 
 
     return(df_final)
