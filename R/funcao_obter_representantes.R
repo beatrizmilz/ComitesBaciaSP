@@ -1,11 +1,13 @@
-#' Title
+#' Obter tabelas sobre representantes dos Comitês de Bacia
 #'
-#' @param n_comite
+#' Função para obter tabelas sobre representantes dos Comitês de Bacia no Estado de São Paulo
 #'
-#' @return
+#' @param n_comite Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.
+#'
+#' @return Uma tibble.
 #' @export
 #'
-#' @examples
+#' @examples obter_tabela_representantes_comites(10)
 obter_tabela_representantes_comites <- function(n_comite) {
 
 

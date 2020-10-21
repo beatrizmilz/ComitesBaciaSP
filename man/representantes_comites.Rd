@@ -5,7 +5,11 @@
 \alias{representantes_comites}
 \title{Representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo}
 \format{
-Uma tibble.
+Uma tibble, contendo:
+\describe{
+  \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
+  \item{comite}{Nome do comit}
+}
 }
 \source{
 SigRH - \url{http://www.sigrh.sp.gov.br/}

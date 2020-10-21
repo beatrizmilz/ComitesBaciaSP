@@ -3,8 +3,14 @@
 #'
 #' MUDAR ISSO
 #'
-#' @format Uma tibble.
-
+#' @format Uma tibble com `r nrows(comites_sp)` linhas e `r ncols(comites_sp)` colunas, contendo as variáveis:
+#' \describe{
+#'   \item{bacia_hidrografica}{Nome da Bacia Hidrográfica}
+#'   \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
+#'   \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+#'   \item{n_ugrhi}{Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+#'   \item{macrometropole_daee}{Variável lógica. Caso a resposta seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE.}
+#' }
 #' @name comites_sp
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
 #'
@@ -16,8 +22,11 @@
 #'
 #' MUDAR ISSO
 #'
-#' @format Uma tibble.
-
+#' @format Uma tibble, contendo:
+#' \describe{
+#'   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
+#'   \item{comite}{Nome do comit}
+#' }
 #' @name representantes_comites
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
 #'
@@ -27,8 +36,11 @@
 #'
 #' MUDAR ISSO
 #'
-#' @format Uma tibble.
-
+#' @format Uma tibble, contendo:
+#' \describe{
+#'   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
+#'   \item{comite}{Nome do comit}
+#' }
 #' @name atas_comites
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
 #'

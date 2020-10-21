@@ -12,12 +12,12 @@ comites_sp <- municipios_sp %>%
     sigla_comite = stringr::str_to_lower(sigla_comite),
     n_ugrhi = dplyr::case_when(sigla_comite == "ps" ~ 02,
                                sigla_comite == "tj" ~ 13,
-                               TRUE ~ as.double(n_ugrhi)),
-    links = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas")
+                               TRUE ~ as.double(n_ugrhi))
   ) %>%
 
-  dplyr::group_by(bacia_hidrografica, sigla_comite, n_ugrhi, links) %>%
-  dplyr::count() %>%
+  dplyr::group_by(bacia_hidrografica, sigla_comite, n_ugrhi) %>%
+  dplyr::count(name = "numero_municipios") %>%
+  dplyr::ungroup() %>%
   dplyr::arrange(n_ugrhi) %>%
   dplyr::mutate(macrometropole_daee = dplyr::case_when(
     sigla_comite %in% c("ps","ln","pcj","at","bs","mogi","smt","rb") ~ TRUE,

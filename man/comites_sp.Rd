@@ -5,7 +5,14 @@
 \alias{comites_sp}
 \title{Comitês de Bacia Hidrográfica no Estado de São Paulo}
 \format{
-Uma tibble.
+Uma tibble com `r nrows(comites_sp)` linhas e `r ncols(comites_sp)` colunas, contendo as variáveis:
+\describe{
+  \item{bacia_hidrografica}{Nome da Bacia Hidrográfica}
+  \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
+  \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+  \item{n_ugrhi}{Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+  \item{macrometropole_daee}{Variável lógica. Caso a resposta seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE.}
+}
 }
 \source{
 SigRH - \url{http://www.sigrh.sp.gov.br/}

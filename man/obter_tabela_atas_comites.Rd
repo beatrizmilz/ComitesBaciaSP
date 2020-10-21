@@ -2,19 +2,19 @@
 % Please edit documentation in R/funcao_obter_atas.R
 \name{obter_tabela_atas_comites}
 \alias{obter_tabela_atas_comites}
-\title{Função para obter tabelas de atas dos comitês}
+\title{Obter tabelas sobre atas dos Comitês de Bacia}
 \usage{
 obter_tabela_atas_comites(n_comite)
 }
 \arguments{
-\item{n_comite}{}
+\item{n_comite}{Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
 }
 \value{
 Retorna uma tibble.
 }
 \description{
-Função para obter tabelas de atas dos comitês
+Função para obter tabelas sobre atas dos Comitês de Bacia no Estado de São Paulo
 }
 \examples{
-obter_tabela_atas_comites(3)
+obter_tabela_atas_comites(6)
 }

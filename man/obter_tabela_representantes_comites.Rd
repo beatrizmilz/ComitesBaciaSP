@@ -2,16 +2,19 @@
 % Please edit documentation in R/funcao_obter_representantes.R
 \name{obter_tabela_representantes_comites}
 \alias{obter_tabela_representantes_comites}
-\title{Title}
+\title{Obter tabelas sobre representantes dos Comitês de Bacia}
 \usage{
 obter_tabela_representantes_comites(n_comite)
 }
 \arguments{
-\item{n_comite}{}
+\item{n_comite}{Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
 }
 \value{
-
+Uma tibble.
 }
 \description{
-Title
+Função para obter tabelas sobre representantes dos Comitês de Bacia no Estado de São Paulo
+}
+\examples{
+obter_tabela_representantes_comites(10)
 }
