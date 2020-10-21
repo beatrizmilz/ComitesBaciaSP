@@ -12,12 +12,10 @@ obter_tabela_atas_comites <- function(n_comite) {
 
   link_comite <-
     comite  %>%
-    dplyr::select(links) %>%
-    dplyr::pull()
+    dplyr::pull(links)
 
   nome_comite <- comite %>%
-    dplyr::select(bacia_hidrografica) %>%
-    dplyr::pull()
+    dplyr::pull(bacia_hidrografica)
 
 
   lista <- xml2::read_html(link_comite) %>%
@@ -41,50 +39,50 @@ obter_tabela_atas_comites <- function(n_comite) {
 
   } else{
     nome_reuniao <- lista %>%
-      purrr::map( ~  rvest::html_nodes(.x, "h2")) %>%
-      purrr::map( ~ .x[1]) %>%
-      purrr::map( ~ rvest::html_text(.x)) %>%
+      purrr::map(~  rvest::html_nodes(.x, "h2")) %>%
+      purrr::map(~ .x[1]) %>%
+      purrr::map(~ rvest::html_text(.x)) %>%
       purrr::as_vector()
 
 
     lista_dados <- lista %>%
-      purrr::map(~  rvest::html_nodes(.x, "ul"))
+      purrr::map( ~  rvest::html_nodes(.x, "ul"))
 
     tres_nodes <-
       lista_dados %>%
-      purrr::map(~  rvest::html_nodes(.x, "li"))
+      purrr::map( ~  rvest::html_nodes(.x, "li"))
 
     data_postagem <- tres_nodes  %>%
-      purrr::map( ~ .x[2])  %>%
-      purrr::map(~  rvest::html_text(.x)) %>%
-      purrr::map(~ stringr::str_extract(.x,  "[0-9]{2}/[0-9]{2}/[0-9]{4}")) %>%
+      purrr::map(~ .x[2])  %>%
+      purrr::map( ~  rvest::html_text(.x)) %>%
+      purrr::map( ~ stringr::str_extract(.x,  "[0-9]{2}/[0-9]{2}/[0-9]{4}")) %>%
       purrr::as_vector() %>%
       lubridate::as_date(format = "%d/%m/%Y")
 
 
     data_reuniao <- tres_nodes  %>%
-      purrr::map( ~ .x[1])  %>%
-      purrr::map(~  rvest::html_text(.x)) %>%
-      purrr::map(~ stringr::str_extract(.x,  "[0-9]{2}/[0-9]{2}/[0-9]{4}")) %>%
+      purrr::map(~ .x[1])  %>%
+      purrr::map( ~  rvest::html_text(.x)) %>%
+      purrr::map( ~ stringr::str_extract(.x,  "[0-9]{2}/[0-9]{2}/[0-9]{4}")) %>%
       purrr::as_vector() %>%
       lubridate::as_date(format = "%d/%m/%Y")
 
     link_ata <-
       tres_nodes %>%
-      purrr::map( ~ rvest::html_nodes(.x, "a")) %>%
-      purrr::map( ~ rvest::html_attr(.x, "href")) %>%
-      purrr::map( ~ tibble::as_tibble(.x)) %>%
-      purrr::map( ~ dplyr::mutate(.x, link_numero = paste0("ata_", dplyr::row_number(.x))))  %>%
-      purrr::map( ~ dplyr::mutate(
+      purrr::map(~ rvest::html_nodes(.x, "a")) %>%
+      purrr::map(~ rvest::html_attr(.x, "href")) %>%
+      purrr::map(~ tibble::as_tibble(.x)) %>%
+      purrr::map(~ dplyr::mutate(.x, link_numero = paste0("ata_", dplyr::row_number(.x))))  %>%
+      purrr::map(~ dplyr::mutate(
         .x,
         value = dplyr::case_when(
           stringr::str_starts(value , "/public") ~ paste0("http://www.sigrh.sp.gov.br", value),
           TRUE ~ value
         )
       )) %>%
-      purrr::map( ~ tidyr::pivot_wider(.x, values_from = value, names_from = link_numero)) %>%
-      purrr::map( ~ tibble::as_tibble(.x)) %>%
-      purrr::map( ~ if (nrow(.x) == 0) {
+      purrr::map(~ tidyr::pivot_wider(.x, values_from = value, names_from = link_numero)) %>%
+      purrr::map(~ tibble::as_tibble(.x)) %>%
+      purrr::map(~ if (nrow(.x) == 0) {
         .x %>% tibble::add_row()
       } else {
         .x
@@ -135,12 +133,17 @@ obter_tabela_atas_comites <- function(n_comite) {
 # View(obter_tabela_atas_comites(3))
 
 #SALVAR OS DADOS NO PACOTE -----------------
-# numeros_dos_comites <- comites_sp %>% dplyr::pull(n_ugrhi)
+# numeros_dos_comites <- comites_sp %>%
+#   dplyr::filter(n_ugrhi != 21) %>% # As UGRHIs 21 e 20 tem o mesmo comitê
+#   dplyr::pull(n_ugrhi)
 #
 # tabela_atas_comites <-
 #   purrr::map_df(numeros_dos_comites, obter_tabela_atas_comites)
 #
 # tabela_atas_comites %>%
-#   write.csv2(file = glue::glue("inst/extdata/tabela_atas_comites_{Sys.Date()}.csv"), fileEncoding = "UTF-8")
+#   write.csv2(
+#     file = glue::glue("inst/extdata/tabela_atas_comites_{Sys.Date()}.csv"),
+#     fileEncoding = "UTF-8"
+#   )
 #
 # usethis::use_data(tabela_atas_comites, overwrite = TRUE)
