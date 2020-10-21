@@ -10,7 +10,7 @@ Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contend
   \item{bacia_hidrografica}{Nome da Bacia Hidrográfica}
   \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
   \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
-  \item{n_ugrhi}{Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+  \item{numero_municipios}{Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
   \item{macrometropole_daee}{Variável lógica. Caso a resposta seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE.}
 }
 }

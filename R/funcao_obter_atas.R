@@ -31,7 +31,7 @@ obter_tabela_atas_comites <- function(n_comite) {
       tibble::tibble(
         data_coleta_dados = Sys.Date(),
         comite = nome_comite,
-        comite_numero = n_comite,
+        n_ugrhi = n_comite,
         nome_reuniao = NA,
         data_reuniao = NA,
         data_postagem = NA,
@@ -96,7 +96,7 @@ obter_tabela_atas_comites <- function(n_comite) {
       tibble::tibble(
         data_coleta_dados = Sys.Date(),
         comite = nome_comite,
-        comite_numero = n_comite,
+        n_ugrhi = n_comite,
         nome_reuniao,
         data_reuniao,
         data_postagem,
@@ -113,19 +113,20 @@ obter_tabela_atas_comites <- function(n_comite) {
       dplyr::select(
         "data_coleta_dados",
         "comite" ,
-        "comite_numero" ,
+        "n_ugrhi" ,
         "nome_reuniao"  ,
         "data_reuniao",
         "data_postagem"  ,
         "numero_link"   ,
         "url_link"
-      ) %>%
-      dplyr::mutate(
-        formato_link = dplyr::case_when(
-          is.na(url_link) ~ "Ata não disponibilizada",
-          TRUE ~ stringr::str_extract(url_link, pattern = "(.doc|.docx|.pdf|.html|.htm|.jpg|.pd)$|drive.google")
-        )
       )
+    # %>%
+    #   dplyr::mutate(
+    #     formato_link = dplyr::case_when(
+    #       is.na(url_link) ~ "Ata não disponibilizada",
+    #       TRUE ~ stringr::str_extract(url_link, pattern = "(.doc|.docx|.pdf|.html|.htm|.jpg|.pd)$|drive.google")
+    #     )
+    #   )
 
 
     return(df_longer)
