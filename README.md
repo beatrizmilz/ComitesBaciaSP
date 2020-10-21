@@ -91,7 +91,7 @@ Obs: As UGRHIs 20 - Aquapeí e 21 - Peixe integram o “Comitê das Bacias
 Hidrográficas dos Rios Aguapeí e Peixe – CBH-AP”, e por isso o CBH-AP
 aparece duas vezes na tabela.
 
-## Citações
+## Como citar o pacote
 
 ``` r
 citation("ComitesBaciaSP")
