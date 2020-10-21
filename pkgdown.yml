@@ -1,9 +1,6 @@
-template:
-  params:
-    bootswatch: cerulean
 pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2020-10-21T17:46Z
+last_built: 2020-10-21T17:58Z
 

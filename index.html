@@ -87,7 +87,22 @@
 <p>É possível carregar o pacote utilizando a seguinte função:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/beatrizmilz/ComitesBaciaSP">ComitesBaciaSP</a></span><span class="op">)</span></pre></div>
-<p>Para utilizar as funções do pacote, primeiramente é necessário saber a sigla referente ao comitê que você deseja buscar informações. A base comites_sp disponibiliza esta informação:</p>
+<ul>
+<li>As bases disponíveis no pacote atualmente são:
+<ul>
+<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html"><code>comites_sp</code></a></li>
+<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/atas_comites.html"><code>atas_comites</code></a></li>
+<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/representantes_comites.html"><code>representantes_comites</code></a></li>
+</ul>
+</li>
+<li>As funções disponíveis no pacote atualmente são:
+<ul>
+<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_atas_comites.html"><code>obter_tabela_atas_comites()</code></a></li>
+<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_representantes_comites.html"><code>obter_tabela_representantes_comites()</code></a></li>
+</ul>
+</li>
+</ul>
+<p>Para utilizar as funções do pacote, é necessário saber a sigla referente ao comitê que você deseja buscar informações. A base comites_sp disponibiliza esta informação:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">comites_sp</span> <span class="op">%&gt;%</span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -212,21 +227,6 @@
 </tbody>
 </table>
 <p>Obs: As UGRHIs 20 - Aquapeí e 21 - Peixe integram o “Comitê das Bacias Hidrográficas dos Rios Aguapeí e Peixe – CBH-AP”, e por isso o CBH-AP aparece duas vezes na tabela.</p>
-<ul>
-<li>As bases disponíveis no pacote atualmente são:
-<ul>
-<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html"><code>comites_sp</code></a></li>
-<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/atas_comites.html"><code>atas_comites</code></a></li>
-<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/representantes_comites.html"><code>representantes_comites</code></a></li>
-</ul>
-</li>
-<li>As funções disponíveis no pacote atualmente são:
-<ul>
-<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_atas_comites.html"><code>obter_tabela_atas_comites()</code></a></li>
-<li><a href="https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_representantes_comites.html"><code>obter_tabela_representantes_comites()</code></a></li>
-</ul>
-</li>
-</ul>
 </div>
 <div id="citações" class="section level2">
 <h2 class="hasAnchor">
