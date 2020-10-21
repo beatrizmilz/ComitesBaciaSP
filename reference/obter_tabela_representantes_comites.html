@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — obter_tabela_representantes_comites • ComitesBaciaSP</title>
+<title>Obter tabelas sobre representantes dos Comitês de Bacia — obter_tabela_representantes_comites • ComitesBaciaSP</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Title — obter_tabela_representantes_comites" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Obter tabelas sobre representantes dos Comitês de Bacia — obter_tabela_representantes_comites" />
+<meta property="og:description" content="Função para obter tabelas sobre representantes dos Comitês de Bacia no Estado de São Paulo" />
 
 
 
@@ -108,13 +108,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Obter tabelas sobre representantes dos Comitês de Bacia</h1>
     <small class="dont-index">Source: <a href='https://github.com/beatrizmilz/ComitesBaciaSP/blob/master/R/funcao_obter_representantes.R'><code>R/funcao_obter_representantes.R</code></a></small>
     <div class="hidden name"><code>obter_tabela_representantes_comites.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Função para obter tabelas sobre representantes dos Comitês de Bacia no Estado de São Paulo</p>
     </div>
 
     <pre class="usage"><span class='fu'>obter_tabela_representantes_comites</span><span class='op'>(</span><span class='va'>n_comite</span><span class='op'>)</span></pre>
@@ -124,16 +124,31 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>n_comite</th>
-      <td></td>
+      <td><p>Número referente ao comitê. É possível verificar na base:  <code><a href='comites_sp.html'>comites_sp</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>Uma tibble.</p>
 
-
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>obter_tabela_representantes_comites</span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 109 x 10</span><span>
+#&gt;    data_coleta_dad… posicao_blocos comite comite_numero site_coleta
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2020-10-21                    1 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2020-10-21                    2 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2020-10-21                    3 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2020-10-21                    4 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2020-10-21                    5 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2020-10-21                    5 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2020-10-21                    6 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2020-10-21                    6 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2020-10-21                    7 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'>10</span><span> 2020-10-21                    7 Soroc…            10 http://www…
+#&gt; </span><span style='color: #555555;'># … with 99 more rows, and 5 more variables: organizacao_representante </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ordem </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, nome </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, email </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, cargo </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

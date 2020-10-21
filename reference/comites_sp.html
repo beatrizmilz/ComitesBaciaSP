@@ -122,7 +122,15 @@
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>Uma tibble.</p>
+    <p>Uma tibble com `r nrows(comites_sp)` linhas e `r ncols(comites_sp)` colunas, contendo as variáveis:</p><dl>
+  <dt>bacia_hidrografica</dt><dd><p>Nome da Bacia Hidrográfica</p></dd>
+  <dt>sigla_comite</dt><dd><p>Sigla utilizada no site do SigRH para o Comitê</p></dd>
+  <dt>n_ugrhi</dt><dd><p>Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado</p></dd>
+  <dt>n_ugrhi</dt><dd><p>Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado</p></dd>
+  <dt>macrometropole_daee</dt><dd><p>Variável lógica. Caso a resposta seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE.</p></dd>
+
+</dl>
+
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>SigRH - <a href='http://www.sigrh.sp.gov.br/'>http://www.sigrh.sp.gov.br/</a></p>
