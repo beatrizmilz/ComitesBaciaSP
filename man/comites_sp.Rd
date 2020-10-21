@@ -5,7 +5,7 @@
 \alias{comites_sp}
 \title{Comitês de Bacia Hidrográfica no Estado de São Paulo}
 \format{
-Uma tibble com `r nrows(comites_sp)` linhas e `r ncols(comites_sp)` colunas, contendo as variáveis:
+Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contendo as variáveis:
 \describe{
   \item{bacia_hidrografica}{Nome da Bacia Hidrográfica}
   \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
@@ -15,12 +15,16 @@ Uma tibble com `r nrows(comites_sp)` linhas e `r ncols(comites_sp)` colunas, con
 }
 }
 \source{
-SigRH - \url{http://www.sigrh.sp.gov.br/}
+SigRH - \url{http://www.sigrh.sp.gov.br/municipios}
 }
 \usage{
 comites_sp
 }
 \description{
-MUDAR ISSO
+Tabela agregada à partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
+}
+\examples{
+knitr::kable(comites_sp)
+
 }
 \keyword{datasets}

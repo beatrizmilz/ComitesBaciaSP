@@ -1,9 +1,9 @@
 
 #' Comitês de Bacia Hidrográfica no Estado de São Paulo
 #'
-#' MUDAR ISSO
+#' Tabela agregada à partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
 #'
-#' @format Uma tibble com `r nrows(comites_sp)` linhas e `r ncols(comites_sp)` colunas, contendo as variáveis:
+#' @format Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contendo as variáveis:
 #' \describe{
 #'   \item{bacia_hidrografica}{Nome da Bacia Hidrográfica}
 #'   \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
@@ -12,7 +12,8 @@
 #'   \item{macrometropole_daee}{Variável lógica. Caso a resposta seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE.}
 #' }
 #' @name comites_sp
-#' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
+#' @source SigRH - \url{http://www.sigrh.sp.gov.br/municipios}
+#' @examples knitr::kable(comites_sp)
 #'
 "comites_sp"
 
