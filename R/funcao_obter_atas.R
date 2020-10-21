@@ -132,18 +132,18 @@ obter_tabela_atas_comites <- function(n_comite) {
 
 # View(obter_tabela_atas_comites(3))
 
-#SALVAR OS DADOS NO PACOTE -----------------
+# #SALVAR OS DADOS NO PACOTE -----------------
 # numeros_dos_comites <- comites_sp %>%
 #   dplyr::filter(n_ugrhi != 21) %>% # As UGRHIs 21 e 20 tem o mesmo comitê
 #   dplyr::pull(n_ugrhi)
 #
-# tabela_atas_comites <-
+# atas_comites <-
 #   purrr::map_df(numeros_dos_comites, obter_tabela_atas_comites)
 #
-# tabela_atas_comites %>%
+# atas_comites %>%
 #   write.csv2(
 #     file = glue::glue("inst/extdata/tabela_atas_comites_{Sys.Date()}.csv"),
 #     fileEncoding = "UTF-8"
 #   )
 #
-# usethis::use_data(tabela_atas_comites, overwrite = TRUE)
+# usethis::use_data(atas_comites, overwrite = TRUE)

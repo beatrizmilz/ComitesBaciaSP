@@ -2,4 +2,5 @@
 
 export("%>%")
 export(obter_tabela_atas_comites)
+export(obter_tabela_representantes_comites)
 importFrom(magrittr,"%>%")

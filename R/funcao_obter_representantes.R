@@ -1,16 +1,44 @@
-library(magrittr)
-
+#' Title
+#'
+#' @param n_comite
+#'
+#' @return
+#' @export
+#'
+#' @examples
 obter_tabela_representantes_comites <- function(n_comite) {
 
- # n_comite <- 5
 
-  comite <- comites_sp %>%
-    dplyr::filter(n_ugrhi == n_comite) %>%
-    dplyr::mutate(
-      link_representantes = glue::glue(
-        "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
+  if (n_comite == 17) {
+    comite <- comites_sp %>%
+      dplyr::filter(n_ugrhi == n_comite) %>%
+      dplyr::mutate(
+        link_representantes = glue::glue(
+          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes-plenario"
+        )
       )
-    )
+
+  } else if (n_comite == 22) {
+    comite <- comites_sp %>%
+      dplyr::filter(n_ugrhi == n_comite) %>%
+      dplyr::mutate(
+        link_representantes = glue::glue(
+          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantesplenaria20192020"
+        )
+      )
+
+  } else {
+    comite <- comites_sp %>%
+      dplyr::filter(n_ugrhi == n_comite) %>%
+      dplyr::mutate(
+        link_representantes = glue::glue(
+          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
+        )
+      )
+
+  }
+
+
 
   link_comite <- comite  %>%
     dplyr::pull(link_representantes)
@@ -37,9 +65,9 @@ obter_tabela_representantes_comites <- function(n_comite) {
         comite_numero = n_comite,
         site_coleta = link_comite,
         organizacao_representante = NA,
-        nome_representantes = NA,
-        email_representantes = NA,
-        cargo_representantes = NA
+        nome = NA,
+        email = NA,
+        cargo = NA
       )
 
     return(df_vazia)
@@ -47,21 +75,21 @@ obter_tabela_representantes_comites <- function(n_comite) {
   } else{
     # Organizacao representante
     organizacao_representante <- blocos %>%
-      purrr::map( ~  rvest::html_nodes(.x, "h2")) %>%
-      purrr::map( ~ .x[1]) %>%
-      purrr::map( ~ rvest::html_text(.x)) %>%
+      purrr::map(~  rvest::html_nodes(.x, "h2")) %>%
+      purrr::map(~ .x[1]) %>%
+      purrr::map(~ rvest::html_text(.x)) %>%
       purrr::as_vector()
 
     # Nome representantes
     nome_representantes <- blocos %>%
-      purrr::map( ~  rvest::html_nodes(.x, "b")) %>%
-      purrr::map( ~  rvest::html_text(.x, trim = TRUE)) %>%
-      purrr::map( ~ tibble::as_tibble(.x)) %>%
-      purrr::map(~ tibble::rowid_to_column(.x, "nome_numero")) %>%
-      purrr::map(~ dplyr::mutate(.x, nome_numero = paste0("nome_", nome_numero))) %>%
-      purrr::map( ~ tidyr::pivot_wider(.x, values_from = value, names_from = nome_numero)) %>%
-       purrr::map( ~ tibble::as_tibble(.x)) %>%
-      purrr::map( ~ if (nrow(.x) == 0) {
+      purrr::map(~  rvest::html_nodes(.x, "b")) %>%
+      purrr::map(~  rvest::html_text(.x, trim = TRUE)) %>%
+      purrr::map(~ tibble::as_tibble(.x)) %>%
+      purrr::map( ~ tibble::rowid_to_column(.x, "nome_numero")) %>%
+      purrr::map( ~ dplyr::mutate(.x, nome_numero = paste0("nome_", nome_numero))) %>%
+      purrr::map(~ tidyr::pivot_wider(.x, values_from = value, names_from = nome_numero)) %>%
+      purrr::map(~ tibble::as_tibble(.x)) %>%
+      purrr::map(~ if (nrow(.x) == 0) {
         .x %>% tibble::add_row()
       } else {
         .x
@@ -71,15 +99,15 @@ obter_tabela_representantes_comites <- function(n_comite) {
 
     # Cargo representantes
     cargo_representantes <- blocos %>%
-      purrr::map( ~  rvest::html_nodes(.x, "h2")) %>%
-      purrr::map( ~ .x[-1]) %>%
-      purrr::map( ~  rvest::html_text(.x)) %>%
-      purrr::map( ~ tibble::as_tibble(.x)) %>%
-      purrr::map(~ tibble::rowid_to_column(.x, "cargo_numero")) %>%
-      purrr::map(~ dplyr::mutate(.x, cargo_numero = paste0("cargo_", cargo_numero))) %>%
-      purrr::map( ~ tidyr::pivot_wider(.x, values_from = value, names_from = cargo_numero)) %>%
-      purrr::map( ~ tibble::as_tibble(.x)) %>%
-      purrr::map( ~ if (nrow(.x) == 0) {
+      purrr::map(~  rvest::html_nodes(.x, "h2")) %>%
+      purrr::map(~ .x[-1]) %>%
+      purrr::map(~  rvest::html_text(.x)) %>%
+      purrr::map(~ tibble::as_tibble(.x)) %>%
+      purrr::map( ~ tibble::rowid_to_column(.x, "cargo_numero")) %>%
+      purrr::map( ~ dplyr::mutate(.x, cargo_numero = paste0("cargo_", cargo_numero))) %>%
+      purrr::map(~ tidyr::pivot_wider(.x, values_from = value, names_from = cargo_numero)) %>%
+      purrr::map(~ tibble::as_tibble(.x)) %>%
+      purrr::map(~ if (nrow(.x) == 0) {
         .x %>% tibble::add_row()
       } else {
         .x
@@ -91,16 +119,17 @@ obter_tabela_representantes_comites <- function(n_comite) {
 
     # email representantes
     email_representantes <- blocos %>%
-      purrr::map(~  rvest::html_nodes(.x, "td")) %>%
-      purrr::map(~  rvest::html_text(.x, trim = TRUE)) %>%
-      purrr::map(~ stringr::str_remove_all(.x, pattern = "(^| )[0-9.() -]{5,}( |$)")) %>%
-      purrr::map(~ tibble::as_tibble(.x)) %>%
-      purrr::map( ~ dplyr::filter(.x, value != "")) %>%
-      purrr::map( ~ tibble::rowid_to_column(.x, "email_numero")) %>%
-      purrr::map( ~ dplyr::mutate(.x, email_numero = paste0("email_", email_numero))) %>%
-      purrr::map(~ tidyr::pivot_wider(.x, values_from = value, names_from = email_numero)) %>%
-      purrr::map(~ tibble::as_tibble(.x)) %>%
-      purrr::map(~ if (nrow(.x) == 0) {
+      purrr::map( ~  rvest::html_nodes(.x, "td")) %>%
+      purrr::map( ~  rvest::html_text(.x, trim = TRUE)) %>%
+      purrr::map( ~ stringr::str_remove_all(.x, pattern = "(^| )[0-9.() -]{5,}( |$)")) %>%
+      purrr::map( ~ tibble::as_tibble(.x)) %>%
+      purrr::map(~ dplyr::filter(.x, stringr::str_detect(value, pattern = "@"))) %>%
+      # purrr::map( ~ dplyr::filter(.x, value != "")) %>%
+      purrr::map(~ tibble::rowid_to_column(.x, "email_numero")) %>%
+      purrr::map(~ dplyr::mutate(.x, email_numero = paste0("email_", email_numero))) %>%
+      purrr::map( ~ tidyr::pivot_wider(.x, values_from = value, names_from = email_numero)) %>%
+      purrr::map( ~ tibble::as_tibble(.x)) %>%
+      purrr::map( ~ if (nrow(.x) == 0) {
         .x %>% tibble::add_row()
       } else {
         .x
@@ -122,8 +151,8 @@ obter_tabela_representantes_comites <- function(n_comite) {
         organizacao_representante,
         nome_representantes,
         email_representantes,
-       cargo_representantes
-       )
+        cargo_representantes
+      )
 
 
     df_final <- df %>% tidyr::pivot_longer(
@@ -131,21 +160,30 @@ obter_tabela_representantes_comites <- function(n_comite) {
       names_to = c("set", "ordem"),
       names_pattern = "(.+)_(.+)"
     )    %>%
-      tidyr::pivot_wider(names_from = c(set), values_from = c(value)) %>%
-    dplyr::filter(!is.na(nome))
+      tidyr::pivot_wider(names_from = c(set),
+                         values_from = c(value)) %>%
+      dplyr::filter(!is.na(nome))
 
-    # %>% # erro aqui
-      #tidyr::drop_na(tidyselect::all_of(c("nome", "email", "cargo")))
 
     return(df_final)
   }
 }
 
-# teste <- obter_tabela_representantes_comites(10)
 
-
-# Comitês que não funciona: arrumar para 11 e 19, campo de email dá erro - excluir tudo que não tenha @; 17 - resulta vazio porém tem conteúdo; 20 ta esquisito o campo de email
-# 20 e 21 sao os mesmos? esquisito
-# 22 usa link diferente
-
-# obter_tabela_representantes_comites(6)
+#SALVAR OS DADOS NO PACOTE -----------------
+# numeros_dos_comites <- comites_sp %>%
+#   dplyr::filter(n_ugrhi != 21) %>% # As UGRHIs 21 e 20 tem o mesmo comitê
+#   dplyr::pull(n_ugrhi)
+# #
+# representantes_comites <-
+#   purrr::map_df(numeros_dos_comites, obter_tabela_representantes_comites)
+#
+# representantes_comites %>%
+#   write.csv2(
+#     file = glue::glue(
+#       "inst/extdata/tabela_representantes_comites_{Sys.Date()}.csv"
+#     ),
+#     fileEncoding = "UTF-8"
+#   )
+#
+# usethis::use_data(representantes_comites, overwrite = TRUE)
