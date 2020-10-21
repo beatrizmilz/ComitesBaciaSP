@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo — representantes_comites" />
-<meta property="og:description" content="MUDAR ISSO" />
+<meta property="og:description" content="Tabela contendo informações sobre representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo" />
 
 
 
@@ -114,7 +114,7 @@
     </div>
 
     <div class="ref-description">
-    <p>MUDAR ISSO</p>
+    <p>Tabela contendo informações sobre representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo</p>
     </div>
 
     <pre class="usage"><span class='va'>representantes_comites</span></pre>
@@ -124,7 +124,13 @@
 
     <p>Uma tibble, contendo:</p><dl>
   <dt>data_coleta_dados</dt><dd><p>Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)</p></dd>
-  <dt>comite</dt><dd><p>Nome do comit</p></dd>
+  <dt>site_coleta</dt><dd><p>Link do site onde os dados foram coletados</p></dd>
+  <dt>comite</dt><dd><p>Nome do comitê de Bacia Hidrográfica</p></dd>
+  <dt>n_ugrhi</dt><dd><p>Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado</p></dd>
+  <dt>organizacao_representante</dt><dd><p>Organização representante à qual a pessoa na coluna 'nome' está vinculada, segundo informado pelo Comitê de Bacia</p></dd>
+  <dt>nome</dt><dd><p>Nome da pessoa representante, segundo informado pelo Comitê de Bacia</p></dd>
+  <dt>email</dt><dd><p>Email da pessoa representante, segundo informado pelo Comitê de Bacia</p></dd>
+  <dt>cargo</dt><dd><p>Cargo (Titular ou Suplente) da pessoa representante, segundo informado pelo Comitê de Bacia</p></dd>
 
 </dl>
 
@@ -134,17 +140,15 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>representantes_comites</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 10</span><span>
-#&gt;   data_coleta_dad… posicao_blocos comite comite_numero site_coleta
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span>     
-#&gt; </span><span style='color: #555555;'>1</span><span> 2020-10-21                    1 Serra…             1 http://www…
-#&gt; </span><span style='color: #555555;'>2</span><span> 2020-10-21                    2 Serra…             1 http://www…
-#&gt; </span><span style='color: #555555;'>3</span><span> 2020-10-21                    3 Serra…             1 http://www…
-#&gt; </span><span style='color: #555555;'>4</span><span> 2020-10-21                    3 Serra…             1 http://www…
-#&gt; </span><span style='color: #555555;'>5</span><span> 2020-10-21                    4 Serra…             1 http://www…
-#&gt; </span><span style='color: #555555;'>6</span><span> 2020-10-21                    4 Serra…             1 http://www…
-#&gt; </span><span style='color: #555555;'># … with 5 more variables: organizacao_representante </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ordem </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   nome </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, email </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, cargo </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div></span></pre>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 8</span><span>
+#&gt;   data_coleta_dad… site_coleta comite n_ugrhi organizacao_rep… nome  email cargo
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 2020-10-21       http://www… Serra…       1 </span><span style='color: #555555;'>"</span><span>P. M. de São B… Rona… pref… Titu…
+#&gt; </span><span style='color: #555555;'>2</span><span> 2020-10-21       http://www… Serra…       1 </span><span style='color: #555555;'>"</span><span>ABES</span><span style='color: #555555;'>"</span><span>           Luiz… gere… Titu…
+#&gt; </span><span style='color: #555555;'>3</span><span> 2020-10-21       http://www… Serra…       1 </span><span style='color: #555555;'>"</span><span>Depto. de Água… Naza… comi… Titu…
+#&gt; </span><span style='color: #555555;'>4</span><span> 2020-10-21       http://www… Serra…       1 </span><span style='color: #555555;'>"</span><span>Depto. de Água… Mari… most… Supl…
+#&gt; </span><span style='color: #555555;'>5</span><span> 2020-10-21       http://www… Serra…       1 </span><span style='color: #555555;'>"</span><span>DAEE</span><span style='color: #555555;'>"</span><span>           Naza… comi… Titu…
+#&gt; </span><span style='color: #555555;'>6</span><span> 2020-10-21       http://www… Serra…       1 </span><span style='color: #555555;'>"</span><span>DAEE</span><span style='color: #555555;'>"</span><span>           Mari… comi… Supl…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
