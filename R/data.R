@@ -9,11 +9,11 @@
 #'   \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
 #'   \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
 #'   \item{numero_municipios}{Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
-#'   \item{macrometropole_daee}{Variável lógica. Caso a resposta seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE.}
+#'   \item{macrometropole_daee}{Variável lógica. Caso seja `TRUE`, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE ( \url{http://www.sigrh.sp.gov.br/}).}
 #' }
 #' @name comites_sp
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/municipios}
-#' @examples knitr::kable(comites_sp)
+#' @examples comites_sp
 #'
 "comites_sp"
 
@@ -30,7 +30,7 @@
 #' }
 #' @name representantes_comites
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
-#'
+#' @examples head(representantes_comites)
 "representantes_comites"
 
 #' Atas de reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo
@@ -50,6 +50,6 @@
 #' }
 #' @name atas_comites
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
-#'
+#'@examples atas_comites %>% dplyr::arrange(desc(data_postagem)) %>% head(10)
 "atas_comites"
 

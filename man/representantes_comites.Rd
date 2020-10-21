@@ -20,4 +20,7 @@ representantes_comites
 \description{
 MUDAR ISSO
 }
+\examples{
+head(representantes_comites)
+}
 \keyword{datasets}

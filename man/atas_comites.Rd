@@ -26,4 +26,7 @@ atas_comites
 \description{
 Tabela contendo informações sobre reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo e link para as atas de reunião.
 }
+\examples{
+atas_comites \%>\% dplyr::arrange(desc(data_postagem)) \%>\% head(10)
+}
 \keyword{datasets}
