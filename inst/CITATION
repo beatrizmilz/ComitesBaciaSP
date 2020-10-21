@@ -1,0 +1,15 @@
+citHeader("To cite ComitesBaciaSP in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "ComitesBaciaSP - Pacote com dados sobre os Comitês de Bacias Hidrográficas no Estado de São Paulo (SP - Brasil)",
+  author   = person("Beatriz Milz"),
+  year     = 2020,
+  note     = "R package version 0.0.0.9000",
+  url      = "https://beatrizmilz.github.io/ComitesBaciaSP/",
+  textVersion = paste(
+
+  "Beatriz Milz (2020). ComitesBaciaSP - Pacote com dados sobre os Comitês de Bacias Hidrográficas no Estado de São Paulo (SP - Brasil). R package version 0.0.0.9000. https://beatrizmilz.github.io/ComitesBaciaSP/"
+
+  )
+)

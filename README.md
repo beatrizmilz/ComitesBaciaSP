@@ -11,14 +11,20 @@ status](https://github.com/beatrizmilz/ComitesBaciaSP/workflows/R-CMD-check/badg
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-O objetivo deste pacote é disponibilizar funções para raspar dados sobre
+O objetivo deste pacote é disponibilizar funções para obter dados sobre
 os Comitês de Bacias Hidrográficas do Estado de São Paulo, disponíveis
 de forma não estruturada no site [SigRH](http://www.sigrh.sp.gov.br/),
 assim como disponibilizar as bases de dados raspadas, de forma a
 facilitar a análise dos mesmos.
 
 Este pacote foi criado no âmbito da [pesquisa de doutorado de Beatriz
-Milz](https://beatrizmilz.github.io/tese/).
+Milz](https://beatrizmilz.github.io/tese/). As funções do pacote estão
+sendo desenvolvidas à medida que são necessárias na pesquisa, porém se
+você necessita de algum dado que se encaixa no contexto deste pacote,
+[escreva uma
+issue](https://github.com/beatrizmilz/ComitesBaciaSP/issues/new/choose)
+descrevendo as informações necessárias para que seja avaliado à
+possibilidade de desenvolver e incorporar a sugestão no pacote.
 
 ## Instalação do pacote
 
@@ -32,65 +38,78 @@ devtools::install_github("beatrizmilz/ComitesBaciaSP")
 
 ## Utilização do pacote
 
+É possível carregar o pacote utilizando a seguinte função:
+
 ``` r
 library(ComitesBaciaSP)
 ```
 
-Para utilizar as funções do pacote, primeiramente é necessário saber o
-número referente ao comitê que você deseja buscar informações:
+Para utilizar as funções do pacote, primeiramente é necessário saber a
+sigla referente ao comitê que você deseja buscar informações. A base
+comites\_sp disponibiliza esta informação:
 
 ``` r
 comites_sp %>%
-  dplyr::select(nome_ugrhi, n_ugrhi) %>%
-  knitr::kable(col.names = c("Nome", "Número"))
+  dplyr::select(1:3) %>% 
+  knitr::kable()
 ```
 
-| Nome                          | Número |
-| :---------------------------- | -----: |
-| Paraíba do Sul                |      2 |
-| Litoral Norte                 |      3 |
-| Piracicaba/Capivari/Jundiaí   |      5 |
-| Alto Tietê                    |      6 |
-| Baixada Santista              |      7 |
-| Mogi-Guaçu                    |      9 |
-| Tietê/Sorocaba                |     10 |
-| Ribeira de Iguape/Litoral Sul |     11 |
+| bacia\_hidrografica             | sigla\_comite | n\_ugrhi |
+| :------------------------------ | :------------ | -------: |
+| Serra da Mantiqueira            | sm            |        1 |
+| Paraíba do Sul                  | ps            |        2 |
+| Litoral Norte                   | ln            |        3 |
+| Pardo                           | pardo         |        4 |
+| Piracicaba / Capivari / Jundiaí | pcj           |        5 |
+| Alto Tietê                      | at            |        6 |
+| Baixada Santista                | bs            |        7 |
+| Sapucaí-Mirim / Grande          | smg           |        8 |
+| Mogi-Guaçu                      | mogi          |        9 |
+| Sorocaba e Médio Tietê          | smt           |       10 |
+| Ribeira do Iguape e Litoral Sul | rb            |       11 |
+| Baixo Pardo / Grande            | bpg           |       12 |
+| Tietê-Jacaré                    | tj            |       13 |
+| Alto Paranapanema               | alpa          |       14 |
+| Turvo / Grande                  | tg            |       15 |
+| Tietê-Batalha                   | tb            |       16 |
+| Médio Paranapanema              | mp            |       17 |
+| São José dos Dourados           | sjd           |       18 |
+| Baixo Tietê                     | bt            |       19 |
+| Aquapeí e Peixe                 | ap            |       20 |
+| Aquapeí e Peixe                 | ap            |       21 |
+| Pontal do Paranapanema          | pp            |       22 |
 
-### Busca de atas
+Obs: As UGRHIs 20 - Aquapeí e 21 - Peixe integram o “Comitê das Bacias
+Hidrográficas dos Rios Aguapeí e Peixe – CBH-AP”, e por isso o CBH-AP
+aparece duas vezes na tabela.
 
-A função seguinte busca informações disponíveis sobre as atas dos
-comitês de bacia:
+  - As bases disponíveis no pacote atualmente são:
+      - [`comites_sp`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html)
+      - [`atas_comites`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/atas_comites.html)
+      - [`representantes_comites`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/representantes_comites.html)
+  - As funções disponíveis no pacote atualmente são:
+      - [`obter_tabela_atas_comites()`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_atas_comites.html)
+      - [`obter_tabela_representantes_comites()`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/obter_tabela_representantes_comites.html)
+
+## Citações
 
 ``` r
-obter_tabela_atas_comites(6) %>% # O 6 é o número referente à bacia Alto Tietê
-  head() %>%  # filtra apenas as primeiras linhas
-  knitr::kable() # formata a tabela
+citation("ComitesBaciaSP")
+#> 
+#> To cite ComitesBaciaSP in publications use:
+#> 
+#>   Beatriz Milz (2020). ComitesBaciaSP - Pacote com dados sobre os
+#>   Comitês de Bacias Hidrográficas no Estado de São Paulo (SP - Brasil).
+#>   R package version 0.0.0.9000.
+#>   https://beatrizmilz.github.io/ComitesBaciaSP/
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {ComitesBaciaSP - Pacote com dados sobre os Comitês de Bacias Hidrográficas no Estado de São Paulo (SP - Brasil)},
+#>     author = {{Beatriz Milz}},
+#>     year = {2020},
+#>     note = {R package version 0.0.0.9000},
+#>     url = {https://beatrizmilz.github.io/ComitesBaciaSP/},
+#>   }
 ```
-
-| data\_coleta\_dados | comite     | comite\_numero | nome\_reuniao                                                   | data\_reuniao | data\_postagem | numero\_link | url\_link                                                                                                                                      | formato\_link |
-| :------------------ | :--------- | -------------: | :-------------------------------------------------------------- | :------------ | :------------- | :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| 2020-10-12          | Alto Tietê |              6 | Resumo Executivo da 1ª reunião extraordinária do CBH-AT de 2020 | 2020-02-20    | 2020-07-29     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/18944/1-reuniao-20-02-2020.pdf>                                                     | .pdf          |
-| 2020-10-12          | Alto Tietê |              6 | Resumo Executivo da 6ª Reunião Plenária Extraordinária de 2019  | 2019-12-17    | 2020-02-21     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/18770/6-reuniao-17-12-2019.pdf>                                                     | .pdf          |
-| 2020-10-12          | Alto Tietê |              6 | Plenária CBH-AT 25/09/2019                                      | 2019-09-25    | 2019-10-01     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17560/resumo-executivo-da-3-reuniao-plenaria-de-2019-24-07-2019.pdf>                | .pdf          |
-| 2020-10-12          | Alto Tietê |              6 | Plenária CBH-AT 24/07/2019                                      | 2019-07-24    | 2019-08-13     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17449/resumo-executivo-da-3-reuniao-plenaria-extraordinaria-de-2019-24-07-2019.pdf> | .pdf          |
-| 2020-10-12          | Alto Tietê |              6 | Plenária CBH-AT 29/03/2019                                      | 2019-03-29    | 2019-08-13     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17448/resumo-executivo-da-2-reuniao-plenaria-ordinaria-de-2019-29-03-2019.pdf>      | .pdf          |
-| 2020-10-12          | Alto Tietê |              6 | Plenária CBH-AT 14/03/2019                                      | 2019-03-14    | 2019-08-13     | ata\_1       | <http://www.sigrh.sp.gov.br/public/uploads/records//CBH-AT/17447/resumo-executivo-da-1-reuniao-plenaria-extraordinaria-de-2019-14-03-2019.pdf> | .pdf          |
-
-``` r
-reunioes_disponiveis_por_comite <- tabela_atas_comites %>%
-  dplyr::filter(numero_link == "ata_1") %>%
-  dplyr::group_by(comite, comite_numero) %>%
-  dplyr::count()
-
-knitr::kable(reunioes_disponiveis_por_comite)
-```
-
-| comite                        | comite\_numero |   n |
-| :---------------------------- | -------------: | --: |
-| Alto Tietê                    |              6 | 140 |
-| Baixada Santista              |              7 | 136 |
-| Litoral Norte                 |              3 |  56 |
-| Mogi-Guaçu                    |              9 |  84 |
-| Piracicaba/Capivari/Jundiaí   |              5 |  90 |
-| Ribeira de Iguape/Litoral Sul |             11 | 110 |
-| Tietê/Sorocaba                |             10 |  99 |
