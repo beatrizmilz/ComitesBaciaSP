@@ -4,10 +4,10 @@
 \alias{obter_tabela_representantes_comites}
 \title{Obter tabelas sobre representantes dos Comitês de Bacia}
 \usage{
-obter_tabela_representantes_comites(n_comite)
+obter_tabela_representantes_comites(sigla_do_comite)
 }
 \arguments{
-\item{n_comite}{Número referente ao comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
+\item{sigla_do_comite}{Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
 }
 \value{
 Uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{representantes_comites}}.
@@ -16,5 +16,5 @@ Uma tibble. Uma base com dados coletados para todos os comitês está disponíve
 Função para obter tabelas sobre representantes dos Comitês de Bacia no Estado de São Paulo
 }
 \examples{
-obter_tabela_representantes_comites(10)
+obter_tabela_representantes_comites("smt")
 }

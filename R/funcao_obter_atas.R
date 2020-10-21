@@ -2,7 +2,7 @@
 #'
 #' Função para obter tabelas sobre atas dos Comitês de Bacia no Estado de São Paulo
 #'
-#' @param sigla_comite Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.
+#' @param sigla_do_comite Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.
 #' @return Retorna uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{atas_comites}}.
 #' @export
 #'

@@ -7,7 +7,7 @@
 obter_tabela_atas_comites(sigla_do_comite)
 }
 \arguments{
-\item{sigla_comite}{Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
+\item{sigla_do_comite}{Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
 }
 \value{
 Retorna uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{atas_comites}}.
