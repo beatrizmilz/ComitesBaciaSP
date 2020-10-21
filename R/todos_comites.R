@@ -30,5 +30,5 @@ comites_sp <- municipios_sp %>%
   # )
 
 
-usethis::use_data(comites_sp, overwrite = TRUE)
+# usethis::use_data(comites_sp, overwrite = TRUE)
 
