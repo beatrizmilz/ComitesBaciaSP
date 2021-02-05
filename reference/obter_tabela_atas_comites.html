@@ -80,18 +80,33 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/atas_comites.html">atas_comites</a>
+    </li>
+    <li>
+      <a href="../articles/dev.html">dev</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/beatrizmilz/ComitesBaciaSP/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -134,20 +149,20 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>obter_tabela_atas_comites</span><span class='op'>(</span><span class='st'>"at"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 147 x 9</span><span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 151 x 9</span><span>
 #&gt;    data_coleta_dad… site_coleta comite n_ugrhi nome_reuniao data_reuniao
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2020-10-21       http://www… Alto …       6 Resumo Exec… 2020-02-20  
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2020-10-21       http://www… Alto …       6 Resumo Exec… 2019-12-17  
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2019-09-25  
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2019-07-24  
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2019-03-29  
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2019-03-14  
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2018-12-13  
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2018-09-05  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2018-06-28  
-#&gt; </span><span style='color: #555555;'>10</span><span> 2020-10-21       http://www… Alto …       6 Plenária CB… 2018-04-26  
-#&gt; </span><span style='color: #555555;'># … with 137 more rows, and 3 more variables: data_postagem </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2020-10-29  
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2020-10-29  
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2020-07-28  
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2020-07-28  
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2020-02-20  
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2019-12-17  
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2019-09-25  
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2019-07-24  
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2019-03-29  
+#&gt; </span><span style='color: #555555;'>10</span><span> 2021-02-05       http://www… Alto …       6 Plenária CB… 2019-03-14  
+#&gt; </span><span style='color: #555555;'># … with 141 more rows, and 3 more variables: data_postagem </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   numero_link </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, url_link </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -39,18 +39,33 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/atas_comites.html">atas_comites</a>
+    </li>
+    <li>
+      <a href="articles/dev.html">dev</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/beatrizmilz/ComitesBaciaSP/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -77,16 +92,16 @@
 <h2 class="hasAnchor">
 <a href="#instala%C3%A7%C3%A3o-do-pacote" class="anchor"></a>Instalação do pacote</h2>
 <p>Este pacote pode ser instalado através do <a href="https://github.com/">GitHub</a> utilizando o seguinte código em <code>R</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"beatrizmilz/ComitesBaciaSP"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"beatrizmilz/ComitesBaciaSP"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="utilização-do-pacote" class="section level2">
 <h2 class="hasAnchor">
 <a href="#utiliza%C3%A7%C3%A3o-do-pacote" class="anchor"></a>Utilização do pacote</h2>
 <p>É possível carregar o pacote utilizando a seguinte função:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/beatrizmilz/ComitesBaciaSP">ComitesBaciaSP</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/beatrizmilz/ComitesBaciaSP">ComitesBaciaSP</a></span><span class="op">)</span></code></pre></div>
 <ul>
 <li>As bases disponíveis no pacote atualmente são:
 <ul>
@@ -103,10 +118,10 @@
 </li>
 </ul>
 <p>Para utilizar as funções do pacote, é necessário saber a sigla referente ao comitê que você deseja buscar informações. A base comites_sp disponibiliza esta informação:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">comites_sp</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">comites_sp</span> <span class="op">%&gt;%</span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">bacia_hidrografica</th>
@@ -231,8 +246,8 @@
 <div id="como-citar-o-pacote" class="section level2">
 <h2 class="hasAnchor">
 <a href="#como-citar-o-pacote" class="anchor"></a>Como citar o pacote</h2>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"ComitesBaciaSP"</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"ComitesBaciaSP"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; To cite ComitesBaciaSP in publications use:</span>
 <span class="co">#&gt; </span>
@@ -249,7 +264,7 @@
 <span class="co">#&gt;     year = {2020},</span>
 <span class="co">#&gt;     note = {R package version 0.0.0.9000},</span>
 <span class="co">#&gt;     url = {https://beatrizmilz.github.io/ComitesBaciaSP/},</span>
-<span class="co">#&gt;   }</span></pre></div>
+<span class="co">#&gt;   }</span></code></pre></div>
 </div>
 </div>
   </div>
