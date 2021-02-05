@@ -1,0 +1,29 @@
+---
+title: "dev"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{dev}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ComitesBaciaSP)
+```
+
+
+```{r}
+fs::dir_tree(here::here())
+```
+
+```{r}
+devtools::session_info()
+```
+

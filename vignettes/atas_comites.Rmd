@@ -1,0 +1,40 @@
+---
+title: "atas_comites"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{atas_comites}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ComitesBaciaSP)
+```
+
+
+### Busca de atas
+
+A função seguinte busca informações disponíveis sobre as atas dos comitês de bacia:
+
+```{r}
+# obter_tabela_atas_comites(6) %>% # O 6 é o número referente à bacia Alto Tietê
+#   head() %>%  # filtra apenas as primeiras linhas
+#   knitr::kable() # formata a tabela
+```
+
+```{r}
+# reunioes_disponiveis_por_comite <- tabela_atas_comites %>%
+#   dplyr::filter(numero_link == "ata_1") %>%
+#   dplyr::group_by(comite, comite_numero) %>%
+#   dplyr::count()
+# 
+# knitr::kable(reunioes_disponiveis_por_comite)
+
+```
