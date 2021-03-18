@@ -9,7 +9,7 @@
 #' @examples obter_tabela_representantes_comites("smt")
 obter_tabela_representantes_comites <- function(sigla_do_comite) {
 
-  siglas_dos_comites <- comites_sp %>%
+  siglas_dos_comites <- ComitesBaciaSP::comites_sp %>%
     dplyr::pull(sigla_comite) %>%
     unique()
 
@@ -26,7 +26,7 @@ obter_tabela_representantes_comites <- function(sigla_do_comite) {
     )
   }
 
-  comite_raw <- comites_sp %>%
+  comite_raw <- ComitesBaciaSP::comites_sp %>%
     dplyr::filter(sigla_comite == sigla_do_comite) %>%
     dplyr::top_n(1, wt = n_ugrhi)
 

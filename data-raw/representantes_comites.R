@@ -1,6 +1,6 @@
 ## code to prepare `representantes_comites` dataset goes here
 
-siglas_dos_comites <- comites_sp %>%
+siglas_dos_comites <- ComitesBaciaSP::comites_sp %>%
   dplyr::pull(sigla_comite) %>%
   unique()
 

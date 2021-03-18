@@ -8,7 +8,7 @@
 #'
 #' @examples obter_tabela_atas_comites("at")
 obter_tabela_atas_comites <- function(sigla_do_comite) {
-  siglas_dos_comites <- comites_sp %>%
+  siglas_dos_comites <- ComitesBaciaSP::comites_sp %>%
     dplyr::pull(sigla_comite) %>%
     unique()
 
@@ -26,7 +26,7 @@ obter_tabela_atas_comites <- function(sigla_do_comite) {
   }
 
 
-  comite <- comites_sp %>%
+  comite <- ComitesBaciaSP::comites_sp %>%
     dplyr::filter(sigla_comite == sigla_do_comite) %>%
     dplyr::top_n(1, wt = n_ugrhi)
 
