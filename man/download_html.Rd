@@ -5,14 +5,14 @@
 \title{Função para fazer download das páginas em HTML do SigRH}
 \usage{
 download_html(
-  siglas_comites = ComitesBaciaSP::comites_sp$sigla_comite,
+  sigla_do_comite = ComitesBaciaSP::comites_sp$sigla_comite,
   path = here::here("html"),
   pagina = c("representantes", "atas", "atas_agencia", "deliberacoes", "documentos",
     "agenda")
 )
 }
 \arguments{
-\item{siglas_comites}{Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.}
+\item{sigla_do_comite}{Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.}
 
 \item{path}{O caminho onde o(s) arquivo(s) HTMl deve(m) ser baixado(s).}
 

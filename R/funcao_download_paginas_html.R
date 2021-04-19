@@ -1,5 +1,5 @@
 #' Função para fazer download das páginas em HTML do SigRH
-#' @param siglas_comites Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.
+#' @param sigla_do_comite Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.
 #' @param path O caminho onde o(s) arquivo(s) HTMl deve(m) ser baixado(s).
 #' @param pagina Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.
 #'
@@ -8,7 +8,7 @@
 #'
 #' @examples # download_html()
 download_html <-
-  function(siglas_comites = ComitesBaciaSP::comites_sp$sigla_comite,
+  function(sigla_do_comite = ComitesBaciaSP::comites_sp$sigla_comite,
            path = here::here("html"),
            pagina = c("representantes",
                       "atas",
@@ -16,6 +16,8 @@ download_html <-
                       "deliberacoes",
                       "documentos",
                       "agenda")) {
+
+
     fs::dir_create(path)
 
 
@@ -39,7 +41,7 @@ download_html <-
             sigla_comite == "at" ~ "http://www.sigrh.sp.gov.br/fabhat/atas"
           )
       ) %>%
-      dplyr::filter(sigla_comite %in% stringr::str_to_lower(siglas_comites))
+      dplyr::filter(sigla_comite %in% stringr::str_to_lower(sigla_do_comite))
 
 
     url_pagina <- glue::glue("url_{pagina}") %>% as.vector()
