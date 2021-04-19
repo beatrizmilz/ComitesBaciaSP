@@ -4,10 +4,23 @@
 \alias{obter_tabela_atas_comites}
 \title{Obter tabelas sobre atas dos Comitês de Bacia}
 \usage{
-obter_tabela_atas_comites(sigla_do_comite)
+obter_tabela_atas_comites(
+  sigla_do_comite = NULL,
+  online = TRUE,
+  path_arquivo = NULL
+)
 }
 \arguments{
-\item{sigla_do_comite}{Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
+\item{sigla_do_comite}{Texto referente à sigla do comitê. É possível
+# verificar na base:  \code{\link{comites_sp}}.}
+
+\item{online}{Caso seja TRUE, a tabela será obtida consultando a página web.
+Caso seja FALSE, a tabela será obtida usando um caminho, que deve ser
+informado no argumento \code{path_arquivo}. O valor padrão é TRUE.}
+
+\item{path_arquivo}{Caminho para o arquivo .html que será lido.
+Isso só deve ser usado com o argumento online sendo FALSE.
+O caminho para o arquivo deve ser o gerado pela função \code{\link{download_html}}.}
 }
 \value{
 Retorna uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{atas_comites}}.

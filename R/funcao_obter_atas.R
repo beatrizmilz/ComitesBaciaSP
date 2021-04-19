@@ -2,29 +2,88 @@
 #'
 #' Função para obter tabelas sobre atas dos Comitês de Bacia no Estado de São Paulo
 #'
-#' @param sigla_do_comite Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.
+#' @param sigla_do_comite Texto referente à sigla do comitê. É possível
+#' # verificar na base:  \code{\link{comites_sp}}.
+#' @param online Caso seja TRUE, a tabela será obtida consultando a página web.
+#' Caso seja FALSE, a tabela será obtida usando um caminho, que deve ser
+#' informado no argumento \code{path_arquivo}. O valor padrão é TRUE.
+#' @param path_arquivo Caminho para o arquivo .html que será lido.
+#' Isso só deve ser usado com o argumento online sendo FALSE.
+#' O caminho para o arquivo deve ser o gerado pela função \code{\link{download_html}}.
 #' @return Retorna uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{atas_comites}}.
 #' @export
 #'
 #' @examples obter_tabela_atas_comites("at")
-obter_tabela_atas_comites <- function(sigla_do_comite) {
-  siglas_dos_comites <- ComitesBaciaSP::comites_sp %>%
-    dplyr::pull(sigla_comite) %>%
-    unique()
+obter_tabela_atas_comites <- function(sigla_do_comite = NULL, online = TRUE, path_arquivo = NULL) {
 
-  texto_siglas_dos_comites <-   siglas_dos_comites  %>%
-    paste(collapse = ", ")
+  if(online == TRUE & !is.null(sigla_do_comite)){
+    siglas_dos_comites <- ComitesBaciaSP::comites_sp %>%
+      dplyr::pull(sigla_comite) %>%
+      unique()
 
-  if (!sigla_do_comite %in% siglas_dos_comites) {
-    stop(
-      paste(
-        "O texto fornecido para o argumento 'sigla_do_comite' não é válido.
+    texto_siglas_dos_comites <-   siglas_dos_comites  %>%
+      paste(collapse = ", ")
+
+    if (!sigla_do_comite %in% siglas_dos_comites) {
+      stop(
+        paste(
+          "O texto fornecido para o argumento 'sigla_do_comite' não é válido.
         Forneça uma das seguintes possibilidades:",
         texto_siglas_dos_comites
+        )
+      )
+    }
+
+    link_html <-
+      ComitesBaciaSP::comites_sp %>%
+      dplyr::filter(sigla_comite == sigla_do_comite) %>%
+      dplyr::top_n(1, wt = n_ugrhi)  %>%
+      dplyr::mutate(links = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
+      dplyr::pull(links)
+
+    data_coleta_dos_dados <- Sys.Date()
+
+  } else if(online == FALSE & !is.null(path_arquivo)) {
+
+    nome_pagina <- path_arquivo %>%
+      fs::path_file() %>%
+      stringr::str_split(pattern = "-") %>%
+      purrr::pluck(1) %>%
+      .[2]
+
+    if(nome_pagina != "atas"){
+      stop(
+        paste(
+          "O caminho fornecido deve ser para o arquivo de atas"
+        )
+      )
+    }
+
+    link_html <- path_arquivo
+
+    sigla_do_comite <- path_arquivo %>%
+      fs::path_file() %>%
+      stringr::str_split(pattern = "-") %>%
+      purrr::pluck(1) %>%
+      .[1]
+
+    data_coleta_dos_dados_interm <- path_arquivo %>%
+      fs::path_file() %>%
+      tools::file_path_sans_ext() %>%
+      stringr::str_split(pattern = "-") %>%
+      purrr::pluck(1)
+
+      data_coleta_dos_dados <-
+        glue::glue("{data_coleta_dos_dados_interm[5]}-{data_coleta_dos_dados_interm[4]}-{data_coleta_dos_dados_interm[3]}") %>%
+        as.character()
+  } else if(online == TRUE & !is.null(path_arquivo)) {
+    stop(
+      paste(
+        "O argumento online == TRUE não deve ser usado junto ao argumento path_arquivo, e sim
+        ao argumento sigla_do_comite"
       )
     )
   }
-
 
   comite <- ComitesBaciaSP::comites_sp %>%
     dplyr::filter(sigla_comite == sigla_do_comite) %>%
@@ -32,25 +91,28 @@ obter_tabela_atas_comites <- function(sigla_do_comite) {
 
   n_comite <- comite  %>% dplyr::pull(n_ugrhi)
 
-  link_comite <-
-    comite  %>%
-    dplyr::mutate(links = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
-    dplyr::pull(links)
-
   nome_comite <- comite %>%
     dplyr::pull(bacia_hidrografica)
 
-
-  lista <- xml2::read_html(link_comite) %>%
+  lista <- xml2::read_html(link_html, encoding = "UTF-8") %>%
     rvest::html_nodes("div.col_right") %>%
     rvest::html_nodes("div.block")
+
+  url_site_coleta <-
+    ComitesBaciaSP::comites_sp %>%
+    dplyr::filter(sigla_comite == sigla_do_comite) %>%
+    dplyr::top_n(1, wt = n_ugrhi)  %>%
+    dplyr::mutate(links = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
+    dplyr::pull(links)
+
+
 
 
   if (length(lista) == 0) {
     df_vazia <-
       tibble::tibble(
-        data_coleta_dados = Sys.Date(),
-        site_coleta = link_comite,
+        data_coleta_dados = data_coleta_dos_dados,
+        site_coleta = url_site_coleta,
         comite = nome_comite,
         n_ugrhi = n_comite,
         nome_reuniao = NA,
@@ -115,8 +177,8 @@ obter_tabela_atas_comites <- function(sigla_do_comite) {
 
     df <-
       tibble::tibble(
-        data_coleta_dados = Sys.Date(),
-        site_coleta = link_comite,
+        data_coleta_dados = data_coleta_dos_dados,
+        site_coleta =  url_site_coleta,
         comite = nome_comite,
         n_ugrhi = n_comite,
         nome_reuniao,

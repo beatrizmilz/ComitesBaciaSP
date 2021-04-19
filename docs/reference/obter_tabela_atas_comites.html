@@ -122,14 +122,31 @@
     <p>Função para obter tabelas sobre atas dos Comitês de Bacia no Estado de São Paulo</p>
     </div>
 
-    <pre class="usage"><span class='fu'>obter_tabela_atas_comites</span><span class='op'>(</span><span class='va'>sigla_do_comite</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>obter_tabela_atas_comites</span><span class='op'>(</span>
+  sigla_do_comite <span class='op'>=</span> <span class='cn'>NULL</span>,
+  online <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  path_arquivo <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sigla_do_comite</th>
-      <td><p>Texto referente à sigla do comitê. É possível verificar na base:  <code><a href='comites_sp.html'>comites_sp</a></code>.</p></td>
+      <td><p>Texto referente à sigla do comitê. É possível
+# verificar na base:  <code><a href='comites_sp.html'>comites_sp</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>online</th>
+      <td><p>Caso seja TRUE, a tabela será obtida consultando a página web.
+Caso seja FALSE, a tabela será obtida usando um caminho, que deve ser
+informado no argumento <code>path_arquivo</code>. O valor padrão é TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>path_arquivo</th>
+      <td><p>Caminho para o arquivo .html que será lido.
+Isso só deve ser usado com o argumento online sendo FALSE.
+O caminho para o arquivo deve ser o gerado pela função <code><a href='download_html.html'>download_html</a></code>.</p></td>
     </tr>
     </table>
 
