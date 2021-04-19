@@ -1,7 +1,7 @@
 #' Função para fazer download das páginas em HTML do SigRH
 #' @param siglas_comites Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.
 #' @param path O caminho onde o(s) arquivo(s) HTMl deve(m) ser baixado(s).
-#' @param pagina Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.
+#' @param pagina Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.
 #'
 #' @return Mensagens no console apontando o que foi baixado.
 #' @export
@@ -10,7 +10,7 @@
 download_html <-
   function(siglas_comites = ComitesBaciaSP::comites_sp$sigla_comite,
            path = here::here("html"),
-           pagina = c("representantes", "atas", "deliberacoes", "documentos", "agenda")) {
+           pagina = c("representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda")) {
 
 
      fs::dir_create(path)
@@ -20,10 +20,19 @@ download_html <-
       dplyr::mutate(
         url_atas = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas"),
         url_representantes = glue::glue(
-          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes"),
-        url_deliberacoes = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/deliberacoes"),
+          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
+        ),
+        url_deliberacoes = glue::glue(
+          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/deliberacoes"
+        ),
         url_documentos = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/documentos"),
         url_agenda = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/agenda"),
+      ) %>%
+      dplyr::mutate(
+        url_atas_agencia =
+          dplyr::case_when(
+            sigla_comite == "at" ~ "http://www.sigrh.sp.gov.br/fabhat/atas"
+          )
       ) %>%
       dplyr::filter(sigla_comite %in% stringr::str_to_lower(siglas_comites))
 
@@ -41,7 +50,8 @@ download_html <-
       df_url <- url_comites %>%
         dplyr::slice(i)  %>%
         dplyr::select(url_pagina) %>%
-        tidyr::pivot_longer(cols = tidyselect::everything())
+        tidyr::pivot_longer(cols = tidyselect::everything()) %>%
+        tidyr::drop_na(value)
 
       for (j in 1:nrow(df_url)) {
 

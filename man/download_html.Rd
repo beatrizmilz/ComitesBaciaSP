@@ -7,7 +7,8 @@
 download_html(
   siglas_comites = ComitesBaciaSP::comites_sp$sigla_comite,
   path = here::here("html"),
-  pagina = c("representantes", "atas", "deliberacoes", "documentos", "agenda")
+  pagina = c("representantes", "atas", "atas_agencia", "deliberacoes", "documentos",
+    "agenda")
 )
 }
 \arguments{
@@ -15,7 +16,7 @@ download_html(
 
 \item{path}{O caminho onde o(s) arquivo(s) HTMl deve(m) ser baixado(s).}
 
-\item{pagina}{Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.}
+\item{pagina}{Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.}
 }
 \value{
 Mensagens no console apontando o que foi baixado.
