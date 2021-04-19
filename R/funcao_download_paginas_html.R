@@ -1,7 +1,7 @@
-#' Função para fazer download das páginas em HTML do SigRH
-#' @param siglas_comites Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.
+#' Fun\u00e7\u00e3o para fazer download das p\u00e1ginas em HTML do SigRH
+#' @param siglas_comites Texto referente \u00e0 sigla do(s) comit\u00ea(s). Pode ser informado um vetor de siglas. \u00c9 poss\u00edvel verificar na base:  \code{\link{comites_sp}}. Por padr\u00e3o, utiliza um vetor com a sigla de todos os comit\u00eas.
 #' @param path O caminho onde o(s) arquivo(s) HTMl deve(m) ser baixado(s).
-#' @param pagina Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.
+#' @param pagina Palavra (texto) apontando qual p\u00e1gina deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padr\u00e3o, utiliza um vetor com todas as possibilidades.
 #'
 #' @return Mensagens no console apontando o que foi baixado.
 #' @export
@@ -72,14 +72,14 @@ download_html <-
         if (fs::file_exists(caminho_salvar)) {
           message(
             glue::glue(
-              "Download realizado anteriormente: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
+              "Download realizado anteriormente: Arquivo referente \u00e0 {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
             )
           )
         } else {
           httr::GET(url, httr::write_disk(path = caminho_salvar))
           message(
             glue::glue(
-              "Download realizado: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
+              "Download realizado: Arquivo referente \u00e0 {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
             )
           )
         }

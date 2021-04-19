@@ -3,15 +3,15 @@
 \docType{data}
 \name{comites_sp}
 \alias{comites_sp}
-\title{Comitês de Bacia Hidrográfica no Estado de São Paulo}
+\title{Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo}
 \format{
-Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contendo as variáveis:
+Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contendo as vari\u00e1veis:
 \describe{
-  \item{bacia_hidrografica}{Nome da Bacia Hidrográfica}
-  \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
-  \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
-  \item{numero_municipios}{Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
-  \item{macrometropole_daee}{Variável lógica. Caso seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE ( \url{http://www.sigrh.sp.gov.br/}).}
+  \item{bacia_hidrografica}{Nome da Bacia Hidrogr\u00e1fica}
+  \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comit\u00ea}
+  \item{n_ugrhi}{N\u00famero que representa a Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
+  \item{numero_municipios}{N\u00famero de munic\u00edpios que pertencem \u00e0 Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
+  \item{macrometropole_daee}{Vari\u00e1vel l\u00f3gica. Caso seja TRUE, este Comit\u00ea est\u00e1 parcialmente ou totalmente no territ\u00f3rio da Macrometr\u00f3pole Paulista, segundo a delimita\u00e7\u00e3o do DAEE ( \url{http://www.sigrh.sp.gov.br/}).}
 }
 }
 \source{
@@ -21,7 +21,7 @@ SigRH - \url{http://www.sigrh.sp.gov.br/municipios}
 comites_sp
 }
 \description{
-Tabela agregada à partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
+Tabela agregada \u00e0 partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
 }
 \examples{
 comites_sp

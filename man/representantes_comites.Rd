@@ -3,18 +3,18 @@
 \docType{data}
 \name{representantes_comites}
 \alias{representantes_comites}
-\title{Representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo}
+\title{Representantes dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo}
 \format{
 Uma tibble, contendo:
 \describe{
-  \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
+  \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
   \item{site_coleta}{Link do site onde os dados foram coletados}
-  \item{comite}{Nome do comitê de Bacia Hidrográfica}
-  \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
-  \item{organizacao_representante}{Organização representante à qual a pessoa na coluna 'nome' está vinculada, segundo informado pelo Comitê de Bacia}
-  \item{nome}{Nome da pessoa representante, segundo informado pelo Comitê de Bacia}
-  \item{email}{Email da pessoa representante, segundo informado pelo Comitê de Bacia}
-  \item{cargo}{Cargo (Titular ou Suplente) da pessoa representante, segundo informado pelo Comitê de Bacia}
+  \item{comite}{Nome do comit\u00ea de Bacia Hidrogr\u00e1fica}
+  \item{n_ugrhi}{N\u00famero que representa a Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
+  \item{organizacao_representante}{Organiza\u00e7\u00e3o representante \u00e0 qual a pessoa na coluna 'nome' est\u00e1 vinculada, segundo informado pelo Comit\u00ea de Bacia}
+  \item{nome}{Nome da pessoa representante, segundo informado pelo Comit\u00ea de Bacia}
+  \item{email}{Email da pessoa representante, segundo informado pelo Comit\u00ea de Bacia}
+  \item{cargo}{Cargo (Titular ou Suplente) da pessoa representante, segundo informado pelo Comit\u00ea de Bacia}
 }
 }
 \source{
@@ -24,7 +24,7 @@ SigRH - \url{http://www.sigrh.sp.gov.br/}
 representantes_comites
 }
 \description{
-Tabela contendo informações sobre representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo
+Tabela contendo informa\u00e7\u00f5es sobre representantes dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo
 }
 \examples{
 head(representantes_comites)
