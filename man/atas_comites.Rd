@@ -3,19 +3,19 @@
 \docType{data}
 \name{atas_comites}
 \alias{atas_comites}
-\title{Atas de reuni\u00f5es dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo}
+\title{Atas de reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo}
 \format{
 Uma tibble, contendo:
 \describe{
-  \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
+  \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
   \item{site_coleta}{Link do site onde os dados foram coletados}
-  \item{comite}{Nome do comit\u00ea de bacia}
-  \item{n_ugrhi}{N\u00famero que representa a Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
-  \item{nome_reuniao}{Nome da reuni\u00e3o, segundo informado pelo Comit\u00ea de Bacia}
-  \item{data_reuniao}{Data da reuni\u00e3o, segundo informado pelo Comit\u00ea de Bacia, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
-  \item{data_postagem}{Data da postagem da ata de reuni\u00e3o, segundo informado pelo Comit\u00ea de Bacia, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
-  \item{numero_link}{Em alguns casos, h\u00e1 mais de um link para o arquivo da ata por reuni\u00e3o. Essa coluna cont\u00e9m a ordem dos arquivos.}
-  \item{url_link}{URL, ou endere\u00e7o online, do arquivo referente \u00e0 ata da reuni\u00e3o.}
+  \item{comite}{Nome do comitê de bacia}
+  \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+  \item{nome_reuniao}{Nome da reunião, segundo informado pelo Comitê de Bacia}
+  \item{data_reuniao}{Data da reunião, segundo informado pelo Comitê de Bacia, no formato ano-mês-dia (yyyy-mm-dd)}
+  \item{data_postagem}{Data da postagem da ata de reunião, segundo informado pelo Comitê de Bacia, no formato ano-mês-dia (yyyy-mm-dd)}
+  \item{numero_link}{Em alguns casos, há mais de um link para o arquivo da ata por reunião. Essa coluna contém a ordem dos arquivos.}
+  \item{url_link}{URL, ou endereço online, do arquivo referente à ata da reunião.}
 }
 }
 \source{
@@ -25,7 +25,7 @@ SigRH - \url{http://www.sigrh.sp.gov.br/}
 atas_comites
 }
 \description{
-Tabela contendo informa\u00e7\u00f5es sobre reuni\u00f5es dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo e link para as atas de reuni\u00e3o.
+Tabela contendo informações sobre reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo e link para as atas de reunião.
 }
 \examples{
 atas_comites \%>\% dplyr::arrange(desc(data_postagem)) \%>\% head(10)

@@ -2,18 +2,18 @@
 % Please edit documentation in R/funcao_obter_representantes.R
 \name{obter_tabela_representantes_comites}
 \alias{obter_tabela_representantes_comites}
-\title{Obter tabelas sobre representantes dos Comit\u00eas de Bacia}
+\title{Obter tabelas sobre representantes dos Comitês de Bacia}
 \usage{
 obter_tabela_representantes_comites(sigla_do_comite)
 }
 \arguments{
-\item{sigla_do_comite}{Texto referente \u00e0 sigla do comit\u00ea. \u00c9 poss\u00edvel verificar na base:  \code{\link{comites_sp}}.}
+\item{sigla_do_comite}{Texto referente à sigla do comitê. É possível verificar na base:  \code{\link{comites_sp}}.}
 }
 \value{
-Uma tibble. Uma base com dados coletados para todos os comit\u00eas est\u00e1 dispon\u00edvel em \code{\link{representantes_comites}}.
+Uma tibble. Uma base com dados coletados para todos os comitês está disponível em \code{\link{representantes_comites}}.
 }
 \description{
-Fun\u00e7\u00e3o para obter tabelas sobre representantes dos Comit\u00eas de Bacia no Estado de S\u00e3o Paulo
+Função para obter tabelas sobre representantes dos Comitês de Bacia no Estado de São Paulo
 }
 \examples{
 obter_tabela_representantes_comites("smt")

@@ -1,15 +1,14 @@
-
-#' Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo
+#' Comitês de Bacia Hidrográfica no Estado de São Paulo
 #'
-#' Tabela agregada \u00e0 partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
+#' Tabela agregada à partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
 #'
-#' @format Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contendo as vari\u00e1veis:
+#' @format Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contendo as variáveis:
 #' \describe{
-#'   \item{bacia_hidrografica}{Nome da Bacia Hidrogr\u00e1fica}
-#'   \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comit\u00ea}
-#'   \item{n_ugrhi}{N\u00famero que representa a Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
-#'   \item{numero_municipios}{N\u00famero de munic\u00edpios que pertencem \u00e0 Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
-#'   \item{macrometropole_daee}{Vari\u00e1vel l\u00f3gica. Caso seja TRUE, este Comit\u00ea est\u00e1 parcialmente ou totalmente no territ\u00f3rio da Macrometr\u00f3pole Paulista, segundo a delimita\u00e7\u00e3o do DAEE ( \url{http://www.sigrh.sp.gov.br/}).}
+#'   \item{bacia_hidrografica}{Nome da Bacia Hidrográfica}
+#'   \item{sigla_comite}{Sigla utilizada no site do SigRH para o Comitê}
+#'   \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+#'   \item{numero_municipios}{Número de municípios que pertencem à Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+#'   \item{macrometropole_daee}{Variável lógica. Caso seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE ( \url{http://www.sigrh.sp.gov.br/}).}
 #' }
 #' @name comites_sp
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/municipios}
@@ -32,20 +31,20 @@
 
 
 
-#' Representantes dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo
+#' Representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo
 #'
-#' Tabela contendo informa\u00e7\u00f5es sobre representantes dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo
+#' Tabela contendo informações sobre representantes dos Comitês de Bacia Hidrográfica no Estado de São Paulo
 #'
 #' @format Uma tibble, contendo:
 #' \describe{
-#'   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
+#'   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
 #'   \item{site_coleta}{Link do site onde os dados foram coletados}
-#'   \item{comite}{Nome do comit\u00ea de Bacia Hidrogr\u00e1fica}
-#'   \item{n_ugrhi}{N\u00famero que representa a Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
-#'   \item{organizacao_representante}{Organiza\u00e7\u00e3o representante \u00e0 qual a pessoa na coluna 'nome' est\u00e1 vinculada, segundo informado pelo Comit\u00ea de Bacia}
-#'   \item{nome}{Nome da pessoa representante, segundo informado pelo Comit\u00ea de Bacia}
-#'   \item{email}{Email da pessoa representante, segundo informado pelo Comit\u00ea de Bacia}
-#'   \item{cargo}{Cargo (Titular ou Suplente) da pessoa representante, segundo informado pelo Comit\u00ea de Bacia}
+#'   \item{comite}{Nome do comitê de Bacia Hidrográfica}
+#'   \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+#'   \item{organizacao_representante}{Organização representante à qual a pessoa na coluna 'nome' está vinculada, segundo informado pelo Comitê de Bacia}
+#'   \item{nome}{Nome da pessoa representante, segundo informado pelo Comitê de Bacia}
+#'   \item{email}{Email da pessoa representante, segundo informado pelo Comitê de Bacia}
+#'   \item{cargo}{Cargo (Titular ou Suplente) da pessoa representante, segundo informado pelo Comitê de Bacia}
 #' }
 #' @name representantes_comites
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
@@ -70,24 +69,23 @@
 
 
 
-#' Atas de reuni\u00f5es dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo
+#' Atas de reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo
 #'
-#' Tabela contendo informa\u00e7\u00f5es sobre reuni\u00f5es dos Comit\u00eas de Bacia Hidrogr\u00e1fica no Estado de S\u00e3o Paulo e link para as atas de reuni\u00e3o.
+#' Tabela contendo informações sobre reuniões dos Comitês de Bacia Hidrográfica no Estado de São Paulo e link para as atas de reunião.
 #'
 #' @format Uma tibble, contendo:
 #' \describe{
-#'   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
+#'   \item{data_coleta_dados}{Data em que os dados foram coletados, no formato ano-mês-dia (yyyy-mm-dd)}
 #'   \item{site_coleta}{Link do site onde os dados foram coletados}
-#'   \item{comite}{Nome do comit\u00ea de bacia}
-#'   \item{n_ugrhi}{N\u00famero que representa a Unidade de Gerenciamento de Recursos H\u00eddricos \u00e0 qual o Comit\u00ea est\u00e1 relacionado}
-#'   \item{nome_reuniao}{Nome da reuni\u00e3o, segundo informado pelo Comit\u00ea de Bacia}
-#'   \item{data_reuniao}{Data da reuni\u00e3o, segundo informado pelo Comit\u00ea de Bacia, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
-#'   \item{data_postagem}{Data da postagem da ata de reuni\u00e3o, segundo informado pelo Comit\u00ea de Bacia, no formato ano-m\u00eas-dia (yyyy-mm-dd)}
-#'   \item{numero_link}{Em alguns casos, h\u00e1 mais de um link para o arquivo da ata por reuni\u00e3o. Essa coluna cont\u00e9m a ordem dos arquivos.}
-#'   \item{url_link}{URL, ou endere\u00e7o online, do arquivo referente \u00e0 ata da reuni\u00e3o.}
+#'   \item{comite}{Nome do comitê de bacia}
+#'   \item{n_ugrhi}{Número que representa a Unidade de Gerenciamento de Recursos Hídricos à qual o Comitê está relacionado}
+#'   \item{nome_reuniao}{Nome da reunião, segundo informado pelo Comitê de Bacia}
+#'   \item{data_reuniao}{Data da reunião, segundo informado pelo Comitê de Bacia, no formato ano-mês-dia (yyyy-mm-dd)}
+#'   \item{data_postagem}{Data da postagem da ata de reunião, segundo informado pelo Comitê de Bacia, no formato ano-mês-dia (yyyy-mm-dd)}
+#'   \item{numero_link}{Em alguns casos, há mais de um link para o arquivo da ata por reunião. Essa coluna contém a ordem dos arquivos.}
+#'   \item{url_link}{URL, ou endereço online, do arquivo referente à ata da reunião.}
 #' }
 #' @name atas_comites
 #' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
 #'@examples atas_comites %>% dplyr::arrange(desc(data_postagem)) %>% head(10)
 "atas_comites"
-

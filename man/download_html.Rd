@@ -2,7 +2,7 @@
 % Please edit documentation in R/funcao_download_paginas_html.R
 \name{download_html}
 \alias{download_html}
-\title{Fun\u00e7\u00e3o para fazer download das p\u00e1ginas em HTML do SigRH}
+\title{Função para fazer download das páginas em HTML do SigRH}
 \usage{
 download_html(
   siglas_comites = ComitesBaciaSP::comites_sp$sigla_comite,
@@ -12,17 +12,17 @@ download_html(
 )
 }
 \arguments{
-\item{siglas_comites}{Texto referente \u00e0 sigla do(s) comit\u00ea(s). Pode ser informado um vetor de siglas. \u00c9 poss\u00edvel verificar na base:  \code{\link{comites_sp}}. Por padr\u00e3o, utiliza um vetor com a sigla de todos os comit\u00eas.}
+\item{siglas_comites}{Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.}
 
 \item{path}{O caminho onde o(s) arquivo(s) HTMl deve(m) ser baixado(s).}
 
-\item{pagina}{Palavra (texto) apontando qual p\u00e1gina deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padr\u00e3o, utiliza um vetor com todas as possibilidades.}
+\item{pagina}{Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.}
 }
 \value{
 Mensagens no console apontando o que foi baixado.
 }
 \description{
-Fun\u00e7\u00e3o para fazer download das p\u00e1ginas em HTML do SigRH
+Função para fazer download das páginas em HTML do SigRH
 }
 \examples{
 # download_html()

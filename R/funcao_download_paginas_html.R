@@ -1,7 +1,7 @@
-#' Fun\u00e7\u00e3o para fazer download das p\u00e1ginas em HTML do SigRH
-#' @param siglas_comites Texto referente \u00e0 sigla do(s) comit\u00ea(s). Pode ser informado um vetor de siglas. \u00c9 poss\u00edvel verificar na base:  \code{\link{comites_sp}}. Por padr\u00e3o, utiliza um vetor com a sigla de todos os comit\u00eas.
+#' Função para fazer download das páginas em HTML do SigRH
+#' @param siglas_comites Texto referente à sigla do(s) comitê(s). Pode ser informado um vetor de siglas. É possível verificar na base:  \code{\link{comites_sp}}. Por padrão, utiliza um vetor com a sigla de todos os comitês.
 #' @param path O caminho onde o(s) arquivo(s) HTMl deve(m) ser baixado(s).
-#' @param pagina Palavra (texto) apontando qual p\u00e1gina deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padr\u00e3o, utiliza um vetor com todas as possibilidades.
+#' @param pagina Palavra (texto) apontando qual página deve acessada para realizar o download. Possibilidades: "representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda". Por padrão, utiliza um vetor com todas as possibilidades.
 #'
 #' @return Mensagens no console apontando o que foi baixado.
 #' @export
@@ -10,10 +10,13 @@
 download_html <-
   function(siglas_comites = ComitesBaciaSP::comites_sp$sigla_comite,
            path = here::here("html"),
-           pagina = c("representantes", "atas", "atas_agencia", "deliberacoes", "documentos", "agenda")) {
-
-
-     fs::dir_create(path)
+           pagina = c("representantes",
+                      "atas",
+                      "atas_agencia",
+                      "deliberacoes",
+                      "documentos",
+                      "agenda")) {
+    fs::dir_create(path)
 
 
     url_comites <- ComitesBaciaSP::comites_sp %>%
@@ -25,7 +28,9 @@ download_html <-
         url_deliberacoes = glue::glue(
           "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/deliberacoes"
         ),
-        url_documentos = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/documentos"),
+        url_documentos = glue::glue(
+          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/documentos"
+        ),
         url_agenda = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/agenda"),
       ) %>%
       dplyr::mutate(
@@ -42,7 +47,6 @@ download_html <-
 
 
     for (i in 1:nrow(url_comites)) {
-
       sigla_comite_baixar <- url_comites %>%
         dplyr::slice(i)  %>%
         dplyr::pull(sigla_comite)
@@ -54,7 +58,6 @@ download_html <-
         tidyr::drop_na(value)
 
       for (j in 1:nrow(df_url)) {
-
         df_url_download <- df_url %>%
           dplyr::slice(j)
 
@@ -72,14 +75,14 @@ download_html <-
         if (fs::file_exists(caminho_salvar)) {
           message(
             glue::glue(
-              "Download realizado anteriormente: Arquivo referente \u00e0 {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
+              "Download realizado anteriormente: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
             )
           )
         } else {
           httr::GET(url, httr::write_disk(path = caminho_salvar))
           message(
             glue::glue(
-              "Download realizado: Arquivo referente \u00e0 {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
+              "Download realizado: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
             )
           )
         }
@@ -90,4 +93,3 @@ download_html <-
     }
 
   }
-
