@@ -23,22 +23,22 @@ download_html <-
 
     url_comites <- ComitesBaciaSP::comites_sp %>%
       dplyr::mutate(
-        url_atas = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas"),
+        url_atas = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/atas"),
         url_representantes = glue::glue(
-          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
+          "https://sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
         ),
         url_deliberacoes = glue::glue(
-          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/deliberacoes"
+          "https://sigrh.sp.gov.br/cbh{sigla_comite}/deliberacoes"
         ),
         url_documentos = glue::glue(
-          "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/documentos"
+          "https://sigrh.sp.gov.br/cbh{sigla_comite}/documentos"
         ),
-        url_agenda = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/agenda"),
+        url_agenda = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/agenda"),
       ) %>%
       dplyr::mutate(
         url_atas_agencia =
           dplyr::case_when(
-            sigla_comite == "at" ~ "http://www.sigrh.sp.gov.br/fabhat/atas"
+            sigla_comite == "at" ~ "https://sigrh.sp.gov.br/fabhat/atas"
           )
       ) %>%
       dplyr::filter(sigla_comite %in% stringr::str_to_lower(sigla_do_comite))

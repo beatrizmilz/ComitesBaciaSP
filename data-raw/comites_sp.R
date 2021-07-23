@@ -1,7 +1,7 @@
 ## code to prepare `comites_sp` dataset goes here
 
 municipios_sp <-
-  xml2::read_html("http://www.sigrh.sp.gov.br/municipios") %>%
+  xml2::read_html("https://sigrh.sp.gov.br/municipios") %>%
   rvest::html_table(header = TRUE) %>%
   .[[3]] %>%
   janitor::clean_names()

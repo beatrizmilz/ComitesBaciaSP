@@ -43,7 +43,7 @@ obter_tabela_representantes_comites <-
         comite <- comite_raw %>%
           dplyr::mutate(
             link_representantes = glue::glue(
-              "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes-plenario"
+              "https://sigrh.sp.gov.br/cbh{sigla_comite}/representantes-plenario"
             )
           )
 
@@ -51,7 +51,7 @@ obter_tabela_representantes_comites <-
         comite <- comite_raw  %>%
           dplyr::mutate(
             link_representantes = glue::glue(
-              "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantesplenaria20192020"
+              "https://sigrh.sp.gov.br/cbh{sigla_comite}/representantesplenaria20192020"
             )
           )
 
@@ -59,7 +59,7 @@ obter_tabela_representantes_comites <-
         comite <- comite_raw  %>%
           dplyr::mutate(
             link_representantes = glue::glue(
-              "http://www.sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
+              "https://sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
             )
           )
 
@@ -145,7 +145,7 @@ obter_tabela_representantes_comites <-
       ComitesBaciaSP::comites_sp %>%
       dplyr::filter(sigla_comite == sigla_do_comite) %>%
       dplyr::top_n(1, wt = n_ugrhi)  %>%
-      dplyr::mutate(links = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
+      dplyr::mutate(links = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
       dplyr::pull(links)
 
 

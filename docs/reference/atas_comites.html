@@ -45,8 +45,6 @@
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -58,18 +56,9 @@
 
 
 
-<!-- dependencies from examples -->
-
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,6 +79,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -142,25 +137,25 @@
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>SigRH - <a href='http://www.sigrh.sp.gov.br/'>http://www.sigrh.sp.gov.br/</a></p>
+    <p>SigRH - <a href='https://sigrh.sp.gov.br/'>https://sigrh.sp.gov.br/</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>atas_comites</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'>desc</span><span class='op'>(</span><span class='va'>data_postagem</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 9</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 9</span>
 #&gt;    data_coleta_dados site_coleta   comite  n_ugrhi nome_reuniao     data_reuniao
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;glue&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2020-10-21        http://www.s… Piraci…       5 Ata da 10ª Reun… 2020-06-30  
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 2020-10-21        http://www.s… Piraci…       5 Ata da 10ª Reun… 2020-06-30  
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 2020-10-21        http://www.s… Litora…       3 Ata da 3ª Reuni… 2019-12-13  
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2020-10-21        http://www.s… Baixo …      12 ATA DA 47º REUN… 2019-12-17  
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 2020-10-21        http://www.s… Piraci…       5 Ata da 9ª Reuni… 2019-12-13  
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 2020-10-21        http://www.s… Piraci…       5 Ata da 9ª Reuni… 2019-12-13  
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 2020-10-21        http://www.s… Médio …      17 Ata da 41ª Reun… 2019-11-04  
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 2020-10-21        http://www.s… Aquape…      21 Ata da 38ª Reun… 2019-11-04  
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 2020-10-21        http://www.s… Alto T…       6 Resumo Executiv… 2020-02-20  
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 2020-10-21        http://www.s… Tietê-…      16 Ata da 1ª Reuni… 2020-07-17  
-#&gt; </span><span style='color: #949494;'># … with 3 more variables: data_postagem &lt;date&gt;, numero_link &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   url_link &lt;chr&gt;</span><span></div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;glue&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>      
+#&gt; <span style='color: #BCBCBC;'> 1</span> 2020-10-21        http://www.s… Piraci…       5 Ata da 10ª Reun… 2020-06-30  
+#&gt; <span style='color: #BCBCBC;'> 2</span> 2020-10-21        http://www.s… Piraci…       5 Ata da 10ª Reun… 2020-06-30  
+#&gt; <span style='color: #BCBCBC;'> 3</span> 2020-10-21        http://www.s… Litora…       3 Ata da 3ª Reuni… 2019-12-13  
+#&gt; <span style='color: #BCBCBC;'> 4</span> 2020-10-21        http://www.s… Baixo …      12 ATA DA 47º REUN… 2019-12-17  
+#&gt; <span style='color: #BCBCBC;'> 5</span> 2020-10-21        http://www.s… Piraci…       5 Ata da 9ª Reuni… 2019-12-13  
+#&gt; <span style='color: #BCBCBC;'> 6</span> 2020-10-21        http://www.s… Piraci…       5 Ata da 9ª Reuni… 2019-12-13  
+#&gt; <span style='color: #BCBCBC;'> 7</span> 2020-10-21        http://www.s… Médio …      17 Ata da 41ª Reun… 2019-11-04  
+#&gt; <span style='color: #BCBCBC;'> 8</span> 2020-10-21        http://www.s… Aquape…      21 Ata da 38ª Reun… 2019-11-04  
+#&gt; <span style='color: #BCBCBC;'> 9</span> 2020-10-21        http://www.s… Alto T…       6 Resumo Executiv… 2020-02-20  
+#&gt; <span style='color: #BCBCBC;'>10</span> 2020-10-21        http://www.s… Tietê-…      16 Ata da 1ª Reuni… 2020-07-17  
+#&gt; <span style='color: #949494;'># … with 3 more variables: data_postagem &lt;date&gt;, numero_link &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   url_link &lt;chr&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -172,11 +167,11 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Beatriz Milz.</p></p>
+  <p>Developed by Beatriz Milz.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -184,8 +179,6 @@
 
   
 
-
-  
 
   </body>
 </html>

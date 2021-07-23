@@ -15,13 +15,13 @@ Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contend
 }
 }
 \source{
-SigRH - \url{http://www.sigrh.sp.gov.br/municipios}
+SigRH - \url{https://sigrh.sp.gov.br/municipios}
 }
 \usage{
 comites_sp
 }
 \description{
-Tabela agregada à partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
+Tabela agregada à partir de dados obtidos no SigRH \url{https://sigrh.sp.gov.br/municipios}.
 }
 \examples{
 comites_sp

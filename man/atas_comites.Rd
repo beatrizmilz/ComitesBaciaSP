@@ -19,7 +19,7 @@ Uma tibble, contendo:
 }
 }
 \source{
-SigRH - \url{http://www.sigrh.sp.gov.br/}
+SigRH - \url{https://sigrh.sp.gov.br/}
 }
 \usage{
 atas_comites

@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/beatrizmilz/ComitesBaciaSP/workflows/R-CMD-check/badge.svg)](https://github.com/beatrizmilz/ComitesBaciaSP/actions)   [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-O objetivo deste pacote é disponibilizar funções para obter dados sobre os Comitês de Bacias Hidrográficas do Estado de São Paulo, disponíveis de forma não estruturada no site [SigRH](http://www.sigrh.sp.gov.br/), assim como disponibilizar as bases de dados raspadas, de forma a facilitar a análise dos mesmos. 
+O objetivo deste pacote é disponibilizar funções para obter dados sobre os Comitês de Bacias Hidrográficas do Estado de São Paulo, disponíveis de forma não estruturada no site [SigRH](https://sigrh.sp.gov.br/), assim como disponibilizar as bases de dados raspadas, de forma a facilitar a análise dos mesmos. 
 
 Este pacote foi criado no âmbito da [pesquisa de doutorado de Beatriz Milz](https://beatrizmilz.github.io/tese/). As funções do pacote estão sendo desenvolvidas à medida que são necessárias na pesquisa, porém se você necessita de algum dado que se encaixa no contexto deste pacote, [escreva uma issue](https://github.com/beatrizmilz/ComitesBaciaSP/issues/new/choose) descrevendo as informações necessárias para que seja avaliado à possibilidade de desenvolver e incorporar a sugestão no pacote.
 

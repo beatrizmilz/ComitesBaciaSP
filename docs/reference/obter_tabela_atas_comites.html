@@ -45,8 +45,6 @@
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -58,18 +56,9 @@
 
 
 
-<!-- dependencies from examples -->
-
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,6 +79,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -156,21 +151,21 @@ O caminho para o arquivo deve ser o gerado pela função <code><a href='download
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>obter_tabela_atas_comites</span><span class='op'>(</span><span class='st'>"at"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 154 x 9</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 154 × 9</span>
 #&gt;    data_coleta_dados site_coleta   comite n_ugrhi nome_reuniao      data_reuniao
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;glue&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2021-04-19        http://www.s… Alto …       6 Resumo Executivo… 2021-02-10  
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 2021-04-19        http://www.s… Alto …       6 Resumo Executivo… 2020-12-14  
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 2021-04-19        http://www.s… Alto …       6 Resumo Executivo… 2020-11-27  
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2021-04-19        http://www.s… Alto …       6 Plenária CBH-AT … 2020-10-29  
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 2021-04-19        http://www.s… Alto …       6 Plenária CBH-AT … 2020-10-29  
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 2021-04-19        http://www.s… Alto …       6 Plenária CBH-AT … 2020-07-28  
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 2021-04-19        http://www.s… Alto …       6 Plenária CBH-AT … 2020-07-28  
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 2021-04-19        http://www.s… Alto …       6 Plenária CBH-AT … 2020-02-20  
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 2021-04-19        http://www.s… Alto …       6 Plenária CBH-AT … 2019-12-17  
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 2021-04-19        http://www.s… Alto …       6 Plenária CBH-AT … 2019-09-25  
-#&gt; </span><span style='color: #949494;'># … with 144 more rows, and 3 more variables: data_postagem &lt;date&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   numero_link &lt;chr&gt;, url_link &lt;chr&gt;</span><span></div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;glue&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>      
+#&gt; <span style='color: #BCBCBC;'> 1</span> 2021-07-23        https://sigr… Alto …       6 Resumo Executivo… 2021-02-10  
+#&gt; <span style='color: #BCBCBC;'> 2</span> 2021-07-23        https://sigr… Alto …       6 Resumo Executivo… 2020-12-14  
+#&gt; <span style='color: #BCBCBC;'> 3</span> 2021-07-23        https://sigr… Alto …       6 Resumo Executivo… 2020-11-27  
+#&gt; <span style='color: #BCBCBC;'> 4</span> 2021-07-23        https://sigr… Alto …       6 Plenária CBH-AT … 2020-10-29  
+#&gt; <span style='color: #BCBCBC;'> 5</span> 2021-07-23        https://sigr… Alto …       6 Plenária CBH-AT … 2020-10-29  
+#&gt; <span style='color: #BCBCBC;'> 6</span> 2021-07-23        https://sigr… Alto …       6 Plenária CBH-AT … 2020-07-28  
+#&gt; <span style='color: #BCBCBC;'> 7</span> 2021-07-23        https://sigr… Alto …       6 Plenária CBH-AT … 2020-07-28  
+#&gt; <span style='color: #BCBCBC;'> 8</span> 2021-07-23        https://sigr… Alto …       6 Plenária CBH-AT … 2020-02-20  
+#&gt; <span style='color: #BCBCBC;'> 9</span> 2021-07-23        https://sigr… Alto …       6 Plenária CBH-AT … 2019-12-17  
+#&gt; <span style='color: #BCBCBC;'>10</span> 2021-07-23        https://sigr… Alto …       6 Plenária CBH-AT … 2019-09-25  
+#&gt; <span style='color: #949494;'># … with 144 more rows, and 3 more variables: data_postagem &lt;date&gt;,</span>
+#&gt; <span style='color: #949494;'>#   numero_link &lt;chr&gt;, url_link &lt;chr&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -182,11 +177,11 @@ O caminho para o arquivo deve ser o gerado pela função <code><a href='download
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Beatriz Milz.</p></p>
+  <p>Developed by Beatriz Milz.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -194,8 +189,6 @@ O caminho para o arquivo deve ser o gerado pela função <code><a href='download
 
   
 
-
-  
 
   </body>
 </html>

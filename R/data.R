@@ -1,6 +1,6 @@
 #' Comitês de Bacia Hidrográfica no Estado de São Paulo
 #'
-#' Tabela agregada à partir de dados obtidos no SigRH \url{http://www.sigrh.sp.gov.br/municipios}.
+#' Tabela agregada à partir de dados obtidos no SigRH \url{https://sigrh.sp.gov.br/municipios}.
 #'
 #' @format Uma tibble com 22 linhas (cada uma representando uma UGRHI) e 5 colunas, contendo as variáveis:
 #' \describe{
@@ -11,7 +11,7 @@
 #'   \item{macrometropole_daee}{Variável lógica. Caso seja TRUE, este Comitê está parcialmente ou totalmente no território da Macrometrópole Paulista, segundo a delimitação do DAEE ( \url{http://www.sigrh.sp.gov.br/}).}
 #' }
 #' @name comites_sp
-#' @source SigRH - \url{http://www.sigrh.sp.gov.br/municipios}
+#' @source SigRH - \url{https://sigrh.sp.gov.br/municipios}
 #' @examples comites_sp
 #'
 "comites_sp"
@@ -47,7 +47,7 @@
 #'   \item{cargo}{Cargo (Titular ou Suplente) da pessoa representante, segundo informado pelo Comitê de Bacia}
 #' }
 #' @name representantes_comites
-#' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
+#' @source SigRH - \url{https://sigrh.sp.gov.br/}
 #' @examples head(representantes_comites)
 "representantes_comites"
 
@@ -86,6 +86,6 @@
 #'   \item{url_link}{URL, ou endereço online, do arquivo referente à ata da reunião.}
 #' }
 #' @name atas_comites
-#' @source SigRH - \url{http://www.sigrh.sp.gov.br/}
+#' @source SigRH - \url{https://sigrh.sp.gov.br/}
 #'@examples atas_comites %>% dplyr::arrange(desc(data_postagem)) %>% head(10)
 "atas_comites"

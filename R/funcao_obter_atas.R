@@ -38,7 +38,7 @@ obter_tabela_atas_comites <- function(sigla_do_comite = NULL, online = TRUE, pat
       ComitesBaciaSP::comites_sp %>%
       dplyr::filter(sigla_comite == sigla_do_comite) %>%
       dplyr::top_n(1, wt = n_ugrhi)  %>%
-      dplyr::mutate(links = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
+      dplyr::mutate(links = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
       dplyr::pull(links)
 
     data_coleta_dos_dados <- Sys.Date()
@@ -102,7 +102,7 @@ obter_tabela_atas_comites <- function(sigla_do_comite = NULL, online = TRUE, pat
     ComitesBaciaSP::comites_sp %>%
     dplyr::filter(sigla_comite == sigla_do_comite) %>%
     dplyr::top_n(1, wt = n_ugrhi)  %>%
-    dplyr::mutate(links = glue::glue("http://www.sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
+    dplyr::mutate(links = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
     dplyr::pull(links)
 
 
@@ -162,7 +162,7 @@ obter_tabela_atas_comites <- function(sigla_do_comite = NULL, online = TRUE, pat
       purrr::map( ~ dplyr::mutate(
         .x,
         value = dplyr::case_when(
-          stringr::str_starts(value , "/public") ~ paste0("http://www.sigrh.sp.gov.br", value),
+          stringr::str_starts(value , "/public") ~ paste0("https://sigrh.sp.gov.br", value),
           TRUE ~ value
         )
       )) %>%
