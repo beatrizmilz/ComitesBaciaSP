@@ -2,7 +2,5 @@
 
 export("%>%")
 export(download_html)
-export(obter_tabela_agenda_comites)
-export(obter_tabela_atas_comites)
-export(obter_tabela_representantes_comites)
+export(raspar_pagina_sigrh)
 importFrom(magrittr,"%>%")
