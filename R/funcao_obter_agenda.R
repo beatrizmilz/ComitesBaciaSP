@@ -26,7 +26,7 @@ obter_tabela_agenda_comites <-
         dplyr::pull(sigla_comite) %>%
         unique()
 
-      texto_siglas_dos_comites <-   siglas_dos_comites  %>%
+      texto_siglas_dos_comites <- siglas_dos_comites %>%
         paste(collapse = ", ")
 
       if (!sigla_do_comite %in% siglas_dos_comites) {
@@ -34,7 +34,7 @@ obter_tabela_agenda_comites <-
           paste(
             "O texto fornecido para o argumento 'sigla_do_comite' não é válido.
         Forneça uma das seguintes possibilidades:",
-        texto_siglas_dos_comites
+            texto_siglas_dos_comites
           )
         )
       }
@@ -42,12 +42,11 @@ obter_tabela_agenda_comites <-
       link_html <-
         ComitesBaciaSP::comites_sp %>%
         dplyr::filter(sigla_comite == sigla_do_comite) %>%
-        dplyr::top_n(1, wt = n_ugrhi)  %>%
+        dplyr::top_n(1, wt = n_ugrhi) %>%
         dplyr::mutate(links = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/agenda")) %>%
         dplyr::pull(links)
 
       data_coleta_dos_dados <- Sys.Date()
-
     } else if (online == FALSE & !is.null(path_arquivo)) {
       nome_pagina <- path_arquivo %>%
         fs::path_file() %>%
@@ -91,18 +90,21 @@ obter_tabela_agenda_comites <-
       dplyr::filter(sigla_comite == sigla_do_comite) %>%
       dplyr::top_n(1, wt = n_ugrhi)
 
-    n_comite <- comite  %>% dplyr::pull(n_ugrhi)
+    n_comite <- comite %>% dplyr::pull(n_ugrhi)
 
     nome_comite <- comite %>%
       dplyr::pull(bacia_hidrografica)
 
-    lista <- xml2::read_html(link_html, encoding = "UTF-8") %>%
+    # Importante para não dar o erro do certificado SSL expirado do site
+    link_get <- httr::GET(link_html, httr::config(ssl_verifypeer = FALSE))
+
+    lista <- xml2::read_html(link_get, encoding = "UTF-8") %>%
       rvest::html_nodes("div.col_right")
 
     url_site_coleta <-
       ComitesBaciaSP::comites_sp %>%
       dplyr::filter(sigla_comite == sigla_do_comite) %>%
-      dplyr::top_n(1, wt = n_ugrhi)  %>%
+      dplyr::top_n(1, wt = n_ugrhi) %>%
       dplyr::mutate(links = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/agenda")) %>%
       dplyr::pull(links)
 
@@ -120,42 +122,40 @@ obter_tabela_agenda_comites <-
           nome_reuniao_extra = NA,
           data_reuniao_dia = NA,
           data_reuniao_mes_ano = NA,
-          link_mais_informacoes = NA,
-          data_reuniao = NA
+          link_mais_informacoes = NA
         )
 
       return(df_vazia)
-
-    } else{
+    } else {
       lista_dados <-
         lista %>%
-        purrr::map( ~ rvest::html_nodes(.x, "div.news_event"))
+        purrr::map(~ rvest::html_nodes(.x, "div.news_event"))
 
 
       nome_reuniao <-
         lista_dados |>
-        purrr::map( ~  rvest::html_nodes(.x, "h2")) %>%
+        purrr::map(~ rvest::html_nodes(.x, "h2")) %>%
         purrr::pluck(1) |>
-        purrr::map( ~ rvest::html_text(.x)) %>%
+        purrr::map(~ rvest::html_text(.x)) %>%
         purrr::as_vector()
 
 
       nome_reuniao_extra <- lista_dados %>%
-        purrr::map( ~  rvest::html_nodes(.x, "p")) %>%
+        purrr::map(~ rvest::html_nodes(.x, "p")) %>%
         purrr::pluck(1) |>
-        purrr::map( ~ rvest::html_text(.x)) %>%
-        purrr::map( ~  stringr::str_replace_all(.x, "[\r\t\n]", "")) %>%
-        purrr::map( ~ stringr::str_squish(.x)) %>%
+        purrr::map(~ rvest::html_text(.x)) %>%
+        purrr::map(~ stringr::str_replace_all(.x, "[\r\t\n]", "")) %>%
+        purrr::map(~ stringr::str_squish(.x)) %>%
         purrr::as_vector()
 
       link_mais_informacoes <- lista_dados %>%
-        purrr::map( ~ rvest::html_node(.x, "a")) %>%
-        purrr::map( ~ rvest::html_attr(.x, "href")) %>%
-        purrr::map( ~ tibble::as_tibble(.x)) %>%
-        purrr::map( ~ dplyr::mutate(
+        purrr::map(~ rvest::html_node(.x, "a")) %>%
+        purrr::map(~ rvest::html_attr(.x, "href")) %>%
+        purrr::map(~ tibble::as_tibble(.x)) %>%
+        purrr::map(~ dplyr::mutate(
           .x,
           value = dplyr::case_when(
-            stringr::str_starts(value , "/collegiate") ~ paste0("https://sigrh.sp.gov.br", value),
+            stringr::str_starts(value, "/collegiate") ~ paste0("https://sigrh.sp.gov.br", value),
             TRUE ~ value
           )
         )) %>%
@@ -164,20 +164,20 @@ obter_tabela_agenda_comites <-
 
 
       lista_calendar <- lista %>%
-        purrr::map( ~  rvest::html_nodes(.x, "div.calendar"))
+        purrr::map(~ rvest::html_nodes(.x, "div.calendar"))
 
       data_reuniao_mes_ano <- lista_calendar %>%
-        purrr::map( ~  rvest::html_node(.x, "[class='month']")) %>%
+        purrr::map(~ rvest::html_node(.x, "[class='month']")) %>%
         purrr::pluck(1) |>
-        purrr::map( ~ rvest::html_text(.x)) %>%
-        purrr::map( ~ stringr::str_squish(.x)) %>%
+        purrr::map(~ rvest::html_text(.x)) %>%
+        purrr::map(~ stringr::str_squish(.x)) %>%
         purrr::as_vector()
 
       data_reuniao_dia <- lista_calendar %>%
-        purrr::map( ~  rvest::html_node(.x, "[class='day']")) %>%
+        purrr::map(~ rvest::html_node(.x, "[class='day']")) %>%
         purrr::pluck(1) |>
-        purrr::map( ~ rvest::html_text(.x)) %>%
-        purrr::map( ~ stringr::str_squish(.x)) %>%
+        purrr::map(~ rvest::html_text(.x)) %>%
+        purrr::map(~ stringr::str_squish(.x)) %>%
         purrr::as_vector()
 
       df <-
@@ -194,51 +194,51 @@ obter_tabela_agenda_comites <-
         )
 
 
-      df_2 <- df |>
-        tidyr::separate(
-          data_reuniao_mes_ano,
-          c("data_reuniao_mes", "data_reuniao_ano"),
-          sep = "/",
-          remove = FALSE
-        ) |>
-        dplyr::mutate(
-          data_reuniao_ano = stringr::str_trim(data_reuniao_ano),
-          data_reuniao_mes = stringr::str_trim(data_reuniao_mes),
+      # df_2 <- df |>
+      #   tidyr::separate(
+      #     col = data_reuniao_mes_ano,
+      #     into =
+      #       c("data_reuniao_mes", "data_reuniao_ano"),
+      #     sep = "/",
+      #     remove = FALSE
+      #   ) |>
+      #   dplyr::mutate(
+      #     data_reuniao_ano = stringr::str_trim(data_reuniao_ano),
+      #     data_reuniao_mes = stringr::str_trim(data_reuniao_mes),
+      #
+      #     data_reuniao_ano =  dplyr::case_when(
+      #       as.numeric(data_reuniao_ano) >= 0 &
+      #         as.numeric(data_reuniao_ano) < 80 ~ paste0("20", stringr::str_trim(data_reuniao_ano)),
+      #       TRUE ~ paste0("19", stringr::str_trim(data_reuniao_ano)),
+      #     ),
+      #     data_reuniao_mes =  dplyr::case_when(
+      #       data_reuniao_mes == "JAN" ~ 1,
+      #       data_reuniao_mes == "FEV" ~ 2,
+      #       data_reuniao_mes == "MAR" ~ 3,
+      #       data_reuniao_mes == "ABR" ~ 4,
+      #       data_reuniao_mes == "MAI" ~ 5,
+      #       data_reuniao_mes == "JUN" ~ 6,
+      #       data_reuniao_mes == "JUL" ~ 7,
+      #       data_reuniao_mes == "AGO" ~ 8,
+      #       data_reuniao_mes == "SET" ~ 9,
+      #       data_reuniao_mes == "OUT" ~ 10,
+      #       data_reuniao_mes == "NOV" ~ 11,
+      #       data_reuniao_mes == "DEZ" ~ 12
+      #
+      #     ),
+      #     data_reuniao = lubridate::as_date(
+      #       paste0(
+      #         data_reuniao_ano,
+      #         "-",
+      #         data_reuniao_mes,
+      #         "-",
+      #         data_reuniao_dia
+      #       )
+      #     )
+      #   ) |>
+      #   dplyr::select(-data_reuniao_mes,-data_reuniao_ano)
 
-          data_reuniao_ano =  dplyr::case_when(
-            as.numeric(data_reuniao_ano) >= 0 &
-              as.numeric(data_reuniao_ano) < 80 ~ paste0("20", stringr::str_trim(data_reuniao_ano)),
-            TRUE ~ paste0("19", stringr::str_trim(data_reuniao_ano)),
-          ),
-          data_reuniao_mes =  dplyr::case_when(
-            data_reuniao_mes == "JAN" ~ 1,
-            data_reuniao_mes == "FEV" ~ 2,
-            data_reuniao_mes == "MAR" ~ 3,
-            data_reuniao_mes == "ABR" ~ 4,
-            data_reuniao_mes == "MAI" ~ 5,
-            data_reuniao_mes == "JUN" ~ 6,
-            data_reuniao_mes == "JUL" ~ 7,
-            data_reuniao_mes == "AGO" ~ 8,
-            data_reuniao_mes == "SET" ~ 9,
-            data_reuniao_mes == "OUT" ~ 10,
-            data_reuniao_mes == "NOV" ~ 11,
-            data_reuniao_mes == "DEZ" ~ 12
 
-          ),
-          data_reuniao = lubridate::as_date(
-            paste0(
-              data_reuniao_ano,
-              "-",
-              data_reuniao_mes,
-              "-",
-              data_reuniao_dia
-            )
-          )
-        ) |>
-        dplyr::select(-data_reuniao_mes,-data_reuniao_ano)
-
-
-      return(df_2)
+      return(df)
     }
-
   }
