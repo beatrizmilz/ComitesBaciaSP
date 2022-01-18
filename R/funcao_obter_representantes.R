@@ -148,8 +148,10 @@ obter_tabela_representantes_comites <-
       dplyr::mutate(links = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/atas")) %>%
       dplyr::pull(links)
 
+# Importante para não dar o erro do certificado SSL expirado do site
+    link_get <- httr::GET(link_html, httr::config(ssl_verifypeer = FALSE))
 
-    blocos <- xml2::read_html(link_html, encoding = "UTF-8") %>%
+    blocos <- xml2::read_html(link_get, encoding = "UTF-8") %>%
       rvest::html_nodes("div.col_right") %>%
       rvest::html_nodes("div.block")
 

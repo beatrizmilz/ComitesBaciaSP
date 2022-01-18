@@ -81,7 +81,8 @@ download_html <-
             )
           )
         } else {
-          httr::GET(url, httr::write_disk(path = caminho_salvar))
+          # Importante para não dar o erro do certificado SSL expirado do site
+          httr::GET(url, httr::write_disk(path = caminho_salvar), httr::config(ssl_verifypeer = FALSE))
           message(
             glue::glue(
               "Download realizado: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
