@@ -95,7 +95,11 @@ obter_tabela_atas_comites <- function(sigla_do_comite = NULL, online = TRUE, pat
     dplyr::pull(bacia_hidrografica)
 
   # Importante para não dar o erro do certificado SSL expirado do site
-  link_get <- httr::GET(link_html, httr::config(ssl_verifypeer = FALSE))
+  if(online == TRUE){
+    link_get <- httr::GET(link_html, httr::config(ssl_verifypeer = FALSE))
+  } else {
+    link_get <- link_html
+  }
 
   lista <- xml2::read_html(link_get, encoding = "UTF-8") %>%
     rvest::html_nodes("div.col_right") %>%
