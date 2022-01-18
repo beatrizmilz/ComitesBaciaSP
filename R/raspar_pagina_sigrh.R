@@ -222,10 +222,10 @@ raspar_pagina_sigrh <-
       # Se for CBH/ATAS ----------
       if (conteudo_pagina == "atas") {
         print("12")
-        lista <- lista |>
+        lista_blocos <- lista |>
           rvest::html_nodes("div.block")
 
-        if (length(lista) == 0) {
+        if (length(lista_blocos) == 0) {
           df_vazia <-
             tibble::tibble(
               data_coleta_dados = data_coleta_dos_dados,
@@ -242,14 +242,14 @@ raspar_pagina_sigrh <-
           return(df_vazia)
 
         } else{
-          nome_reuniao <- lista |>
+          nome_reuniao <- lista_blocos |>
             purrr::map( ~  rvest::html_nodes(.x, "h2")) |>
             purrr::map( ~ .x[1]) |>
             purrr::map( ~ rvest::html_text(.x)) |>
             purrr::as_vector()
 
 
-          lista_dados <- lista |>
+          lista_dados <- lista_blocos |>
             purrr::map(~  rvest::html_nodes(.x, "ul"))
 
           tres_nodes <-
@@ -551,10 +551,10 @@ raspar_pagina_sigrh <-
       } else if (conteudo_pagina == "deliberacoes") {
         # Se for CBH/DELIBERACOES ----------
         print("15")
-        lista <- lista |>
+        lista_blocos <- lista |>
           rvest::html_nodes("div.block")
 
-        if (length(lista) == 0) {
+        if (length(lista_blocos) == 0) {
           df_vazia <-
             tibble::tibble(
               data_coleta_dados = data_coleta_dos_dados,
@@ -574,20 +574,20 @@ raspar_pagina_sigrh <-
           return(df_vazia)
 
         } else{
-          nome_deliberacao <- lista |>
+          nome_deliberacao <- lista_blocos |>
             purrr::map( ~  rvest::html_nodes(.x, "h2")) |>
             purrr::map( ~ .x[1]) |>
             purrr::map( ~ rvest::html_text(.x)) |>
             purrr::as_vector()
 
-          descricao_deliberacao <- lista |>
+          descricao_deliberacao <- lista_blocos |>
             purrr::map( ~  rvest::html_nodes(.x, "div")) |>
             purrr::map( ~ .x[1]) |>
             purrr::map( ~ rvest::html_text(.x, trim = TRUE)) |>
             purrr::as_vector()
 
 
-          lista_dados <- lista |>
+          lista_dados <- lista_blocos |>
             purrr::map(~  rvest::html_nodes(.x, "ul"))
 
 
@@ -705,27 +705,24 @@ raspar_pagina_sigrh <-
           return(df_vazia)
 
         } else{
-          quebrada <-  lista |>
-            as.vector() |>
-            stringr::str_split(pattern = "<h3>")
+          lista_blocos <- lista |>
+            rvest::html_nodes("div.block")
 
-          quebrada[1]
-
-
-          nome_deliberacao <- lista |>
+          nome_documento <- lista_blocos |>
             purrr::map( ~  rvest::html_nodes(.x, "h2")) |>
             purrr::map( ~ .x[1]) |>
             purrr::map( ~ rvest::html_text(.x)) |>
             purrr::as_vector()
 
-          descricao_deliberacao <- lista |>
+
+          descricao_deliberacao <- lista_blocos |>
             purrr::map( ~  rvest::html_nodes(.x, "div")) |>
             purrr::map( ~ .x[1]) |>
             purrr::map( ~ rvest::html_text(.x, trim = TRUE)) |>
             purrr::as_vector()
 
 
-          lista_dados <- lista |>
+          lista_dados <- lista_blocos |>
             purrr::map(~  rvest::html_nodes(.x, "ul"))
 
 
@@ -750,13 +747,15 @@ raspar_pagina_sigrh <-
             purrr::map(~ dplyr::select(.x,-name)) |>
             purrr::map(~ tidyr::fill(.x, data, postado_em, .direction = "updown")) |>
             purrr::map(~ dplyr::slice(.x, 1)) |>
-
             dplyr::bind_rows() |>
-            dplyr::rename(
-              "data_publicacao_doe" = "publicado_em_d_o_e_em",
-              "data_documento" = "data",
-              "data_postagem" = "postado_em" ,
-            )
+            dplyr::union_all(dplyr::tibble(publicado_em_d_o_e_em = character())) |>
+            dplyr::rename(tidyselect::any_of(
+              c(
+                "data_publicacao_doe" = "publicado_em_d_o_e_em",
+                "data_documento" = "data",
+                "data_postagem" = "postado_em"
+              )
+            ))
 
           link_arquivos_df <- lista_links |>
             purrr::map(~ rvest::html_attr(.x, "href")) |>
