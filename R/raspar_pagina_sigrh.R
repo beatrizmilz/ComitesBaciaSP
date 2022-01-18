@@ -600,15 +600,20 @@ raspar_pagina_sigrh <-
             purrr::map( ~  rvest::html_nodes(.x, "a"))
 
           infos_df <- lista_infos |>
-            purrr::map( ~ tibble::enframe(.x)) |>
-            purrr::map(~ tidyr::separate(.x, col = value, into = c("desc_data", "data"), sep = ": ") |>
-                         dplyr::mutate(desc_data = janitor::make_clean_names(desc_data)) |>
-                         tidyr::pivot_wider(names_from = "desc_data", values_from = "data") |>
-                         dplyr::select(-name) |>
-                         tidyr::fill(data, postado_em, .direction = "updown") |>
-                         dplyr::slice(1)
-                       ) |>
-            dplyr::bind_rows() |>
+            purrr::map(~ tibble::enframe(.x)) |>
+            purrr::map( ~ tidyr::separate(
+              .x,
+              col = value,
+              into = c("desc_data", "data"),
+              sep = ": "
+            )) |>
+            purrr::map( ~ dplyr::mutate( .x, desc_data = janitor::make_clean_names(desc_data))) |>
+            purrr::map( ~ tidyr::pivot_wider( .x, names_from = "desc_data", values_from = "data")) |>
+            purrr::map( ~ dplyr::select( .x, -name)) |>
+            purrr::map( ~ tidyr::fill( .x, data, postado_em, .direction = "updown")) |>
+            purrr::map( ~ dplyr::slice( .x, 1)) |>
+
+          dplyr::bind_rows() |>
             dplyr::rename(
               "data_publicacao_doe" = "publicado_em_d_o_e_em",
               "data_documento" = "data",
