@@ -712,7 +712,7 @@ raspar_pagina_sigrh <-
           todos_h3 <- lista |>
             xml2::xml_find_all("//div[@id='accordion_records']/h3") |>
             purrr::map( ~ rvest::html_text(.x)) |>
-            purrr::as_vector() |> tibble::enframe()
+            purrr::as_vector() |> tibble::enframe(name = "id_lista")
 
 
           todos_div <- lista |>
@@ -724,63 +724,37 @@ raspar_pagina_sigrh <-
             purrr::map(~ purrr::map(.x, ~  purrr::pluck(.x, 1))) |>
             purrr::map(~ purrr::map(.x, ~  rvest::html_text(.x))) |>
             purrr::map(~  purrr::as_vector(.x)) |>
-            purrr::map(~  tibble::enframe(.x)) |>
-
+            purrr::map(~  tibble::enframe(.x, name = "id_bloco")) |>
             dplyr::bind_rows(.id = "id_lista")
 
-          # lista_blocos <- lista |>
-          #   rvest::html_nodes("div.block")
+          lista_dados <- todos_div |>
+            purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "ul")))
 
-         #  nome <- xml2::xml_name(todos)
-         #  txt <- xml2::xml_text(todos)
-         #
-         #  todos
-         #  .x <- todos_h3[[1]]
-         #
-         #  .x |>
-         #    xml2::xml_find_all("./following-sibling::div")
-         #
-         #
-         # teste <-  lista_blocos |>
-         #   purrr::map( ~  rvest::html_node(.x, xpath = "//*[preceding-sibling::h3]") )
+        lista_infos <- lista_dados |>
+          purrr::map(~ purrr::map(.x, ~  purrr::pluck(.x, 1))) |>
+            purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "li"))) |>
+            purrr::map(~ purrr::map(.x, ~  rvest::html_text(.x)))
+
+        lista_links <- lista_dados |>
+          purrr::map(~ purrr::map(.x, ~  purrr::pluck(.x, 2))) |>
+          purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "li"))) |>
+          purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "a")))
 
 
-
-          nome_documento <- lista_blocos |>
-            purrr::map( ~  rvest::html_nodes(.x, "h2")) |>
-            purrr::map( ~ .x[1]) |>
-            purrr::map( ~ rvest::html_text(.x)) |>
-            purrr::as_vector()
-
-
-          lista_dados <- lista_blocos |>
-            purrr::map(~  rvest::html_nodes(.x, "ul"))
-
-
-          lista_infos <- lista_dados |> purrr::map( ~ .x[1]) |>
-            purrr::map(~  rvest::html_nodes(.x, "li")) |>
-            purrr::map( ~ rvest::html_text(.x))
-
-          lista_links <- lista_dados |> purrr::map( ~ .x[2]) |>
-            purrr::map(~  rvest::html_nodes(.x, "li")) |>
-            purrr::map(~  rvest::html_nodes(.x, "a"))
 
           infos_df <- lista_infos |>
             purrr::map( ~ tibble::enframe(.x)) |>
-            purrr::map(~ tidyr::separate(
-              .x,
+            dplyr::bind_rows(.id = "id_lista") |>
+            tidyr::unnest(value) |>
+            tidyr::separate(
               col = value,
               into = c("desc_data", "data"),
               sep = ": "
-            )) |>
-            purrr::map(~ dplyr::mutate(.x, desc_data = janitor::make_clean_names(desc_data))) |>
-            purrr::map(~ tidyr::pivot_wider(.x, names_from = "desc_data", values_from = "data")) |>
-            purrr::map(~ dplyr::select(.x,-name)) |>
-            purrr::map(~ tidyr::fill(.x, tidyselect::everything(), .direction = "updown")) |>
-            purrr::map(~ dplyr::slice(.x, 1)) |>
-            dplyr::bind_rows() |>
-            # dplyr::union_all(dplyr::tibble(data_do_documento = character(),
-            #                                postado_em = character())) |>
+            ) |>
+            dplyr::mutate(desc_data = stringr::str_to_lower(desc_data),
+                          desc_data = stringr::str_replace_all(desc_data, " ", "_")) |>
+            tidyr::pivot_wider( names_from = "desc_data", values_from = "data") |>
+            dplyr::select(-name) |>
             dplyr::rename(tidyselect::any_of(
               c(
                 "data_documento" = "data_do_documento",
@@ -788,27 +762,37 @@ raspar_pagina_sigrh <-
               )
             ))
 
-          link_arquivos_df <- lista_links |>
-            purrr::map(~ rvest::html_attr(.x, "href")) |>
-            purrr::map(~ tibble::as_tibble(.x)) |>
-            purrr::map(~ dplyr::mutate(.x, link_numero = paste0(
-              "documento_", dplyr::row_number(.x)
-            )))  |>
-            purrr::map(~ dplyr::mutate(
-              .x,
-              value = dplyr::case_when(
-                stringr::str_starts(value , "/public") ~ paste0("https://sigrh.sp.gov.br", value),
-                TRUE ~ value
-              )
+
+
+         link_arquivos_df <- lista_links |>
+            purrr::map( ~ purrr::map(.x, ~  rvest::html_attr(.x, "href"))) |>
+            purrr::map(~ purrr::map(.x, ~  tibble::enframe(.x))) |>
+
+            purrr::map( ~ purrr::map(.x, ~ dplyr::mutate(
+              .x, link_numero = paste0("documento_", name))
             )) |>
-            purrr::map(~ tidyr::pivot_wider(.x, values_from = value, names_from = link_numero)) |>
-            purrr::map(~ tibble::as_tibble(.x)) |>
-            purrr::map(~ if (nrow(.x) == 0) {
-              .x |> tibble::add_row()
-            } else {
-              .x
-            }) |>
-            dplyr::bind_rows()
+           purrr::map( ~  dplyr::bind_rows(.x, .id = "id_bloco")) |>
+           dplyr::bind_rows(.id = "id_lista") |>
+          dplyr::mutate(
+            id_lista = as.numeric(id_lista),
+            id_bloco = as.numeric(id_bloco),
+                value = dplyr::case_when(
+                  stringr::str_starts(value , "/public") ~ paste0("https://sigrh.sp.gov.br", value),
+                  TRUE ~ value
+                )
+              ) |>
+              tidyr::pivot_wider(values_from = value, names_from = link_numero)
+
+
+
+        base_parcial <- infos_df |>
+           dplyr::select( data_documento, data_postagem) |>
+           dplyr::bind_cols(nomes_documentos) |>
+           dplyr::mutate(id_lista = as.numeric(id_lista)) |>
+           dplyr::rename(nome_documento = value) |>
+           dplyr::left_join(todos_h3, by = "id_lista") |>
+         dplyr::rename(tema_documento = value) |>
+           dplyr::left_join(link_arquivos_df, by = c("id_lista", "id_bloco"))
 
 
           df <-
@@ -818,11 +802,10 @@ raspar_pagina_sigrh <-
               orgao = orgao,
               comite = nome_comite,
               n_ugrhi = n_comite,
-              nome_documento,
-              infos_df,
-              link_arquivos_df,
+              base_parcial
             )
 
+          # ATE AQUI MUDEI
           df_longer <- df |>
             tidyr::pivot_longer(
               tidyselect::starts_with("documento_"),
@@ -831,16 +814,7 @@ raspar_pagina_sigrh <-
               values_drop_na = TRUE
             ) |>
             dplyr::select(
-              "data_coleta_dados",
-              "site_coleta",
-              "orgao",
-              "comite" ,
-              "n_ugrhi" ,
-              "nome_documento",
-              "data_documento",
-              "data_postagem"  ,
-              "numero_link"   ,
-              "url_link"
+             -id_lista, -id_bloco, -name
             )
 
 
