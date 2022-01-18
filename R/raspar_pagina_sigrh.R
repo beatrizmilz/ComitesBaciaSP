@@ -28,7 +28,8 @@ raspar_pagina_sigrh <-
     # sigla_do_comite <- "at"
     # orgao <- "cbh"
     # conteudo_pagina <- "documentos"
-
+    # online = TRUE
+    # path_arquivo = NULL
     # path_arquivo <- "../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/9/mp-agenda-15-09-2021.html"
 
     # Verificacoes se os argumentos estão válidos --------------
@@ -563,6 +564,7 @@ raspar_pagina_sigrh <-
               comite = nome_comite,
               n_ugrhi = n_comite,
               nome_deliberacao = NA,
+              descricao_deliberacao = NA,
               data_publicacao_doe = NA,
               data_documento = NA,
               data_postagem = NA,
@@ -610,7 +612,7 @@ raspar_pagina_sigrh <-
             purrr::map(~ dplyr::mutate(.x, desc_data = janitor::make_clean_names(desc_data))) |>
             purrr::map(~ tidyr::pivot_wider(.x, names_from = "desc_data", values_from = "data")) |>
             purrr::map(~ dplyr::select(.x,-name)) |>
-            purrr::map(~ tidyr::fill(.x, data, postado_em, .direction = "updown")) |>
+            purrr::map(~ tidyr::fill(.x, tidyselect::everything(), .direction = "updown")) |>
             purrr::map(~ dplyr::slice(.x, 1)) |>
             dplyr::bind_rows() |>
             dplyr::union_all(dplyr::tibble(publicado_em_d_o_e_em = character())) |>
@@ -653,6 +655,7 @@ raspar_pagina_sigrh <-
               comite = nome_comite,
               n_ugrhi = n_comite,
               nome_deliberacao,
+              descricao_deliberacao,
               infos_df,
               link_arquivos_df,
             )
@@ -671,6 +674,7 @@ raspar_pagina_sigrh <-
               "comite" ,
               "n_ugrhi" ,
               "nome_deliberacao",
+              "descricao_deliberacao",
               "data_publicacao_doe",
               "data_documento",
               "data_postagem"  ,
@@ -693,8 +697,7 @@ raspar_pagina_sigrh <-
               orgao = orgao,
               comite = nome_comite,
               n_ugrhi = n_comite,
-              nome_deliberacao = NA,
-              data_publicacao_doe = NA,
+              nome_documento = NA,
               data_documento = NA,
               data_postagem = NA,
               numero_link = NA,
@@ -705,20 +708,48 @@ raspar_pagina_sigrh <-
           return(df_vazia)
 
         } else{
-          lista_blocos <- lista |>
-            rvest::html_nodes("div.block")
+
+          todos_h3 <- lista |>
+            xml2::xml_find_all("//div[@id='accordion_records']/h3") |>
+            purrr::map( ~ rvest::html_text(.x)) |>
+            purrr::as_vector() |> tibble::enframe()
+
+
+          todos_div <- lista |>
+            xml2::xml_find_all("//div[@id='accordion_records']/div") |>
+            purrr::map(xml2::xml_find_all, "./div")
+
+         nomes_documentos <- todos_div |>
+            purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "h2"))) |>
+            purrr::map(~ purrr::map(.x, ~  purrr::pluck(.x, 1))) |>
+            purrr::map(~ purrr::map(.x, ~  rvest::html_text(.x))) |>
+            purrr::map(~  purrr::as_vector(.x)) |>
+            purrr::map(~  tibble::enframe(.x)) |>
+
+            dplyr::bind_rows(.id = "id_lista")
+
+          # lista_blocos <- lista |>
+          #   rvest::html_nodes("div.block")
+
+         #  nome <- xml2::xml_name(todos)
+         #  txt <- xml2::xml_text(todos)
+         #
+         #  todos
+         #  .x <- todos_h3[[1]]
+         #
+         #  .x |>
+         #    xml2::xml_find_all("./following-sibling::div")
+         #
+         #
+         # teste <-  lista_blocos |>
+         #   purrr::map( ~  rvest::html_node(.x, xpath = "//*[preceding-sibling::h3]") )
+
+
 
           nome_documento <- lista_blocos |>
             purrr::map( ~  rvest::html_nodes(.x, "h2")) |>
             purrr::map( ~ .x[1]) |>
             purrr::map( ~ rvest::html_text(.x)) |>
-            purrr::as_vector()
-
-
-          descricao_deliberacao <- lista_blocos |>
-            purrr::map( ~  rvest::html_nodes(.x, "div")) |>
-            purrr::map( ~ .x[1]) |>
-            purrr::map( ~ rvest::html_text(.x, trim = TRUE)) |>
             purrr::as_vector()
 
 
@@ -745,14 +776,14 @@ raspar_pagina_sigrh <-
             purrr::map(~ dplyr::mutate(.x, desc_data = janitor::make_clean_names(desc_data))) |>
             purrr::map(~ tidyr::pivot_wider(.x, names_from = "desc_data", values_from = "data")) |>
             purrr::map(~ dplyr::select(.x,-name)) |>
-            purrr::map(~ tidyr::fill(.x, data, postado_em, .direction = "updown")) |>
+            purrr::map(~ tidyr::fill(.x, tidyselect::everything(), .direction = "updown")) |>
             purrr::map(~ dplyr::slice(.x, 1)) |>
             dplyr::bind_rows() |>
-            dplyr::union_all(dplyr::tibble(publicado_em_d_o_e_em = character())) |>
+            # dplyr::union_all(dplyr::tibble(data_do_documento = character(),
+            #                                postado_em = character())) |>
             dplyr::rename(tidyselect::any_of(
               c(
-                "data_publicacao_doe" = "publicado_em_d_o_e_em",
-                "data_documento" = "data",
+                "data_documento" = "data_do_documento",
                 "data_postagem" = "postado_em"
               )
             ))
@@ -787,7 +818,7 @@ raspar_pagina_sigrh <-
               orgao = orgao,
               comite = nome_comite,
               n_ugrhi = n_comite,
-              nome_deliberacao,
+              nome_documento,
               infos_df,
               link_arquivos_df,
             )
@@ -805,8 +836,7 @@ raspar_pagina_sigrh <-
               "orgao",
               "comite" ,
               "n_ugrhi" ,
-              "nome_deliberacao",
-              "data_publicacao_doe",
+              "nome_documento",
               "data_documento",
               "data_postagem"  ,
               "numero_link"   ,

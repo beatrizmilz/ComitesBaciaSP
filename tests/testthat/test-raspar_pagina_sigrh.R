@@ -14,4 +14,7 @@ test_that("raspar_pagina_sigrh() works", {
   deliberacoes_cbhalpa <- raspar_pagina_sigrh(sigla_do_comite = "alpa", conteudo_pagina = "deliberacoes", orgao = "cbh")
   testthat::expect_gt(nrow(deliberacoes_cbhalpa), 200)
 
+  documentos_cbhsmt <- raspar_pagina_sigrh(sigla_do_comite = "smt", conteudo_pagina = "documentos", orgao = "cbh")
+  testthat::expect_gt(nrow(documentos_cbhsmt), 100)
+
 })
