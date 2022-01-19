@@ -17,7 +17,7 @@ raspar_pagina_sigrh(
 # verificar na base:  \code{\link{comites_sp}}.}
 
 \item{conteudo_pagina}{Qual é o tipo de página que deve ser raspada.
-Atualmente aceita: atas, representantes, agenda.}
+Atualmente aceita: atas, representantes, agenda, deliberacoes, documentos.}
 
 \item{orgao}{Qual é o órgão da página que deve ser raspada.
 Atualmente aceita: cbh, agencia.}
@@ -28,7 +28,7 @@ informado no argumento \code{path_arquivo}. O valor padrão é TRUE.}
 
 \item{path_arquivo}{Caminho para o arquivo .html que será lido.
 Isso só deve ser usado com o argumento online sendo FALSE.
-O caminho para o arquivo deve ser o gerado pela função \code{\link{download_html}}.}
+O caminho para o arquivo deve ser o gerado pela função \code{\link{download_pagina_sigrh}}.}
 }
 \value{
 Retorna uma tibble.

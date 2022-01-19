@@ -9,7 +9,7 @@
 #' informado no argumento \code{path_arquivo}. O valor padrão é TRUE.
 #' @param path_arquivo Caminho para o arquivo .html que será lido.
 #' Isso só deve ser usado com o argumento online sendo FALSE.
-#' O caminho para o arquivo deve ser o gerado pela função \code{\link{download_html}}.
+#' O caminho para o arquivo deve ser o gerado pela função \code{\link{download_pagina_sigrh}}.
 #' @param conteudo_pagina Qual é o tipo de página que deve ser raspada.
 #' Atualmente aceita: atas, representantes, agenda, deliberacoes, documentos.
 #' @param orgao Qual é o órgão da página que deve ser raspada.

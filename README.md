@@ -44,7 +44,7 @@ library(ComitesBaciaSP)
 -   As bases disponíveis no pacote atualmente são:
     -   [`comites_sp`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html)
 -   As funções disponíveis no pacote atualmente são:
-    -   [`raspar_pagina_sigrh`()\`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/raspar_pagina_sigrh.html)
+    -   [`raspar_pagina_sigrh`()](https://beatrizmilz.github.io/ComitesBaciaSP/reference/raspar_pagina_sigrh.html)
 
 Para utilizar as funções do pacote, é necessário saber a sigla referente
 ao comitê que você deseja buscar informações. A base comites_sp
@@ -107,3 +107,17 @@ citation("ComitesBaciaSP")
 #>     url = {https://beatrizmilz.github.io/ComitesBaciaSP/},
 #>   }
 ```
+
+## Pacotes relacionados ao tema
+
+-   [Pacote Mananciais](https://beatrizmilz.github.io/mananciais/),
+    desenvolvido por [Beatriz Milz](https://beatrizmilz.com):
+    disponibiliza a base de dados sobre o volume operacional em
+    mananciais de abastecimento público na Região Metropolitana de São
+    Paulo (SP - Brasil).
+
+-   [Pacote
+    reservatoriosBR](https://brunomioto.github.io/reservatoriosBR/),
+    desenvolvido por [Bruno Mioto](https://www.brunomioto.com.br/):
+    Pacote para obtenção de dados dos principais reservatórios
+    brasileiros a partir da plataforma SAR-ANA e da ONS.

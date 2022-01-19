@@ -6,8 +6,8 @@
 #' @return Mensagens no console apontando o que foi baixado.
 #' @export
 #'
-#' @examples # download_html()
-download_html <-
+#' @examples # download_pagina_sigrh()
+download_pagina_sigrh <-
   function(sigla_do_comite = ComitesBaciaSP::comites_sp$sigla_comite,
            path = here::here("html"),
            pagina = c(
