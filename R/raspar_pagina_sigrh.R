@@ -46,11 +46,7 @@ raspar_pagina_sigrh <-
       }
     }
 
-    if(length(sigla_do_comite) != 1 |
-       length(conteudo_pagina) != 1  |
-       length(orgao) != 1  |
-       length(online) != 1  |
-       length(path_arquivo) != 1){
+    if(length(sigla_do_comite) > 1){
 
       usethis::ui_stop("Cada argumento deve receber um vetor com comprimento = 1.
         Exemplo de argumento correto: sigla_do_comite = 'at'

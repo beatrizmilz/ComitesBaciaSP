@@ -8,6 +8,8 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/beatrizmilz/ComitesBaciaSP/workflows/R-CMD-check/badge.svg)](https://github.com/beatrizmilz/ComitesBaciaSP/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/beatrizmilz/ComitesBaciaSP/branch/master/graph/badge.svg)](https://app.codecov.io/gh/beatrizmilz/ComitesBaciaSP?branch=master)
 <!-- badges: end -->
 
 O objetivo deste pacote é disponibilizar funções para obter dados sobre

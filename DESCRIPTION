@@ -16,7 +16,8 @@ URL: https://github.com/beatrizmilz/ComitesBaciaSP
 BugReports: https://github.com/beatrizmilz/ComitesBaciaSP/issues
 Suggests: 
     testthat (>= 3.0.0),
-    rmarkdown
+    rmarkdown,
+    covr
 Imports: 
     magrittr,
     glue,
