@@ -68,6 +68,6 @@ test_that("raspar_pagina_sigrh() works", {
     orgao = "agencia"
   )
 
-  testthat::expect_gt(nrow(atas_agencia_at), 100)
+  testthat::expect_gt(nrow(atas_agencia_at), 50)
 
 })
