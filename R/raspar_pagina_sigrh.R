@@ -33,7 +33,7 @@ raspar_pagina_sigrh <-
     # path_arquivo <- "../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/9/mp-agenda-15-09-2021.html"
 
     # Verificacoes se os argumentos estão válidos --------------
-    print("1")
+
     if (online == TRUE & !is.null(path_arquivo)) {
       usethis::ui_stop(
         paste(
@@ -41,7 +41,7 @@ raspar_pagina_sigrh <-
         )
       )
     }
-    print("2")
+
     # Verificando se a sigla do comitê informada é válida
     siglas_dos_comites <- ComitesBaciaSP::comites_sp |>
       dplyr::pull(sigla_comite) |>
@@ -69,7 +69,7 @@ raspar_pagina_sigrh <-
         )
       }
     }
-    print("3")
+
     # verificando se forneceu o órgão
     orgaos_validos <- c("cbh", "agencia")
 
@@ -93,7 +93,7 @@ raspar_pagina_sigrh <-
       )
     }
 
-    print("4")
+
 
     # Verificando se o tipo de página informado é válido
     paginas_validas <-
@@ -123,7 +123,7 @@ raspar_pagina_sigrh <-
       )
     }
 
-    print("5")
+
 
     # Data de hoje ------
     if (online == TRUE) {
@@ -131,11 +131,11 @@ raspar_pagina_sigrh <-
     }
 
     # Formando o link que será usado -----------
-    print("6")
+
 
     # Caso seja CBH e esteja online ---------
     if (online == TRUE & orgao == "cbh") {
-      print("7")
+
       link_html <-
         ComitesBaciaSP::comites_sp |>
         dplyr::filter(sigla_comite == sigla_do_comite) |>
@@ -147,14 +147,14 @@ raspar_pagina_sigrh <-
         ) |>
         dplyr::pull(links)
     } else if (online == TRUE & orgao == "agencia") {
-      print("8")
+
       # Caso seja Agencia e esteja online ----------
       # TODO:
       usethis::ui_stop("Funcionalidade futura.")
     } else if (online == FALSE &
                !is.null(path_arquivo)) {
       # Caso seja offline a partir de um arquivo ------------------
-      print("9")
+
       nome_pagina <- path_arquivo |>
         fs::path_file() |>
         stringr::str_split(pattern = "-") |>
@@ -181,7 +181,7 @@ raspar_pagina_sigrh <-
 
       link_html <- path_arquivo
     }
-    print("9")
+
     # buscar infos
 
     # Importante para não dar o erro do certificado SSL expirado do site ----
@@ -191,7 +191,7 @@ raspar_pagina_sigrh <-
     } else {
       link_get <- link_html
     }
-    print("10")
+
 
     # Ler o HTML --------
     lista <- xml2::read_html(link_get, encoding = "UTF-8") |>
@@ -199,7 +199,7 @@ raspar_pagina_sigrh <-
 
     # Se for CBH ----------
     if (orgao == "cbh") {
-      print("11")
+
       comite <- ComitesBaciaSP::comites_sp |>
         dplyr::filter(sigla_comite == sigla_do_comite) |>
         dplyr::slice(1)
@@ -222,7 +222,7 @@ raspar_pagina_sigrh <-
 
       # Se for CBH/ATAS ----------
       if (conteudo_pagina == "atas") {
-        print("12")
+
         lista_blocos <- lista |>
           rvest::html_nodes("div.block")
 
@@ -340,7 +340,7 @@ raspar_pagina_sigrh <-
 
         # Se for CBH/REPRESENTANTES ----------
       } else if (conteudo_pagina == "representantes") {
-        print("13")
+
         blocos <- lista |>
           rvest::html_nodes("div.block")
 
@@ -459,9 +459,9 @@ raspar_pagina_sigrh <-
         }
         # Se for CBH/AGENDA ----------
       } else if (conteudo_pagina == "agenda") {
-        print("14")
+
         if (length(lista) == 0) {
-          print("15")
+
           df_vazia <-
             tibble::tibble(
               data_coleta_dados = data_coleta_dos_dados,
@@ -478,7 +478,7 @@ raspar_pagina_sigrh <-
 
           return(df_vazia)
         } else {
-          print("16")
+
           lista_dados <-
             lista |>
             purrr::map(~ rvest::html_nodes(.x, "div.news_event"))
@@ -546,12 +546,12 @@ raspar_pagina_sigrh <-
               link_mais_informacoes
             )
 
-          print("17")
+
           return(df)
         }
       } else if (conteudo_pagina == "deliberacoes") {
         # Se for CBH/DELIBERACOES ----------
-        print("15")
+
         lista_blocos <- lista |>
           rvest::html_nodes("div.block")
 
@@ -687,7 +687,7 @@ raspar_pagina_sigrh <-
         }
       } else if (conteudo_pagina == "documentos") {
         # Se for CBH/DOCUMENTOS ----------
-        print("16")
+
 
         lista_interna <- lista |>
           xml2::xml_find_all("//div[@id='accordion_records']")
