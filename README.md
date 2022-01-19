@@ -43,6 +43,7 @@ library(ComitesBaciaSP)
 
 -   As bases disponíveis no pacote atualmente são:
     -   [`comites_sp`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html)
+    -   [`agencias_de_bacia_sp`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/agencias_de_bacia_sp.html)
 -   As funções disponíveis no pacote atualmente são:
     -   [`raspar_pagina_sigrh`()](https://beatrizmilz.github.io/ComitesBaciaSP/reference/raspar_pagina_sigrh.html)
     -   [`download_pagina_sigrh`()](https://beatrizmilz.github.io/ComitesBaciaSP/reference/download_pagina_sigrh.html)
