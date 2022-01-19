@@ -1,4 +1,6 @@
 test_that("raspar_pagina_sigrh() works", {
+
+  # Comitês --------
   testthat::expect_error(raspar_pagina_sigrh(sigla_do_comite = "at"))
 
   agenda_cbhat <-
@@ -9,7 +11,6 @@ test_that("raspar_pagina_sigrh() works", {
     )
   testthat::expect_gt(nrow(agenda_cbhat), 200)
 
-  # ERRO AQUI ---
   representantes_cbhpcj <-
     raspar_pagina_sigrh(
       sigla_do_comite = "pcj",
@@ -41,5 +42,32 @@ test_that("raspar_pagina_sigrh() works", {
       orgao = "cbh"
     )
   testthat::expect_gt(nrow(documentos_cbhsmt), 100)
+
+  # Agências -------
+  testthat::expect_error(raspar_pagina_sigrh(
+    sigla_do_comite = "smt",
+    conteudo_pagina = "documentos",
+    orgao = "agencia"
+  ))
+
+  testthat::expect_error(raspar_pagina_sigrh(
+    sigla_do_comite = "at",
+    conteudo_pagina = "documentos",
+    orgao = "agencia"
+  ))
+
+  testthat::expect_error(raspar_pagina_sigrh(
+    sigla_do_comite = "ps",
+    conteudo_pagina = "atas",
+    orgao = "agencia"
+  ))
+
+  atas_agencia_at <- raspar_pagina_sigrh(
+    sigla_do_comite = "at",
+    conteudo_pagina = "atas",
+    orgao = "agencia"
+  )
+
+  testthat::expect_gt(nrow(atas_agencia_at), 100)
 
 })
