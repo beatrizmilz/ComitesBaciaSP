@@ -25,7 +25,7 @@ raspar_pagina_sigrh <-
            online = TRUE,
            path_arquivo = NULL) {
     # Variáveis para testar
-    # sigla_do_comite <- "at"
+    # sigla_do_comite <- "mp"
     # orgao <- "cbh"
     # conteudo_pagina <- "documentos"
     # online = TRUE
@@ -689,7 +689,10 @@ raspar_pagina_sigrh <-
         # Se for CBH/DOCUMENTOS ----------
         print("16")
 
-        if (length(lista) == 0) {
+        lista_interna <- lista |>
+          xml2::xml_find_all("//div[@id='accordion_records']")
+
+        if (length(lista_interna) == 0) {
           df_vazia <-
             tibble::tibble(
               data_coleta_dados = data_coleta_dos_dados,
@@ -713,7 +716,6 @@ raspar_pagina_sigrh <-
             xml2::xml_find_all("//div[@id='accordion_records']/h3") |>
             purrr::map( ~ rvest::html_text(.x)) |>
             purrr::as_vector() |> tibble::enframe(name = "id_lista")
-
 
           todos_div <- lista |>
             xml2::xml_find_all("//div[@id='accordion_records']/div") |>
