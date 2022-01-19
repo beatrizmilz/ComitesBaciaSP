@@ -46,14 +46,26 @@ raspar_pagina_sigrh <-
       }
     }
 
+    if(length(sigla_do_comite) != 1 |
+       length(conteudo_pagina) != 1  |
+       length(orgao) != 1  |
+       length(online) != 1  |
+       length(path_arquivo) != 1){
+
+      usethis::ui_stop("Cada argumento deve receber um vetor com comprimento = 1.
+        Exemplo de argumento correto: sigla_do_comite = 'at'
+        Exemplo de argumento incorreto: sigla_do_comite = c('at', 'ps')")
+
+    }
+
 
     # Verificacoes se os argumentos estão válidos --------------
 
     if (online == TRUE & !is.null(path_arquivo)) {
       usethis::ui_stop(
-        paste(
+
           "O argumento online == TRUE não deve ser usado junto ao argumento path_arquivo."
-        )
+
       )
     }
 
