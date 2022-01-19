@@ -10,14 +10,14 @@
 download_html <-
   function(sigla_do_comite = ComitesBaciaSP::comites_sp$sigla_comite,
            path = here::here("html"),
-           pagina = c("representantes",
-                      "atas",
-                      "atas_agencia",
-                      "deliberacoes",
-                      "documentos",
-                      "agenda")) {
-
-
+           pagina = c(
+             "representantes",
+             "atas",
+             "atas_agencia",
+             "deliberacoes",
+             "documentos",
+             "agenda"
+           )) {
     fs::dir_create(path)
 
 
@@ -50,11 +50,11 @@ download_html <-
 
     for (i in 1:nrow(url_comites)) {
       sigla_comite_baixar <- url_comites %>%
-        dplyr::slice(i)  %>%
+        dplyr::slice(i) %>%
         dplyr::pull(sigla_comite)
 
       df_url <- url_comites %>%
-        dplyr::slice(i)  %>%
+        dplyr::slice(i) %>%
         dplyr::select(url_pagina) %>%
         tidyr::pivot_longer(cols = tidyselect::everything()) %>%
         tidyr::drop_na(value)
@@ -75,24 +75,16 @@ download_html <-
 
 
         if (fs::file_exists(caminho_salvar)) {
-          message(
-            glue::glue(
-              "Download realizado anteriormente: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
-            )
+          usethis::ui_info(
+            "Download realizado anteriormente: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
           )
         } else {
           # Importante para não dar o erro do certificado SSL expirado do site
           httr::GET(url, httr::write_disk(path = caminho_salvar), httr::config(ssl_verifypeer = FALSE))
-          message(
-            glue::glue(
-              "Download realizado: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
-            )
+          usethis::ui_done(
+            "Download realizado: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
           )
         }
-
-
       }
-
     }
-
   }
