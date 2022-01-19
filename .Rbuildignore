@@ -6,3 +6,4 @@
 ^\.github/workflows$
 ^docs$
 ^ComitesBaciaSP\.Rproj$
+^\.github$
