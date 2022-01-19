@@ -7,3 +7,5 @@
 ^docs$
 ^ComitesBaciaSP\.Rproj$
 ^\.github$
+^_pkgdown\.yml$
+^pkgdown$

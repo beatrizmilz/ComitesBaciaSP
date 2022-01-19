@@ -64,7 +64,7 @@ raspar_pagina_sigrh <-
           paste(
             "O texto fornecido para o argumento 'sigla_do_comite' não é válido.
         Forneça uma das seguintes possibilidades:",
-        texto_siglas_dos_comites
+            texto_siglas_dos_comites
           )
         )
       }
@@ -88,7 +88,7 @@ raspar_pagina_sigrh <-
         paste(
           "O texto fornecido para o argumento 'orgao' não é válido.
         Forneça uma das seguintes possibilidades:",
-        texto_orgaos_validos
+          texto_orgaos_validos
         )
       )
     }
@@ -97,11 +97,13 @@ raspar_pagina_sigrh <-
 
     # Verificando se o tipo de página informado é válido
     paginas_validas <-
-      c("atas",
+      c(
+        "atas",
         "representantes",
         "agenda",
         "deliberacoes",
-        "documentos")
+        "documentos"
+      )
 
     texto_paginas_validas <- paginas_validas |>
       paste(collapse = ", ")
@@ -118,7 +120,7 @@ raspar_pagina_sigrh <-
         paste(
           "O texto fornecido para o argumento 'conteudo_pagina' não é válido.
         Forneça uma das seguintes possibilidades:",
-        texto_paginas_validas
+          texto_paginas_validas
         )
       )
     }
@@ -135,7 +137,6 @@ raspar_pagina_sigrh <-
 
     # Caso seja CBH e esteja online ---------
     if (online == TRUE & orgao == "cbh") {
-
       link_html <-
         ComitesBaciaSP::comites_sp |>
         dplyr::filter(sigla_comite == sigla_do_comite) |>
@@ -152,7 +153,7 @@ raspar_pagina_sigrh <-
       # TODO:
       usethis::ui_stop("Funcionalidade futura.")
     } else if (online == FALSE &
-               !is.null(path_arquivo)) {
+      !is.null(path_arquivo)) {
       # Caso seja offline a partir de um arquivo ------------------
 
       nome_pagina <- path_arquivo |>
@@ -199,7 +200,6 @@ raspar_pagina_sigrh <-
 
     # Se for CBH ----------
     if (orgao == "cbh") {
-
       comite <- ComitesBaciaSP::comites_sp |>
         dplyr::filter(sigla_comite == sigla_do_comite) |>
         dplyr::slice(1)
@@ -222,7 +222,6 @@ raspar_pagina_sigrh <-
 
       # Se for CBH/ATAS ----------
       if (conteudo_pagina == "atas") {
-
         lista_blocos <- lista |>
           rvest::html_nodes("div.block")
 
@@ -239,55 +238,54 @@ raspar_pagina_sigrh <-
               data_postagem = NA,
               url_link = NA
             )
-
+          usethis::ui_info("Raspagem não encontrou nada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}. Caso queira checar manualmente, confirme em: {link_html}")
           return(df_vazia)
-
-        } else{
+        } else {
           nome_reuniao <- lista_blocos |>
-            purrr::map( ~  rvest::html_nodes(.x, "h2")) |>
-            purrr::map( ~ .x[1]) |>
-            purrr::map( ~ rvest::html_text(.x)) |>
+            purrr::map(~ rvest::html_nodes(.x, "h2")) |>
+            purrr::map(~ .x[1]) |>
+            purrr::map(~ rvest::html_text(.x)) |>
             purrr::as_vector()
 
 
           lista_dados <- lista_blocos |>
-            purrr::map(~  rvest::html_nodes(.x, "ul"))
+            purrr::map(~ rvest::html_nodes(.x, "ul"))
 
           tres_nodes <-
             lista_dados |>
-            purrr::map(~  rvest::html_nodes(.x, "li"))
+            purrr::map(~ rvest::html_nodes(.x, "li"))
 
-          data_postagem <- tres_nodes  |>
-            purrr::map( ~ .x[2])  |>
-            purrr::map(~  rvest::html_text(.x)) |>
-            purrr::map(~ stringr::str_extract(.x,  "[0-9]{2}/[0-9]{2}/[0-9]{4}")) |>
+          data_postagem <- tres_nodes |>
+            purrr::map(~ .x[2]) |>
+            purrr::map(~ rvest::html_text(.x)) |>
+            purrr::map(~ stringr::str_extract(.x, "[0-9]{2}/[0-9]{2}/[0-9]{4}")) |>
             purrr::as_vector() |>
             lubridate::as_date(format = "%d/%m/%Y")
 
 
-          data_reuniao <- tres_nodes  |>
-            purrr::map( ~ .x[1])  |>
-            purrr::map(~  rvest::html_text(.x)) |>
-            purrr::map(~ stringr::str_extract(.x,  "[0-9]{2}/[0-9]{2}/[0-9]{4}")) |>
+          data_reuniao <- tres_nodes |>
+            purrr::map(~ .x[1]) |>
+            purrr::map(~ rvest::html_text(.x)) |>
+            purrr::map(~ stringr::str_extract(.x, "[0-9]{2}/[0-9]{2}/[0-9]{4}")) |>
             purrr::as_vector() |>
             lubridate::as_date(format = "%d/%m/%Y")
 
           link_ata <-
             tres_nodes |>
-            purrr::map( ~ rvest::html_nodes(.x, "a")) |>
-            purrr::map( ~ rvest::html_attr(.x, "href")) |>
-            purrr::map( ~ tibble::as_tibble(.x)) |>
-            purrr::map( ~ dplyr::mutate(.x, link_numero = paste0("ata_", dplyr::row_number(.x))))  |>
-            purrr::map( ~ dplyr::mutate(
+            purrr::map(~ rvest::html_nodes(.x, "a")) |>
+            purrr::map(~ rvest::html_attr(.x, "href")) |>
+            purrr::map(~ tibble::as_tibble(.x)) |>
+            purrr::map(~ dplyr::mutate(.x, link_numero = paste0("ata_", dplyr::row_number(.x)))) |>
+            purrr::map(~ dplyr::mutate(
               .x,
               value = dplyr::case_when(
-                stringr::str_starts(value , "/public") ~ paste0("https://sigrh.sp.gov.br", value),
+                stringr::str_starts(value, "/public") ~ paste0("https://sigrh.sp.gov.br", value),
                 TRUE ~ value
               )
             )) |>
-            purrr::map( ~ tidyr::pivot_wider(.x, values_from = value, names_from = link_numero)) |>
-            purrr::map( ~ tibble::as_tibble(.x)) |>
-            purrr::map( ~ if (nrow(.x) == 0) {
+            purrr::map(~ tidyr::pivot_wider(.x, values_from = value, names_from = link_numero)) |>
+            purrr::map(~ tibble::as_tibble(.x)) |>
+            purrr::map(~ if (nrow(.x) == 0) {
               .x |> tibble::add_row()
             } else {
               .x
@@ -318,12 +316,12 @@ raspar_pagina_sigrh <-
               "data_coleta_dados",
               "site_coleta",
               "orgao",
-              "comite" ,
-              "n_ugrhi" ,
-              "nome_reuniao"  ,
+              "comite",
+              "n_ugrhi",
+              "nome_reuniao",
               "data_reuniao",
-              "data_postagem"  ,
-              "numero_link"   ,
+              "data_postagem",
+              "numero_link",
               "url_link"
             )
           # |>
@@ -334,13 +332,12 @@ raspar_pagina_sigrh <-
           #     )
           #   )
 
-
+          usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
           return(df_longer)
         }
 
         # Se for CBH/REPRESENTANTES ----------
       } else if (conteudo_pagina == "representantes") {
-
         blocos <- lista |>
           rvest::html_nodes("div.block")
 
@@ -357,7 +354,7 @@ raspar_pagina_sigrh <-
               email = NA,
               cargo = NA
             )
-
+          usethis::ui_info("Raspagem não encontrou nada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}. Caso queira checar manualmente, confirme em: {link_html}")
           return(df_vazia)
         } else {
           # Organizacao representante
@@ -443,25 +440,25 @@ raspar_pagina_sigrh <-
             )
 
 
-          df_final <- df |>
+          df_final <- df %>%
             tidyr::pivot_longer(
               cols = nome_1:ncol(.),
               names_to = c("set", "ordem"),
               names_pattern = "(.+)_(.+)"
             ) |>
-            tidyr::pivot_wider(names_from = c(set),
-                               values_from = c(value)) |>
+            tidyr::pivot_wider(
+              names_from = c(set),
+              values_from = c(value)
+            ) |>
             dplyr::filter(!is.na(nome)) |>
             dplyr::select(-posicao_blocos, -ordem)
 
-
+          usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
           return(df_final)
         }
         # Se for CBH/AGENDA ----------
       } else if (conteudo_pagina == "agenda") {
-
         if (length(lista) == 0) {
-
           df_vazia <-
             tibble::tibble(
               data_coleta_dados = data_coleta_dos_dados,
@@ -475,10 +472,9 @@ raspar_pagina_sigrh <-
               data_reuniao_mes_ano = NA,
               link_mais_informacoes = NA
             )
-
+          usethis::ui_info("Raspagem não encontrou nada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}. Caso queira checar manualmente, confirme em: {link_html}")
           return(df_vazia)
         } else {
-
           lista_dados <-
             lista |>
             purrr::map(~ rvest::html_nodes(.x, "div.news_event"))
@@ -546,7 +542,7 @@ raspar_pagina_sigrh <-
               link_mais_informacoes
             )
 
-
+          usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
           return(df)
         }
       } else if (conteudo_pagina == "deliberacoes") {
@@ -570,39 +566,39 @@ raspar_pagina_sigrh <-
               data_postagem = NA,
               numero_link = NA,
               url_link = NA
-
             )
-
+          usethis::ui_info("Raspagem não encontrou nada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}. Caso queira checar manualmente, confirme em: {link_html}")
           return(df_vazia)
-
-        } else{
+        } else {
           nome_deliberacao <- lista_blocos |>
-            purrr::map( ~  rvest::html_nodes(.x, "h2")) |>
-            purrr::map( ~ .x[1]) |>
-            purrr::map( ~ rvest::html_text(.x)) |>
+            purrr::map(~ rvest::html_nodes(.x, "h2")) |>
+            purrr::map(~ .x[1]) |>
+            purrr::map(~ rvest::html_text(.x)) |>
             purrr::as_vector()
 
           descricao_deliberacao <- lista_blocos |>
-            purrr::map( ~  rvest::html_nodes(.x, "div")) |>
-            purrr::map( ~ .x[1]) |>
-            purrr::map( ~ rvest::html_text(.x, trim = TRUE)) |>
+            purrr::map(~ rvest::html_nodes(.x, "div")) |>
+            purrr::map(~ .x[1]) |>
+            purrr::map(~ rvest::html_text(.x, trim = TRUE)) |>
             purrr::as_vector()
 
 
           lista_dados <- lista_blocos |>
-            purrr::map(~  rvest::html_nodes(.x, "ul"))
+            purrr::map(~ rvest::html_nodes(.x, "ul"))
 
 
-          lista_infos <- lista_dados |> purrr::map( ~ .x[1]) |>
-            purrr::map(~  rvest::html_nodes(.x, "li")) |>
-            purrr::map( ~ rvest::html_text(.x))
+          lista_infos <- lista_dados |>
+            purrr::map(~ .x[1]) |>
+            purrr::map(~ rvest::html_nodes(.x, "li")) |>
+            purrr::map(~ rvest::html_text(.x))
 
-          lista_links <- lista_dados |> purrr::map( ~ .x[2]) |>
-            purrr::map(~  rvest::html_nodes(.x, "li")) |>
-            purrr::map(~  rvest::html_nodes(.x, "a"))
+          lista_links <- lista_dados |>
+            purrr::map(~ .x[2]) |>
+            purrr::map(~ rvest::html_nodes(.x, "li")) |>
+            purrr::map(~ rvest::html_nodes(.x, "a"))
 
           infos_df <- lista_infos |>
-            purrr::map( ~ tibble::enframe(.x)) |>
+            purrr::map(~ tibble::enframe(.x)) |>
             purrr::map(~ tidyr::separate(
               .x,
               col = value,
@@ -611,7 +607,7 @@ raspar_pagina_sigrh <-
             )) |>
             purrr::map(~ dplyr::mutate(.x, desc_data = janitor::make_clean_names(desc_data))) |>
             purrr::map(~ tidyr::pivot_wider(.x, names_from = "desc_data", values_from = "data")) |>
-            purrr::map(~ dplyr::select(.x,-name)) |>
+            purrr::map(~ dplyr::select(.x, -name)) |>
             purrr::map(~ tidyr::fill(.x, tidyselect::everything(), .direction = "updown")) |>
             purrr::map(~ dplyr::slice(.x, 1)) |>
             dplyr::bind_rows() |>
@@ -629,11 +625,11 @@ raspar_pagina_sigrh <-
             purrr::map(~ tibble::as_tibble(.x)) |>
             purrr::map(~ dplyr::mutate(.x, link_numero = paste0(
               "documento_", dplyr::row_number(.x)
-            )))  |>
+            ))) |>
             purrr::map(~ dplyr::mutate(
               .x,
               value = dplyr::case_when(
-                stringr::str_starts(value , "/public") ~ paste0("https://sigrh.sp.gov.br", value),
+                stringr::str_starts(value, "/public") ~ paste0("https://sigrh.sp.gov.br", value),
                 TRUE ~ value
               )
             )) |>
@@ -671,18 +667,18 @@ raspar_pagina_sigrh <-
               "data_coleta_dados",
               "site_coleta",
               "orgao",
-              "comite" ,
-              "n_ugrhi" ,
+              "comite",
+              "n_ugrhi",
               "nome_deliberacao",
               "descricao_deliberacao",
               "data_publicacao_doe",
               "data_documento",
-              "data_postagem"  ,
-              "numero_link"   ,
+              "data_postagem",
+              "numero_link",
               "url_link"
             )
 
-
+          usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
           return(df_longer)
         }
       } else if (conteudo_pagina == "documentos") {
@@ -705,47 +701,45 @@ raspar_pagina_sigrh <-
               data_postagem = NA,
               numero_link = NA,
               url_link = NA
-
             )
-
+          usethis::ui_info("Raspagem não encontrou nada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}. Caso queira checar manualmente, confirme em: {link_html}")
           return(df_vazia)
-
-        } else{
-
+        } else {
           todos_h3 <- lista |>
             xml2::xml_find_all("//div[@id='accordion_records']/h3") |>
-            purrr::map( ~ rvest::html_text(.x)) |>
-            purrr::as_vector() |> tibble::enframe(name = "id_lista")
+            purrr::map(~ rvest::html_text(.x)) |>
+            purrr::as_vector() |>
+            tibble::enframe(name = "id_lista")
 
           todos_div <- lista |>
             xml2::xml_find_all("//div[@id='accordion_records']/div") |>
             purrr::map(xml2::xml_find_all, "./div")
 
-         nomes_documentos <- todos_div |>
-            purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "h2"))) |>
-            purrr::map(~ purrr::map(.x, ~  purrr::pluck(.x, 1))) |>
-            purrr::map(~ purrr::map(.x, ~  rvest::html_text(.x))) |>
-            purrr::map(~  purrr::as_vector(.x)) |>
-            purrr::map(~  tibble::enframe(.x, name = "id_bloco")) |>
+          nomes_documentos <- todos_div |>
+            purrr::map(~ purrr::map(.x, ~ rvest::html_nodes(.x, "h2"))) |>
+            purrr::map(~ purrr::map(.x, ~ purrr::pluck(.x, 1))) |>
+            purrr::map(~ purrr::map(.x, ~ rvest::html_text(.x))) |>
+            purrr::map(~ purrr::as_vector(.x)) |>
+            purrr::map(~ tibble::enframe(.x, name = "id_bloco")) |>
             dplyr::bind_rows(.id = "id_lista")
 
           lista_dados <- todos_div |>
-            purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "ul")))
+            purrr::map(~ purrr::map(.x, ~ rvest::html_nodes(.x, "ul")))
 
-        lista_infos <- lista_dados |>
-          purrr::map(~ purrr::map(.x, ~  purrr::pluck(.x, 1))) |>
-            purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "li"))) |>
-            purrr::map(~ purrr::map(.x, ~  rvest::html_text(.x)))
+          lista_infos <- lista_dados |>
+            purrr::map(~ purrr::map(.x, ~ purrr::pluck(.x, 1))) |>
+            purrr::map(~ purrr::map(.x, ~ rvest::html_nodes(.x, "li"))) |>
+            purrr::map(~ purrr::map(.x, ~ rvest::html_text(.x)))
 
-        lista_links <- lista_dados |>
-          purrr::map(~ purrr::map(.x, ~  purrr::pluck(.x, 2))) |>
-          purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "li"))) |>
-          purrr::map(~ purrr::map(.x, ~  rvest::html_nodes(.x, "a")))
+          lista_links <- lista_dados |>
+            purrr::map(~ purrr::map(.x, ~ purrr::pluck(.x, 2))) |>
+            purrr::map(~ purrr::map(.x, ~ rvest::html_nodes(.x, "li"))) |>
+            purrr::map(~ purrr::map(.x, ~ rvest::html_nodes(.x, "a")))
 
 
 
           infos_df <- lista_infos |>
-            purrr::map( ~ tibble::enframe(.x)) |>
+            purrr::map(~ tibble::enframe(.x)) |>
             dplyr::bind_rows(.id = "id_lista") |>
             tidyr::unnest(value) |>
             tidyr::separate(
@@ -753,9 +747,11 @@ raspar_pagina_sigrh <-
               into = c("desc_data", "data"),
               sep = ": "
             ) |>
-            dplyr::mutate(desc_data = stringr::str_to_lower(desc_data),
-                          desc_data = stringr::str_replace_all(desc_data, " ", "_")) |>
-            tidyr::pivot_wider( names_from = "desc_data", values_from = "data") |>
+            dplyr::mutate(
+              desc_data = stringr::str_to_lower(desc_data),
+              desc_data = stringr::str_replace_all(desc_data, " ", "_")
+            ) |>
+            tidyr::pivot_wider(names_from = "desc_data", values_from = "data") |>
             dplyr::select(-name) |>
             dplyr::rename(tidyselect::any_of(
               c(
@@ -766,35 +762,35 @@ raspar_pagina_sigrh <-
 
 
 
-         link_arquivos_df <- lista_links |>
-            purrr::map( ~ purrr::map(.x, ~  rvest::html_attr(.x, "href"))) |>
-            purrr::map(~ purrr::map(.x, ~  tibble::enframe(.x))) |>
+          link_arquivos_df <- lista_links |>
+            purrr::map(~ purrr::map(.x, ~ rvest::html_attr(.x, "href"))) |>
+            purrr::map(~ purrr::map(.x, ~ tibble::enframe(.x))) |>
+            purrr::map(~ purrr::map(.x, ~ dplyr::mutate(
+              .x,
+              link_numero = paste0("documento_", name)
+            ))) |>
+            purrr::map(~ dplyr::bind_rows(.x, .id = "id_bloco")) |>
+            dplyr::bind_rows(.id = "id_lista") |>
+            dplyr::mutate(
+              id_lista = as.numeric(id_lista),
+              id_bloco = as.numeric(id_bloco),
+              value = dplyr::case_when(
+                stringr::str_starts(value, "/public") ~ paste0("https://sigrh.sp.gov.br", value),
+                TRUE ~ value
+              )
+            ) |>
+            tidyr::pivot_wider(values_from = value, names_from = link_numero)
 
-            purrr::map( ~ purrr::map(.x, ~ dplyr::mutate(
-              .x, link_numero = paste0("documento_", name))
-            )) |>
-           purrr::map( ~  dplyr::bind_rows(.x, .id = "id_bloco")) |>
-           dplyr::bind_rows(.id = "id_lista") |>
-          dplyr::mutate(
-            id_lista = as.numeric(id_lista),
-            id_bloco = as.numeric(id_bloco),
-                value = dplyr::case_when(
-                  stringr::str_starts(value , "/public") ~ paste0("https://sigrh.sp.gov.br", value),
-                  TRUE ~ value
-                )
-              ) |>
-              tidyr::pivot_wider(values_from = value, names_from = link_numero)
 
 
-
-        base_parcial <- infos_df |>
-           dplyr::select( data_documento, data_postagem) |>
-           dplyr::bind_cols(nomes_documentos) |>
-           dplyr::mutate(id_lista = as.numeric(id_lista)) |>
-           dplyr::rename(nome_documento = value) |>
-           dplyr::left_join(todos_h3, by = "id_lista") |>
-         dplyr::rename(tema_documento = value) |>
-           dplyr::left_join(link_arquivos_df, by = c("id_lista", "id_bloco"))
+          base_parcial <- infos_df |>
+            dplyr::select(data_documento, data_postagem) |>
+            dplyr::bind_cols(nomes_documentos) |>
+            dplyr::mutate(id_lista = as.numeric(id_lista)) |>
+            dplyr::rename(nome_documento = value) |>
+            dplyr::left_join(todos_h3, by = "id_lista") |>
+            dplyr::rename(tema_documento = value) |>
+            dplyr::left_join(link_arquivos_df, by = c("id_lista", "id_bloco"))
 
 
           df <-
@@ -807,7 +803,6 @@ raspar_pagina_sigrh <-
               base_parcial
             )
 
-          # ATE AQUI MUDEI
           df_longer <- df |>
             tidyr::pivot_longer(
               tidyselect::starts_with("documento_"),
@@ -816,10 +811,10 @@ raspar_pagina_sigrh <-
               values_drop_na = TRUE
             ) |>
             dplyr::select(
-             -id_lista, -id_bloco, -name
+              -id_lista, -id_bloco, -name
             )
 
-
+          usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
           return(df_longer)
         }
       }
