@@ -45,6 +45,7 @@ library(ComitesBaciaSP)
     -   [`comites_sp`](https://beatrizmilz.github.io/ComitesBaciaSP/reference/comites_sp.html)
 -   As funções disponíveis no pacote atualmente são:
     -   [`raspar_pagina_sigrh`()](https://beatrizmilz.github.io/ComitesBaciaSP/reference/raspar_pagina_sigrh.html)
+    -   [`download_pagina_sigrh`()](https://beatrizmilz.github.io/ComitesBaciaSP/reference/download_pagina_sigrh.html)
 
 Para utilizar as funções do pacote, é necessário saber a sigla referente
 ao comitê que você deseja buscar informações. A base comites_sp
