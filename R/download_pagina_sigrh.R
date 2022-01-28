@@ -41,6 +41,16 @@ download_pagina_sigrh <-
             sigla_comite == "at" ~ "https://sigrh.sp.gov.br/fabhat/atas"
           )
       ) %>%
+      dplyr::mutate(
+        # arrumar os links que são fora do padrão
+        url_representantes =
+          dplyr::case_when(
+            sigla_comite == "smg" ~ glue::glue("https://sigrh.sp.gov.br/cbhsmg/membros"),
+            sigla_comite == "mp" ~ glue::glue("https://sigrh.sp.gov.br/cbhmp/representantes-plenario"),
+            sigla_comite == "pp" ~ glue::glue("https://sigrh.sp.gov.br/cbhpp/representantesplenaria20212022"),
+            TRUE  ~ url_representantes
+          )
+      ) %>%
       dplyr::filter(sigla_comite %in% stringr::str_to_lower(sigla_do_comite))
 
 
