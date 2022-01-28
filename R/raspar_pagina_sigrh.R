@@ -250,6 +250,15 @@ raspar_pagina_sigrh <-
       }
     }
 
+    if (conteudo_pagina == "atas" & sigla_do_comite == "pp"
+        & orgao == "cbh") {
+      url_site_coleta <- "https://sigrh.sp.gov.br/cbhpp/atasplenarias"
+
+      if (online == TRUE) {
+        link_html <- "https://sigrh.sp.gov.br/cbhpp/atasplenarias"
+      }
+    }
+
     ### mp ------
     if (conteudo_pagina == "representantes" & sigla_do_comite == "mp"
         & orgao == "cbh") {
@@ -259,6 +268,8 @@ raspar_pagina_sigrh <-
         link_html <- "https://sigrh.sp.gov.br/cbhmp/representantes-plenario"
       }
     }
+
+
 
 
 

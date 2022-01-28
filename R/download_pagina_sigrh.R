@@ -43,6 +43,13 @@ download_pagina_sigrh <-
               "https://sigrh.sp.gov.br/cbhpp/representantesplenaria20212022"
             ),
             TRUE  ~ url_representantes
+          ),
+        url_atas =
+          dplyr::case_when(
+            sigla_comite == "pp" ~ glue::glue(
+              "https://sigrh.sp.gov.br/cbhpp/atasplenarias"
+            ),
+            TRUE  ~ url_atas
           )
       ) %>%
       dplyr::filter(sigla_comite %in% stringr::str_to_lower(sigla_do_comite))
