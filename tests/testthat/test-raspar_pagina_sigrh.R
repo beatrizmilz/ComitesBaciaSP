@@ -111,4 +111,14 @@ test_that("raspar_pagina_sigrh() works", {
     )
   testthat::expect_gt(nrow(representantes_cbhsmg), 60)
 
+  # pp
+  atas_cbhpp <-
+    raspar_pagina_sigrh(
+      sigla_do_comite = "pp",
+      conteudo_pagina = "atas",
+      orgao = "cbh"
+    )
+
+  testthat::expect_gt(nrow( atas_cbhpp), 60)
+
 })

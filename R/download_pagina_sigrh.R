@@ -10,14 +10,12 @@
 download_pagina_sigrh <-
   function(sigla_do_comite = ComitesBaciaSP::comites_sp$sigla_comite,
            path = here::here("html"),
-           pagina = c(
-             "representantes",
-             "atas",
-             "atas_agencia",
-             "deliberacoes",
-             "documentos",
-             "agenda"
-           )) {
+           pagina = c("representantes",
+                      "atas",
+                      "atas_agencia",
+                      "deliberacoes",
+                      "documentos",
+                      "agenda")) {
     fs::dir_create(path)
 
 
@@ -27,19 +25,13 @@ download_pagina_sigrh <-
         url_representantes = glue::glue(
           "https://sigrh.sp.gov.br/cbh{sigla_comite}/representantes"
         ),
-        url_deliberacoes = glue::glue(
-          "https://sigrh.sp.gov.br/cbh{sigla_comite}/deliberacoes"
-        ),
-        url_documentos = glue::glue(
-          "https://sigrh.sp.gov.br/cbh{sigla_comite}/documentos"
-        ),
+        url_deliberacoes = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/deliberacoes"),
+        url_documentos = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/documentos"),
         url_agenda = glue::glue("https://sigrh.sp.gov.br/cbh{sigla_comite}/agenda"),
       ) %>%
       dplyr::mutate(
         url_atas_agencia =
-          dplyr::case_when(
-            sigla_comite == "at" ~ "https://sigrh.sp.gov.br/fabhat/atas"
-          )
+          dplyr::case_when(sigla_comite == "at" ~ "https://sigrh.sp.gov.br/fabhat/atas")
       ) %>%
       dplyr::mutate(
         # arrumar os links que são fora do padrão
@@ -47,7 +39,9 @@ download_pagina_sigrh <-
           dplyr::case_when(
             sigla_comite == "smg" ~ glue::glue("https://sigrh.sp.gov.br/cbhsmg/membros"),
             sigla_comite == "mp" ~ glue::glue("https://sigrh.sp.gov.br/cbhmp/representantes-plenario"),
-            sigla_comite == "pp" ~ glue::glue("https://sigrh.sp.gov.br/cbhpp/representantesplenaria20212022"),
+            sigla_comite == "pp" ~ glue::glue(
+              "https://sigrh.sp.gov.br/cbhpp/representantesplenaria20212022"
+            ),
             TRUE  ~ url_representantes
           )
       ) %>%
@@ -90,10 +84,31 @@ download_pagina_sigrh <-
           )
         } else {
           # Importante para não dar o erro do certificado SSL expirado do site
-          httr::GET(url, httr::write_disk(path = caminho_salvar), httr::config(ssl_verifypeer = FALSE))
-          usethis::ui_done(
-            "Download realizado: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
-          )
+          url_get <-
+            httr::GET(
+              url,
+              httr::write_disk(path = caminho_salvar, overwrite = TRUE),
+              httr::config(ssl_verifypeer = FALSE)
+            )
+
+          mensagem_erro <-
+            c("Pagina não encontrada", "Página não encontrada")
+
+          mensagem_h1 <- httr::content(url_get) |>
+            rvest::html_nodes("h1") |>
+            rvest::html_text()
+
+          if (mensagem_h1[1] %in% mensagem_erro) {
+            usethis::ui_oops(
+              "Download NÃO REALIZADO: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}.
+            Checar em: {url}"
+            )
+          } else {
+            usethis::ui_done(
+              "Download realizado: Arquivo referente à {pagina_download} e {sigla_comite_baixar} referente ao dia {data_hoje}."
+            )
+          }
+
         }
       }
     }
