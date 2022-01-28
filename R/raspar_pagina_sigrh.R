@@ -32,6 +32,18 @@ raspar_pagina_sigrh <-
     # path_arquivo = NULL
     # path_arquivo <- "../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/9/mp-agenda-15-09-2021.html"
 
+
+    if (is.null(orgao)) {
+      usethis::ui_stop(
+        "Forneça uma das seguintes opções para o argumento 'orgao': cbh, agencia")
+    } else if (!is.null(orgao)) {
+      if (!orgao %in% c("cbh", "agencia")) {
+        usethis::ui_stop("O texto fornecido para o argumento 'orgao' não é válido.
+        Forneça uma das seguintes possibilidades: cbh, agencia"
+        )
+      }
+    }
+
     # verificacoes de agencia
     if (orgao == "agencia") {
       if (conteudo_pagina != "atas" | sigla_do_comite != "at") {
