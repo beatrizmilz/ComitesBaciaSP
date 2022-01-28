@@ -80,4 +80,35 @@ test_that("raspar_pagina_sigrh() works", {
 
   #raspar_pagina_sigrh(sigla_do_comite = 'at', online = FALSE, path_arquivo = '../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/10/at-atas_agencia-01-10-2021.html', conteudo_pagina = 'atas', orgao = 'agencia')
 
+
+  # alguns que são despadronizados
+
+  # mp
+  representantes_cbhpmp <-
+    raspar_pagina_sigrh(
+      sigla_do_comite = "mp",
+      conteudo_pagina = "representantes",
+      orgao = "cbh"
+    )
+  testthat::expect_gt(nrow(representantes_cbhpmp), 80)
+
+  # pp
+  representantes_cbhpp <-
+    raspar_pagina_sigrh(
+      sigla_do_comite = "pp",
+      conteudo_pagina = "representantes",
+      orgao = "cbh"
+    )
+  testthat::expect_gt(nrow(representantes_cbhpp), 60)
+
+
+  # smg
+  representantes_cbhsmg <-
+    raspar_pagina_sigrh(
+      sigla_do_comite = "smg",
+      conteudo_pagina = "representantes",
+      orgao = "cbh"
+    )
+  testthat::expect_gt(nrow(representantes_cbhsmg), 60)
+
 })

@@ -228,6 +228,40 @@ raspar_pagina_sigrh <-
         dplyr::pull(links)
     }
 
+    ## LINKS FORA DO PADRÃO -----
+    # Isso é necessário pois alguns comitês nomeiam de forma diferente
+    ### SMG ------
+    if (conteudo_pagina == "representantes" & sigla_do_comite == "smg"
+        & orgao == "cbh") {
+      url_site_coleta <- "https://sigrh.sp.gov.br/cbhsmg/membros"
+
+      if (online == TRUE) {
+        link_html <- "https://sigrh.sp.gov.br/cbhsmg/membros"
+      }
+    }
+
+    ### pp ------
+    if (conteudo_pagina == "representantes" & sigla_do_comite == "pp"
+        & orgao == "cbh") {
+      url_site_coleta <- "https://sigrh.sp.gov.br/cbhpp/representantesplenaria20212022"
+
+      if (online == TRUE) {
+        link_html <- "https://sigrh.sp.gov.br/cbhpp/representantesplenaria20212022"
+      }
+    }
+
+    ### mp ------
+    if (conteudo_pagina == "representantes" & sigla_do_comite == "mp"
+        & orgao == "cbh") {
+      url_site_coleta <- "https://sigrh.sp.gov.br/cbhmp/representantes-plenario"
+
+      if (online == TRUE) {
+        link_html <- "https://sigrh.sp.gov.br/cbhmp/representantes-plenario"
+      }
+    }
+
+
+
     # buscar infos
 
     # Importante para não dar o erro do certificado SSL expirado do site ----
