@@ -25,9 +25,9 @@ raspar_pagina_sigrh <-
            online = TRUE,
            path_arquivo = NULL) {
     # Variáveis para testar
-    # sigla_do_comite <- "at"
-    # orgao <- "agencia"
-    # conteudo_pagina <- "atas"
+    # sigla_do_comite <- "pcj"
+    # orgao <- "cbh"
+    # conteudo_pagina <- "representantes"
     # online = TRUE
     # path_arquivo = NULL
     # path_arquivo <- "../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/9/mp-agenda-15-09-2021.html"
@@ -431,6 +431,7 @@ raspar_pagina_sigrh <-
 
       # Se for CBH/REPRESENTANTES ----------
     } else if (conteudo_pagina == "representantes") {
+
       blocos <- lista |>
         rvest::html_nodes("div.block")
 
@@ -442,6 +443,7 @@ raspar_pagina_sigrh <-
             orgao = orgao,
             comite = nome_comite,
             n_ugrhi = n_comite,
+            segmento_representante = NA,
             organizacao_representante = NA,
             nome = NA,
             email = NA,
@@ -450,15 +452,44 @@ raspar_pagina_sigrh <-
         usethis::ui_info("Raspagem não encontrou nada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}. Caso queira checar manualmente, confirme em: {link_html}")
         return(df_vazia)
       } else {
+
+        lista_interna <- lista |>
+          xml2::xml_find_all("//h2[@class='heading small-dotted-border representation-header']")|>
+          purrr::map(~ rvest::html_text(.x)) |>
+          purrr::as_vector() |>
+          stringr::str_squish() |>
+          tibble::enframe(name = "id_lista")
+
+     # Obrigada @jtrecenti!
+
+        filhos <- lista |>
+          xml2::xml_children()
+
+        codigo_com_id <- tibble::tibble(
+          nome = xml2::xml_name(filhos),
+          conteudo = purrr::map(filhos, ~.x)
+        ) |>
+          dplyr::mutate(
+            eh_h2 = nome == "h2",
+            id_lista = cumsum(eh_h2),
+            .before = 1
+          ) |>
+          dplyr::filter(nome == "div") |>
+          dplyr::select(-eh_h2, -nome) |>
+          dplyr::left_join(lista_interna, by = "id_lista")
+
+
         # Organizacao representante
-        organizacao_representante <- blocos |>
+
+        organizacao_representante <- codigo_com_id$conteudo |>
           purrr::map(~ rvest::html_nodes(.x, "h2")) |>
           purrr::map(~ .x[1]) |>
           purrr::map(~ rvest::html_text(.x)) |>
           purrr::as_vector()
 
+
         # Nome representantes
-        nome_representantes <- blocos |>
+        nome_representantes <- codigo_com_id$conteudo |>
           purrr::map(~ rvest::html_nodes(.x, "b")) |>
           purrr::map(~ rvest::html_text(.x, trim = TRUE)) |>
           purrr::map(~ tibble::as_tibble(.x)) |>
@@ -475,7 +506,7 @@ raspar_pagina_sigrh <-
           dplyr::select(-contains("value"))
 
         # Cargo representantes
-        cargo_representantes <- blocos |>
+        cargo_representantes <- codigo_com_id$conteudo |>
           purrr::map(~ rvest::html_nodes(.x, "h2")) |>
           purrr::map(~ .x[-1]) |>
           purrr::map(~ rvest::html_text(.x)) |>
@@ -494,8 +525,9 @@ raspar_pagina_sigrh <-
 
 
 
+
         # email representantes
-        email_representantes <- blocos |>
+        email_representantes <- codigo_com_id$conteudo |>
           purrr::map(~ rvest::html_nodes(.x, "td")) |>
           purrr::map(~ rvest::html_text(.x, trim = TRUE)) |>
           purrr::map(~ stringr::str_remove_all(.x, pattern = "(^| )[0-9.() -]{5,}( |$)")) |>
@@ -526,6 +558,7 @@ raspar_pagina_sigrh <-
             posicao_blocos = tamanho_blocos,
             comite = nome_comite,
             n_ugrhi = n_comite,
+            segmento_representante = codigo_com_id$value,
             organizacao_representante,
             nome_representantes,
             email_representantes,
@@ -775,9 +808,9 @@ raspar_pagina_sigrh <-
         return(df_longer)
       }
     } else if (conteudo_pagina == "documentos") {
+
+
       # Se for CBH/DOCUMENTOS ----------
-
-
       lista_interna <- lista |>
         xml2::xml_find_all("//div[@id='accordion_records']")
 
