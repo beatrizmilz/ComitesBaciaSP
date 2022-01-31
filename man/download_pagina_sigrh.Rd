@@ -5,7 +5,7 @@
 \title{Função para fazer download das páginas em HTML do SigRH}
 \usage{
 download_pagina_sigrh(
-  sigla_do_comite = ComitesBaciaSP::comites_sp$sigla_comite,
+  sigla_do_comite = c(ComitesBaciaSP::comites_sp$sigla_comite, "crh"),
   path = here::here("html"),
   pagina = c("representantes", "atas", "atas_agencia", "deliberacoes", "documentos",
     "agenda")
