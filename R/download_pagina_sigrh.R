@@ -8,7 +8,7 @@
 #'
 #' @examples # download_pagina_sigrh()
 download_pagina_sigrh <-
-  function(sigla_do_comite = ComitesBaciaSP::comites_sp$sigla_comite,
+  function(sigla_do_comite = c(ComitesBaciaSP::comites_sp$sigla_comite, "crh"),
            path = here::here("html"),
            pagina = c("representantes",
                       "atas",
@@ -52,6 +52,14 @@ download_pagina_sigrh <-
             TRUE  ~ url_atas
           )
       ) %>%
+      tibble::add_row(
+        sigla_comite = "crh",
+        url_atas = "https://sigrh.sp.gov.br/crh/atas" ,
+        url_representantes = "https://sigrh.sp.gov.br/crh/representantes" ,
+        url_deliberacoes = "https://sigrh.sp.gov.br/crh/deliberacoes" ,
+        url_documentos = "https://sigrh.sp.gov.br/crh/documentos" ,
+        url_agenda = "https://sigrh.sp.gov.br/crh/agenda"
+      ) |>
       dplyr::filter(sigla_comite %in% stringr::str_to_lower(sigla_do_comite))
 
 
