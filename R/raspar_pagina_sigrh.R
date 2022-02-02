@@ -25,7 +25,7 @@ raspar_pagina_sigrh <-
            online = TRUE,
            path_arquivo = NULL) {
     # Variáveis para testar
-    # sigla_do_comite <- "pcj"
+    # sigla_do_comite <- "smg"
     # orgao <- "cbh"
     # conteudo_pagina <- "representantes"
     # online = TRUE
@@ -465,18 +465,22 @@ raspar_pagina_sigrh <-
         filhos <- lista |>
           xml2::xml_children()
 
-        codigo_com_id <- tibble::tibble(
-          nome = xml2::xml_name(filhos),
-          conteudo = purrr::map(filhos, ~.x)
-        ) |>
-          dplyr::mutate(
-            eh_h2 = nome == "h2",
-            id_lista = cumsum(eh_h2),
-            .before = 1
-          ) |>
+        codigo_com_id <- tibble::tibble(nome = xml2::xml_name(filhos),
+                                        conteudo = purrr::map(filhos, ~ .x)) |>
+          dplyr::mutate(eh_h2 = nome == "h2",
+                        id_lista = cumsum(eh_h2),
+                        .before = 1) |>
           dplyr::filter(nome == "div") |>
-          dplyr::select(-eh_h2, -nome) |>
-          dplyr::left_join(lista_interna, by = "id_lista")
+          dplyr::select(-eh_h2,-nome) |>
+          dplyr::left_join(lista_interna, by = "id_lista") |>
+          dplyr::mutate(
+            h2 = conteudo,
+            h2 = purrr::map(h2, ~ rvest::html_nodes(.x, "h2")),
+            h2 = purrr::map(h2, ~ rvest::html_text(.x)),
+            h2 = purrr::map(h2, ~ .x[1]),
+            h2 = as.character(h2)
+          ) |>
+          tidyr::drop_na(h2)
 
 
         # Organizacao representante
@@ -548,6 +552,8 @@ raspar_pagina_sigrh <-
 
         # coluna com o número do bloco
         tamanho_blocos <- 1:length(blocos)
+
+
 
 
         df <-

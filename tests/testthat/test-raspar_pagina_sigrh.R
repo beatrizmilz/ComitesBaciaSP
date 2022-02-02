@@ -78,9 +78,6 @@ test_that("raspar_pagina_sigrh() works", {
 
   testthat::expect_gt(nrow(atas_agencia_at), 50)
 
-  #raspar_pagina_sigrh(sigla_do_comite = 'at', online = FALSE, path_arquivo = '../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/10/at-atas_agencia-01-10-2021.html', conteudo_pagina = 'atas', orgao = 'agencia')
-
-
   # alguns que são despadronizados
 
   # mp
