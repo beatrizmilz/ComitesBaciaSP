@@ -25,8 +25,8 @@ raspar_pagina_sigrh <-
            online = TRUE,
            path_arquivo = NULL) {
     # Variáveis para testar
-    # sigla_do_comite <- "smg"
-    # orgao <- "cbh"
+    # sigla_do_comite <- "crh"
+    # orgao <- "crh"
     # conteudo_pagina <- "representantes"
     # online = TRUE
     # path_arquivo = NULL
@@ -35,11 +35,11 @@ raspar_pagina_sigrh <-
 
     if (is.null(orgao)) {
       usethis::ui_stop(
-        "Forneça uma das seguintes opções para o argumento 'orgao': cbh, agencia")
+        "Forneça uma das seguintes opções para o argumento 'orgao': cbh, agencia, crh")
     } else if (!is.null(orgao)) {
-      if (!orgao %in% c("cbh", "agencia")) {
+      if (!orgao %in% c("cbh", "agencia", "crh")) {
         usethis::ui_stop("O texto fornecido para o argumento 'orgao' não é válido.
-        Forneça uma das seguintes possibilidades: cbh, agencia"
+        Forneça uma das seguintes possibilidades: cbh, agencia, crh"
         )
       }
     }
@@ -79,6 +79,7 @@ raspar_pagina_sigrh <-
 
     # Verificando se a sigla do comitê informada é válida
     siglas_dos_comites <- ComitesBaciaSP::comites_sp |>
+      dplyr::add_row(sigla_comite = "crh") |>
       dplyr::pull(sigla_comite) |>
       unique()
 
@@ -106,7 +107,7 @@ raspar_pagina_sigrh <-
     }
 
     # verificando se forneceu o órgão
-    orgaos_validos <- c("cbh", "agencia")
+    orgaos_validos <- c("cbh", "agencia", "crh")
 
     texto_orgaos_validos <- orgaos_validos |>
       paste(collapse = ", ")
@@ -174,6 +175,7 @@ raspar_pagina_sigrh <-
     if (online == TRUE) {
       link_html <-
         ComitesBaciaSP::comites_sp |>
+        dplyr::add_row(sigla_comite = "crh") |>
         dplyr::filter(sigla_comite == sigla_do_comite) |>
         dplyr::slice(1) |>
         dplyr::mutate(
@@ -182,7 +184,9 @@ raspar_pagina_sigrh <-
               orgao == "cbh" ~ glue::glue(
             "https://sigrh.sp.gov.br/cbh{sigla_comite}/{conteudo_pagina}"
           ),
-
+          orgao == "crh" ~ glue::glue(
+            "https://sigrh.sp.gov.br/crh/{conteudo_pagina}"
+          ),
           orgao == "agencia" & sigla_do_comite == "at" ~
             glue::glue(
               "https://sigrh.sp.gov.br/fabhat/{conteudo_pagina}"
@@ -223,6 +227,7 @@ raspar_pagina_sigrh <-
       link_html <- path_arquivo
 
       url_site_coleta <- ComitesBaciaSP::comites_sp |>
+        dplyr::add_row(sigla_comite = "crh") |>
         dplyr::filter(sigla_comite == sigla_do_comite) |>
         dplyr::slice(1) |>
         dplyr::mutate(
@@ -232,6 +237,10 @@ raspar_pagina_sigrh <-
                 "https://sigrh.sp.gov.br/cbh{sigla_comite}/{conteudo_pagina}"
               ),
 
+              orgao == "crh" ~ glue::glue(
+                "https://sigrh.sp.gov.br/crh/{conteudo_pagina}"
+              ),
+
               orgao == "agencia" & sigla_do_comite == "at" ~
                 glue::glue(
                   "https://sigrh.sp.gov.br/fabhat/{conteudo_pagina}"
@@ -239,6 +248,8 @@ raspar_pagina_sigrh <-
             )) |>
         dplyr::pull(links)
     }
+
+
 
     ## LINKS FORA DO PADRÃO -----
     # Isso é necessário pois alguns comitês nomeiam de forma diferente
@@ -270,6 +281,8 @@ raspar_pagina_sigrh <-
         link_html <- "https://sigrh.sp.gov.br/cbhpp/atasplenarias"
       }
     }
+
+
 
     ### mp ------
     if (conteudo_pagina == "representantes" & sigla_do_comite == "mp"
@@ -303,6 +316,7 @@ raspar_pagina_sigrh <-
     # Preparar variaveis ----------
 
     comite <- ComitesBaciaSP::comites_sp |>
+      dplyr::add_row(sigla_comite = "crh", ) |>
       dplyr::filter(sigla_comite == sigla_do_comite) |>
       dplyr::slice(1)
 

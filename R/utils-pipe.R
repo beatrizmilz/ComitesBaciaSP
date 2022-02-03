@@ -11,6 +11,3 @@
 NULL
 
 
-globalVariables(c(
-
-))

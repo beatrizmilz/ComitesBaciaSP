@@ -18,6 +18,9 @@ utils::globalVariables(
     "desc_data",
     "id_bloco",
     "id_lista",
-    "link_numero"
+    "link_numero",
+    "eh_h2",
+    "h2",
+    "conteudo"
   )
 )
