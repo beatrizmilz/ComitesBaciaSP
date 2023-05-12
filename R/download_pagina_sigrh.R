@@ -40,7 +40,7 @@ download_pagina_sigrh <-
             sigla_comite == "smg" ~ glue::glue("https://sigrh.sp.gov.br/cbhsmg/membros"),
             sigla_comite == "mp" ~ glue::glue("https://sigrh.sp.gov.br/cbhmp/representantes-plenario"),
             sigla_comite == "pp" ~ glue::glue(
-              "https://sigrh.sp.gov.br/cbhpp/representantesplenaria20212022"
+              "https://sigrh.sp.gov.br/cbhpp/representantesplenaria20232024"
             ),
             TRUE  ~ url_representantes
           ),
