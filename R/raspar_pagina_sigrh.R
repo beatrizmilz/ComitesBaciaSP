@@ -757,7 +757,9 @@ raspar_pagina_sigrh <-
           purrr::map(~ tidyr::fill(.x, tidyselect::everything(), .direction = "updown")) |>
           purrr::map(~ dplyr::slice(.x, 1)) |>
           dplyr::bind_rows() |>
-          dplyr::union_all(dplyr::tibble(publicado_em_d_o_e_em = character())) |>
+          dplyr::union_all(dplyr::tibble(data = character(),
+                                         postado_em = character(),
+                                         publicado_em_d_o_e_em = character())) |>
           dplyr::rename(tidyselect::any_of(
             c(
               "data_publicacao_doe" = "publicado_em_d_o_e_em",
