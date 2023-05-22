@@ -757,9 +757,9 @@ raspar_pagina_sigrh <-
           purrr::map(~ tidyr::fill(.x, tidyselect::everything(), .direction = "updown")) |>
           purrr::map(~ dplyr::slice(.x, 1)) |>
           dplyr::bind_rows() |>
-          dplyr::union_all(dplyr::tibble(data = character(),
-                                         postado_em = character(),
-                                         publicado_em_d_o_e_em = character())) |>
+          # dplyr::union_all(dplyr::tibble(data = character(),
+          #                                postado_em = character(),
+          #                                publicado_em_d_o_e_em = character())) |>
           dplyr::rename(tidyselect::any_of(
             c(
               "data_publicacao_doe" = "publicado_em_d_o_e_em",
@@ -812,6 +812,7 @@ raspar_pagina_sigrh <-
             values_drop_na = TRUE
           ) |>
           dplyr::select(
+            tidyselect::any_of(c(
             "data_coleta_dados",
             "site_coleta",
             "orgao",
@@ -823,7 +824,7 @@ raspar_pagina_sigrh <-
             "data_documento",
             "data_postagem",
             "numero_link",
-            "url_link"
+            "url_link"))
           )
 
         usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
