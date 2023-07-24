@@ -25,12 +25,12 @@ raspar_pagina_sigrh <-
            online = TRUE,
            path_arquivo = NULL) {
     # Variáveis para testar
-    # sigla_do_comite <- "crh"
-    # orgao <- "crh"
-    # conteudo_pagina <- "representantes"
-    # online = TRUE
+    # sigla_do_comite <- "mp"
+    # orgao <- "cbh"
+    # conteudo_pagina <- "agenda"
+    # online = FALSE
     # path_arquivo = NULL
-    # path_arquivo <- "../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/9/mp-agenda-15-09-2021.html"
+    # path_arquivo <- "../RelatoriosTransparenciaAguaSP/inst/dados_html/2021/3/mp-agenda-18-03-2021.html"
 
 
     if (is.null(orgao)) {
@@ -431,13 +431,6 @@ raspar_pagina_sigrh <-
             "numero_link",
             "url_link"
           )
-        # |>
-        #   dplyr::mutate(
-        #     formato_link = dplyr::case_when(
-        #       is.na(url_link) ~ "Ata não disponibilizada",
-        #       TRUE ~ stringr::str_extract(url_link, pattern = "(.doc|.docx|.pdf|.html|.htm|.jpg|.pd)$|drive.google")
-        #     )
-        #   )
 
         usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
         return(df_longer)
@@ -604,6 +597,7 @@ raspar_pagina_sigrh <-
       }
       # Se for CBH/AGENDA ----------
     } else if (conteudo_pagina == "agenda") {
+
       if (length(lista) == 0) {
         df_vazia <-
           tibble::tibble(
@@ -676,16 +670,16 @@ raspar_pagina_sigrh <-
 
         df <-
           tibble::tibble(
-            data_coleta_dados = data_coleta_dos_dados,
-            site_coleta =  url_site_coleta,
-            orgao = orgao,
-            comite = nome_comite,
-            n_ugrhi = n_comite,
-            nome_reuniao,
-            nome_reuniao_extra,
-            data_reuniao_dia,
-            data_reuniao_mes_ano,
-            link_mais_informacoes
+            data_coleta_dados = tratar_vazio(data_coleta_dos_dados),
+            site_coleta =  tratar_vazio(url_site_coleta),
+            orgao = tratar_vazio(orgao),
+            comite = tratar_vazio(nome_comite),
+            n_ugrhi = tratar_vazio(n_comite),
+            nome_reuniao = tratar_vazio(nome_reuniao),
+            nome_reuniao_extra = tratar_vazio(nome_reuniao_extra),
+            data_reuniao_dia = tratar_vazio(data_reuniao_dia),
+            data_reuniao_mes_ano = tratar_vazio(data_reuniao_mes_ano),
+            link_mais_informacoes = tratar_vazio(link_mais_informacoes)
           )
 
         usethis::ui_done("Raspagem realizada: Página referente à {conteudo_pagina}, {orgao} - {sigla_do_comite} referente ao dia {data_coleta_dos_dados}.")
@@ -798,10 +792,10 @@ raspar_pagina_sigrh <-
             orgao = orgao,
             comite = nome_comite,
             n_ugrhi = n_comite,
-            nome_deliberacao,
-            descricao_deliberacao,
-            infos_df,
-            link_arquivos_df,
+            nome_deliberacao = tratar_vazio(nome_deliberacao),
+            descricao_deliberacao =  tratar_vazio(descricao_deliberacao),
+            infos_df = tratar_vazio(infos_df),
+            link_arquivos_df = tratar_vazio(link_arquivos_df),
           )
 
         df_longer <- df |>
