@@ -1,6 +1,6 @@
 Package: ComitesBaciaSP
 Title: Pacote com dados sobre os Comitês de Bacias Hidrográficas no Estado de São Paulo (SP - Brasil)
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person(given = "Beatriz",
            family = "Milz",
